@@ -9,28 +9,9 @@ def init_db(all_weekends_file_name):
     c.execute("DROP TABLE IF EXISTS weekends")
     c.execute("DROP TABLE IF EXISTS weekend_participant")
     c.execute("DROP TABLE IF EXISTS participants")
-    # Creates table for all weekends.
-    c.execute(
-        """CREATE TABLE weekends (
-            weekendId integer PRIMARY KEY NOT NULL,
-            name text NOT NULL,
-            location text NOT NULL,
-            startDate date NOT NULL,
-            endDate date NOT NULL);""")
-    # Creates table for all participants.
-    c.execute(
-        """CREATE TABLE participants (
-            participantName text PRIMARY KEY NOT NULL,
-            membershipNr integer DEFAULT 0,
-            status text NOT NULL,
-            gender text NOT NULL,
-            birthDate date NOT NULL);""")
-    # Creates join table for many-to-many relationship
-    # between weekends and participants.
-    c.execute(
-        """CREATE TABLE weekend_participant (
-            weekendId integer NOT NULL,
-            participantName text NOT NULL);""")
+    create_table_weekends(c)
+    create_table_participants(c)
+    create_table_weekend_participant(c)
     # Fills weekend table, based on input from the all_weekend_file.
     with open(all_weekends_file_name, "r") as all_weekend_file:
         weekend_lines = all_weekend_file.readlines()
@@ -69,6 +50,33 @@ def init_db(all_weekends_file_name):
                             weekend_file_info[1], participantName))
     conn.commit()
     conn.close()
+
+
+def create_table_weekends(c):
+    c.execute(
+        """CREATE TABLE weekends (
+            weekendId integer PRIMARY KEY NOT NULL,
+            name text NOT NULL,
+            location text NOT NULL,
+            startDate date NOT NULL,
+            endDate date NOT NULL);""")
+
+
+def create_table_participants(c):
+    c.execute(
+        """CREATE TABLE participants (
+            participantName text PRIMARY KEY NOT NULL,
+            membershipNr integer DEFAULT 0,
+            status text NOT NULL,
+            gender text NOT NULL,
+            birthDate date NOT NULL);""")
+
+
+def create_table_weekend_participant(c):
+    c.execute(
+        """CREATE TABLE weekend_participant (
+            weekendId integer NOT NULL,
+            participantName text NOT NULL);""")
 
 
 def YYYYMMDD_from_DDMMYYY(date_string):
