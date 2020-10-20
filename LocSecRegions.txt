@@ -1,0 +1,40 @@
+1020	Kiel
+1030	Hamburg
+1040	Nordwest
+1050	Mecklenburg-Vorpommern
+2010	Hannover
+2015	Braunschweig
+2020	Göttingen, Kassel
+2030	OWL
+2050	Münster
+3010	Berlin und Brandenburg
+3020	Sachsen
+3040	Sachsen-Anhalt
+3050	Thüringen
+4010	Ruhrgebiet
+4050	Hamm, Arnsberg
+4060	Hagen
+5010	Niederrhein
+5020	Düsseldorf
+5030	Köln
+5040	Rhein-Mosel
+5050	Aachen
+6010	Marburg, Gießen
+6020	Fulda
+6030	Frankfurt
+6040	Darmstadt
+6050	Mainz, Wiesbaden
+6060	Pfalz
+6070	Saarland
+7010	Rhein-Neckar
+7020	Karlsruhe
+7030	Stuttgart
+7040	Freiburg
+7050	Bodensee
+8005	Aschaffenburg
+8010	Würzburg
+8020	Nürnberg
+8030	München
+8040	Regensburg
+8050	Schwaben
+8060	Passau
