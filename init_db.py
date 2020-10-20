@@ -5,10 +5,7 @@ import csv
 def init_db(all_weekends_file_name):
     conn = sqlite3.connect('Weekend.db')
     c = conn.cursor()
-    # Drops old tables if already existing-
-    c.execute("DROP TABLE IF EXISTS weekends")
-    c.execute("DROP TABLE IF EXISTS weekend_participant")
-    c.execute("DROP TABLE IF EXISTS participants")
+    drop_old_tables(c)
     create_table_weekends(c)
     create_table_participants(c)
     create_table_weekend_participant(c)
@@ -50,6 +47,12 @@ def init_db(all_weekends_file_name):
                             weekend_file_info[1], participantName))
     conn.commit()
     conn.close()
+
+
+def drop_old_tables(c):
+    c.execute("DROP TABLE IF EXISTS weekends")
+    c.execute("DROP TABLE IF EXISTS participants")
+    c.execute("DROP TABLE IF EXISTS weekend_participant")
 
 
 def create_table_weekends(c):
