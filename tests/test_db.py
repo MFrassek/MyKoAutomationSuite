@@ -25,6 +25,7 @@ class TestInitiation(unittest.TestCase):
 
     def test_connects_to_db(self):
         self.assertIsInstance(self.conn, sqlite3.Connection)
+        self.assertIsInstance(self.c, sqlite3.Cursor)
 
     def test_initilization_components_successful(self):
         init_db.drop_old_tables(self.c)
