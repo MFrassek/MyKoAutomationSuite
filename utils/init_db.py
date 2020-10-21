@@ -12,17 +12,7 @@ def init_db(all_weekends_file_name, db_name):
     create_table_weekend_participant(c)
     relative_path = get_relative_path_to_script()
     populate_table_weekends(relative_path, all_weekends_file_name, c)
-    # Iterates of all participant CSV
-    for weekend_file_name, weekend_id in get_weekend_file_names_and_ids(c):
-        with open("{}/data/participants/{}".format(
-                relative_path, weekend_file_name),
-                encoding='latin1') as CSV_file:
-            participant_infos = csv.reader(CSV_file, delimiter=",")
-            next(participant_infos)
-            for participant_info in participant_infos:
-                add_entry_to_table_participants(c, participant_info)
-                add_entry_to_table_weekend_participant(
-                    c, participant_info, weekend_id)
+    populate_table_participants_and_table_weekend_participant(relative_path, c)
     conn.commit()
     conn.close()
 
@@ -78,6 +68,20 @@ def read_base_info_weekends(relative_path, all_weekends_file_name):
         all_weekend_file.readline()
         result = all_weekend_file.readlines()
     return result
+
+
+def populate_table_participants_and_table_weekend_participant(
+        relative_path, c):
+    for weekend_file_name, weekend_id in get_weekend_file_names_and_ids(c):
+        with open("{}/data/participants/{}".format(
+                relative_path, weekend_file_name),
+                encoding='latin1') as CSV_file:
+            participant_infos = csv.reader(CSV_file, delimiter=",")
+            next(participant_infos)
+            for participant_info in participant_infos:
+                add_entry_to_table_participants(c, participant_info)
+                add_entry_to_table_weekend_participant(
+                    c, participant_info, weekend_id)
 
 
 def get_weekend_file_names_and_ids(c):
