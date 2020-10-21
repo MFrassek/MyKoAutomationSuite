@@ -21,14 +21,7 @@ def init_db(all_weekends_file_name, db_name):
             next(csv_reader)
             for row in csv_reader:
                 add_entry_to_table_participants(c, row)
-
-                # Adds participantName and weekendId as foreign keys to the
-                # weekend_participant table.
-                c.execute(
-                    """INSERT INTO weekend_participant
-                        VALUES ('{}', '{}')""".format(
-                            weekend_id,
-                            extract_participant_name_from_csv_row(row)))
+                add_entry_to_table_weekend_participant(c, row, weekend_id)
     conn.commit()
     conn.close()
 
@@ -114,6 +107,14 @@ def extract_participant_name_from_csv_row(row):
 
 def YYYYMMDD_from_DDMMYYY(date_string):
     return "-".join(date_string.split(".")[::-1])
+
+
+def add_entry_to_table_weekend_participant(c, row, weekend_id):
+    c.execute(
+        """INSERT INTO weekend_participant
+            VALUES ('{}', '{}')""".format(
+                weekend_id,
+                extract_participant_name_from_csv_row(row)))
 
 
 init_db("weekends.txt", "Weekend.db")
