@@ -11,15 +11,8 @@ def init_db(all_weekends_file_name, db_name):
     create_table_participants(c)
     create_table_weekend_participant(c)
     relative_path = get_relative_path_to_script()
-    for weekend_base_info in read_base_info_weekends(
-            relative_path, all_weekends_file_name):
-        c.execute(
-            "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
-    # Obtains the file names for all CSVs containing the weekend participants
-    # together with the corresponding weekendIds.
-    c.execute(
-        "SELECT startDate || '_' ||name || '.csv', weekendId from weekends")
-    weekend_file_infos = c.fetchall()
+    populate_table_weekends(relative_path, all_weekends_file_name, c)
+    weekend_file_infos = get_file_names_and_ids_weekends(c)
     # Iterates of all participant CSV
     for weekend_file_info in weekend_file_infos:
         with open("{}/data/participants/{}".format(
@@ -87,6 +80,13 @@ def get_relative_path_to_script():
     return os.path.dirname(os.path.abspath(__file__))
 
 
+def populate_table_weekends(relative_path, all_weekends_file_name, c):
+    for weekend_base_info in read_base_info_weekends(
+            relative_path, all_weekends_file_name):
+        c.execute(
+            "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
+
+
 def read_base_info_weekends(relative_path, all_weekends_file_name):
     with open("{}/data/{}".format(
             relative_path, all_weekends_file_name),
@@ -94,6 +94,12 @@ def read_base_info_weekends(relative_path, all_weekends_file_name):
         all_weekend_file.readline()
         result = all_weekend_file.readlines()
     return result
+
+
+def get_file_names_and_ids_weekends(c):
+    c.execute(
+        "SELECT startDate || '_' ||name || '.csv', weekendId from weekends")
+    return c.fetchall()
 
 
 def YYYYMMDD_from_DDMMYYY(date_string):
