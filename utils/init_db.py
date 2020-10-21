@@ -12,9 +12,8 @@ def init_db(all_weekends_file_name, db_name):
     create_table_weekend_participant(c)
     relative_path = get_relative_path_to_script()
     populate_table_weekends(relative_path, all_weekends_file_name, c)
-    weekend_file_infos = get_file_names_and_ids_weekends(c)
     # Iterates of all participant CSV
-    for weekend_file_info in weekend_file_infos:
+    for weekend_file_info in get_file_names_and_ids_weekends(c):
         with open("{}/data/participants/{}".format(
                 relative_path, weekend_file_info[0]),
                 encoding='latin1') as CSV_file:
