@@ -40,7 +40,8 @@ def create_table_weekends(c):
             name text NOT NULL,
             location text NOT NULL,
             startDate date NOT NULL,
-            endDate date NOT NULL);""")
+            endDate date NOT NULL,
+            regionName text NOT NULL);""")
 
 
 def create_table_participants(c):
