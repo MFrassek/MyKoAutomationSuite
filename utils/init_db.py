@@ -10,10 +10,10 @@ def init_db(all_weekends_file_name, db_name):
     create_table_weekends(c)
     create_table_participants(c)
     create_table_weekend_participant(c)
-    parent_dir = get_relative_path_to_script()
+    relative_path = get_relative_path_to_script()
     # Fills weekend table, based on input from the all_weekend_file.
     with open("{}/data/{}".format(
-            parent_dir, all_weekends_file_name),
+            relative_path, all_weekends_file_name),
             "r") as all_weekend_file:
         weekend_lines = all_weekend_file.readlines()
         for weekend_line in weekend_lines[1:]:
@@ -27,7 +27,7 @@ def init_db(all_weekends_file_name, db_name):
     # Iterates of all participant CSV
     for weekend_file_info in weekend_file_infos:
         with open("{}/data/participants/{}".format(
-                parent_dir, weekend_file_info[0]),
+                relative_path, weekend_file_info[0]),
                 encoding='latin1') as CSV_file:
             csv_reader = csv.reader(CSV_file, delimiter=",")
             next(csv_reader)
