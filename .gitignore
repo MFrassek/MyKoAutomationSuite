@@ -2,6 +2,7 @@ weekends.txt
 **/participants/*
 Weekend.db
 to-do.txt
-test.db
+Test.db
 MYSec_map.png
 tests/utils
+**/__pycache__/
