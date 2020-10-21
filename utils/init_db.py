@@ -1,8 +1,9 @@
 import sqlite3
 import csv
+import os
 
 
-def init_db(all_weekends_file_name, db_name):
+def init_db(parent_dir, all_weekends_file_name, db_name):
     conn = sqlite3.connect(db_name)
     c = conn.cursor()
     drop_old_tables(c)
@@ -10,7 +11,9 @@ def init_db(all_weekends_file_name, db_name):
     create_table_participants(c)
     create_table_weekend_participant(c)
     # Fills weekend table, based on input from the all_weekend_file.
-    with open(all_weekends_file_name, "r") as all_weekend_file:
+    with open("{}/data/{}".format(
+            parent_dir, all_weekends_file_name),
+            "r") as all_weekend_file:
         weekend_lines = all_weekend_file.readlines()
         for weekend_line in weekend_lines[1:]:
             c.execute(
@@ -22,8 +25,9 @@ def init_db(all_weekends_file_name, db_name):
     weekend_file_infos = c.fetchall()
     # Iterates of all participant CSV
     for weekend_file_info in weekend_file_infos:
-        with open("participants/{}".format(
-                weekend_file_info[0]), encoding='latin1') as CSV_file:
+        with open("{}/data/participants/{}".format(
+                parent_dir, weekend_file_info[0]),
+                encoding='latin1') as CSV_file:
             csv_reader = csv.reader(CSV_file, delimiter=",")
             next(csv_reader)
             for row in csv_reader:
@@ -86,4 +90,6 @@ def YYYYMMDD_from_DDMMYYY(date_string):
     return "-".join(date_string.split(".")[::-1])
 
 
-init_db("weekends.txt", "Weekend.db")
+parent_dir = os.path.dirname(os.path.abspath(__file__))
+
+init_db(parent_dir, "weekends.txt", "Weekend.db")
