@@ -20,21 +20,19 @@ def init_db(all_weekends_file_name, db_name):
             csv_reader = csv.reader(CSV_file, delimiter=",")
             next(csv_reader)
             for row in csv_reader:
-                participantName, membershipNr, status, gender, birthDate = \
-                    extract_full_participant_info_from_csv_row(row)
                 # Adds participant or replaces entry if participant is already
                 # in the participants table.
                 c.execute(
                     """INSERT OR REPLACE INTO participants
                         VALUES ('{}', '{}', '{}', '{}', '{}')""".format(
-                            participantName, membershipNr,
-                            status, gender, birthDate))
+                            *extract_full_participant_info_from_csv_row(row)))
                 # Adds participantName and weekendId as foreign keys to the
                 # weekend_participant table.
                 c.execute(
                     """INSERT INTO weekend_participant
                         VALUES ('{}', '{}')""".format(
-                            weekend_id, participantName))
+                            weekend_id,
+                            extract_participant_name_from_csv_row(row)))
     conn.commit()
     conn.close()
 
@@ -109,6 +107,7 @@ def extract_full_participant_info_from_csv_row(row):
 
 def extract_participant_name_from_csv_row(row):
     return row[8]
+
 
 def YYYYMMDD_from_DDMMYYY(date_string):
     return "-".join(date_string.split(".")[::-1])
