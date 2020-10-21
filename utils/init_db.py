@@ -67,8 +67,7 @@ def populate_all_tables(data_path, c):
 def populate_table_weekends(data_path, c):
     for weekend_base_info in read_base_info_weekends(
             data_path):
-        c.execute(
-            "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
+        add_entry_to_table_weekends(c, weekend_base_info)
 
 
 def read_base_info_weekends(data_path):
@@ -78,6 +77,11 @@ def read_base_info_weekends(data_path):
         all_weekend_file.readline()
         result = all_weekend_file.readlines()
     return result
+
+
+def add_entry_to_table_weekends(c, weekend_base_info):
+    c.execute(
+        "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
 
 
 def populate_table_participants_and_table_weekend_participant(
