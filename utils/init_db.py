@@ -11,12 +11,10 @@ def init_db(all_weekends_file_name, db_name):
     create_table_participants(c)
     create_table_weekend_participant(c)
     relative_path = get_relative_path_to_script()
-    # Fills weekend table, based on input from the all_weekend_file.
-    weekend_lines = read_base_info_weekends(
-        relative_path, all_weekends_file_name)
-    for weekend_line in weekend_lines:
+    for weekend_base_info in read_base_info_weekends(
+            relative_path, all_weekends_file_name):
         c.execute(
-            "INSERT INTO weekends VALUES ({})".format(weekend_line))
+            "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
     # Obtains the file names for all CSVs containing the weekend participants
     # together with the corresponding weekendIds.
     c.execute(
