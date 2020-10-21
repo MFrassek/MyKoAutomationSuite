@@ -7,8 +7,7 @@ def init_db(data_path, all_weekends_file_name, db_name):
     conn, c = connect_to_db(db_name)
     drop_old_tables(c)
     create_all_tables(c)
-    populate_table_weekends(data_path, all_weekends_file_name, c)
-    populate_table_participants_and_table_weekend_participant(data_path, c)
+    populate_all_tables(data_path, all_weekends_file_name, c)
     deconnect_from_db(conn)
 
 
@@ -58,6 +57,11 @@ def create_table_weekend_participant(c):
 
 def get_relative_path_to_script():
     return os.path.dirname(os.path.abspath(__file__))
+
+
+def populate_all_tables(data_path, all_weekends_file_name, c):
+    populate_table_weekends(data_path, all_weekends_file_name, c)
+    populate_table_participants_and_table_weekend_participant(data_path, c)
 
 
 def populate_table_weekends(data_path, all_weekends_file_name, c):
