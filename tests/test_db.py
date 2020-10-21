@@ -16,8 +16,9 @@ class TestInitiation(unittest.TestCase):
         pass
 
     def test_weekend_file_exists(self):
-        assert os.path.exists("{}/weekends.txt".format(self.data_path)),\
-            "weekends.txt does not exist at expected location"
+        self.assertTrue(
+            os.path.exists("{}/weekends.txt".format(self.data_path)),
+            "weekends.txt does not exist at expected location")
 
 
 if __name__ == '__main__':
