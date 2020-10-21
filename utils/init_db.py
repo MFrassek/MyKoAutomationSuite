@@ -3,16 +3,15 @@ import csv
 import os
 
 
-def init_db(all_weekends_file_name, db_name):
+def init_db(data_path, all_weekends_file_name, db_name):
     conn = sqlite3.connect(db_name)
     c = conn.cursor()
     drop_old_tables(c)
     create_table_weekends(c)
     create_table_participants(c)
     create_table_weekend_participant(c)
-    relative_path = get_relative_path_to_script()
-    populate_table_weekends(relative_path, all_weekends_file_name, c)
-    populate_table_participants_and_table_weekend_participant(relative_path, c)
+    populate_table_weekends(data_path, all_weekends_file_name, c)
+    populate_table_participants_and_table_weekend_participant(data_path, c)
     conn.commit()
     conn.close()
 
@@ -54,16 +53,16 @@ def get_relative_path_to_script():
     return os.path.dirname(os.path.abspath(__file__))
 
 
-def populate_table_weekends(relative_path, all_weekends_file_name, c):
+def populate_table_weekends(data_path, all_weekends_file_name, c):
     for weekend_base_info in read_base_info_weekends(
-            relative_path, all_weekends_file_name):
+            data_path, all_weekends_file_name):
         c.execute(
             "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
 
 
-def read_base_info_weekends(relative_path, all_weekends_file_name):
-    with open("{}/data/{}".format(
-            relative_path, all_weekends_file_name),
+def read_base_info_weekends(data_path, all_weekends_file_name):
+    with open("{}/{}".format(
+            data_path, all_weekends_file_name),
             "r") as all_weekend_file:
         all_weekend_file.readline()
         result = all_weekend_file.readlines()
@@ -71,10 +70,10 @@ def read_base_info_weekends(relative_path, all_weekends_file_name):
 
 
 def populate_table_participants_and_table_weekend_participant(
-        relative_path, c):
+        data_path, c):
     for weekend_file_name, weekend_id in get_weekend_file_names_and_ids(c):
-        with open("{}/data/participants/{}".format(
-                relative_path, weekend_file_name),
+        with open("{}/participants/{}".format(
+                data_path, weekend_file_name),
                 encoding='latin1') as CSV_file:
             participant_infos = csv.reader(CSV_file, delimiter=",")
             next(participant_infos)
@@ -122,4 +121,6 @@ def add_entry_to_table_weekend_participant(c, participant_info, weekend_id):
                 extract_participant_name_from_csv_row(participant_info)))
 
 
-init_db("weekends.txt", "Weekend.db")
+if __name__ == '__main__':
+    data_path = "{}/data".format(get_relative_path_to_script())
+    init_db(data_path, "weekends.txt", "Weekend.db")
