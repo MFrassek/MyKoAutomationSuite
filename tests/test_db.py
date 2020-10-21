@@ -70,7 +70,8 @@ class TestInitiation(unittest.TestCase):
             WHERE participantName == 'Zoe Zoes'""")
         self.assertEqual(self.c.fetchall(), [(1,)])
         init_db.add_entry_to_table_weekends(
-            self.c, "20, 'Name5', 'Place5', '2020-01-10', '2020-01-14'")
+            self.c, "20, 'Name5', 'Place5', '2020-01-10',\
+            '2020-01-14', 'Münster'")
         self.c.execute("""SELECT COUNT(location)
             FROM weekends
             WHERE location == 'Place5'""")
