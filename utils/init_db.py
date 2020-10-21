@@ -20,11 +20,8 @@ def init_db(all_weekends_file_name, db_name):
             csv_reader = csv.reader(CSV_file, delimiter=",")
             next(csv_reader)
             for row in csv_reader:
-                participantName = row[8]
-                membershipNr = row[0]
-                status = row[1]
-                gender = row[9]
-                birthDate = YYYYMMDD_from_DDMMYYY(row[10])
+                participantName, membershipNr, status, gender, birthDate = \
+                    extract_full_participant_info_from_csv_row(row)
                 # Adds participant or replaces entry if participant is already
                 # in the participants table.
                 c.execute(
@@ -99,6 +96,15 @@ def get_weekend_file_names_and_ids(c):
     c.execute(
         "SELECT startDate || '_' ||name || '.csv', weekendId from weekends")
     return c.fetchall()
+
+
+def extract_full_participant_info_from_csv_row(row):
+    participantName = row[8]
+    membershipNr = row[0]
+    status = row[1]
+    gender = row[9]
+    birthDate = YYYYMMDD_from_DDMMYYY(row[10])
+    return participantName, membershipNr, status, gender, birthDate
 
 
 def YYYYMMDD_from_DDMMYYY(date_string):
