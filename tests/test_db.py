@@ -35,7 +35,13 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(
             self.c.fetchall(),
             [('weekends',), ('participants',), ('weekend_participant',)])
-
+        init_db.populate_all_tables(self.data_path, "weekends.txt", self.c)
+        self.c.execute("SELECT COUNT(*) FROM weekends")
+        self.assertEqual(self.c.fetchall(), [(2,)])
+        self.c.execute("SELECT COUNT(*) FROM participants")
+        self.assertEqual(self.c.fetchall(), [(5,)])
+        self.c.execute("SELECT COUNT(*) FROM weekend_participant")
+        self.assertEqual(self.c.fetchall(), [(8,)])
 
 if __name__ == '__main__':
     unittest.main()
