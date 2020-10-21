@@ -13,9 +13,9 @@ def init_db(all_weekends_file_name, db_name):
     relative_path = get_relative_path_to_script()
     populate_table_weekends(relative_path, all_weekends_file_name, c)
     # Iterates of all participant CSV
-    for weekend_file_info in get_file_names_and_ids_weekends(c):
+    for weekend_file_name, weekend_id in get_file_names_and_ids_weekends(c):
         with open("{}/data/participants/{}".format(
-                relative_path, weekend_file_info[0]),
+                relative_path, weekend_file_name),
                 encoding='latin1') as CSV_file:
             csv_reader = csv.reader(CSV_file, delimiter=",")
             next(csv_reader)
@@ -37,7 +37,7 @@ def init_db(all_weekends_file_name, db_name):
                 c.execute(
                     """INSERT INTO weekend_participant
                         VALUES ('{}', '{}')""".format(
-                            weekend_file_info[1], participantName))
+                            weekend_id, participantName))
     conn.commit()
     conn.close()
 
