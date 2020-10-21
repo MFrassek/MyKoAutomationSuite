@@ -43,6 +43,20 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(self.c.fetchall(), [(5,)])
         self.c.execute("SELECT COUNT(*) FROM weekend_participant")
         self.assertEqual(self.c.fetchall(), [(8,)])
+        init_db.deconnect_from_db(self.conn)
+
+    def test_adding_entry(self):
+        init_db.init_db(self.data_path, self.db_name)
+        init_db.add_entry_to_table_participants(
+            self.c, ["0000000009", "Wohnhaft in Deutschland", "10.01.2018", "",
+                     "Zoe", "", "Zoes", "Zoes, Zoe", "Zoe Zoes", "f",
+                     "05.04.1989", "31", "", "", "", "", "", "", "",
+                     "Albertlane 5", "10000", "Alberta", "", "Frau", 0, "Ja",
+                     "", "", "", "049", "", "Frankfurt"])
+        self.c.execute("""SELECT COUNT(participantName) FROM participants
+            WHERE participantName == 'Zoe Zoes'""")
+        self.assertEqual(self.c.fetchall(), [(1,)])
+        init_db.deconnect_from_db(self.conn)
 
 
 if __name__ == '__main__':
