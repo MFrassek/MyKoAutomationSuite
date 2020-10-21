@@ -6,9 +6,7 @@ import os
 def init_db(data_path, all_weekends_file_name, db_name):
     conn, c = connect_to_db(db_name)
     drop_old_tables(c)
-    create_table_weekends(c)
-    create_table_participants(c)
-    create_table_weekend_participant(c)
+    create_all_tables(c)
     populate_table_weekends(data_path, all_weekends_file_name, c)
     populate_table_participants_and_table_weekend_participant(data_path, c)
     deconnect_from_db(conn)
@@ -23,6 +21,12 @@ def drop_old_tables(c):
     c.execute("DROP TABLE IF EXISTS weekends")
     c.execute("DROP TABLE IF EXISTS participants")
     c.execute("DROP TABLE IF EXISTS weekend_participant")
+
+
+def create_all_tables(c):
+    create_table_weekends(c)
+    create_table_participants(c)
+    create_table_weekend_participant(c)
 
 
 def create_table_weekends(c):
