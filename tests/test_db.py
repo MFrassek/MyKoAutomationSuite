@@ -44,6 +44,8 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(self.c.fetchall(), [(5,)])
         self.c.execute("SELECT COUNT(*) FROM weekend_participant")
         self.assertEqual(self.c.fetchall(), [(8,)])
+        self.c.execute("SELECT COUNT(*) FROM regions")
+        self.assertEqual(self.c.fetchall(), [(40,)])
         init_db.deconnect_from_db(self.conn)
 
     def test_adding_entry(self):
