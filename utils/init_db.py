@@ -2,8 +2,8 @@ import sqlite3
 import csv
 
 
-def init_db(all_weekends_file_name):
-    conn = sqlite3.connect('Weekend.db')
+def init_db(all_weekends_file_name, db_name):
+    conn = sqlite3.connect(db_name)
     c = conn.cursor()
     drop_old_tables(c)
     create_table_weekends(c)
@@ -86,4 +86,4 @@ def YYYYMMDD_from_DDMMYYY(date_string):
     return "-".join(date_string.split(".")[::-1])
 
 
-init_db("weekends.txt")
+init_db("weekends.txt", "Weekend.db")
