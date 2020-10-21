@@ -99,13 +99,16 @@ def get_weekend_file_names_and_ids(c):
 
 
 def extract_full_participant_info_from_csv_row(row):
-    participantName = row[8]
+    participantName = extract_participant_name_from_csv_row(row)
     membershipNr = row[0]
     status = row[1]
     gender = row[9]
     birthDate = YYYYMMDD_from_DDMMYYY(row[10])
     return participantName, membershipNr, status, gender, birthDate
 
+
+def extract_participant_name_from_csv_row(row):
+    return row[8]
 
 def YYYYMMDD_from_DDMMYYY(date_string):
     return "-".join(date_string.split(".")[::-1])
