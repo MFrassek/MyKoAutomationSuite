@@ -1,6 +1,7 @@
 import unittest
 import os
 from utils import init_db
+import sqlite3
 
 
 class TestInitiation(unittest.TestCase):
@@ -8,6 +9,8 @@ class TestInitiation(unittest.TestCase):
         super(TestInitiation, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
+        self.db_name = "Test.db"
+        self.conn, self.c = init_db.connect_to_db(self.db_name)
 
     def setUp(self):
         pass
@@ -19,6 +22,9 @@ class TestInitiation(unittest.TestCase):
         self.assertTrue(
             os.path.exists("{}/weekends.txt".format(self.data_path)),
             "weekends.txt does not exist at expected location")
+
+    def test_connects_to_db(self):
+        self.assertIsInstance(self.conn, sqlite3.Connection)
 
 
 if __name__ == '__main__':
