@@ -1,18 +1,17 @@
 import unittest
+import os
+from utils import init_db
 
 
 class TestInitiation(unittest.TestCase):
     def setUp(self):
-        pass
+        self.data_path = "{}/test_data".format(
+            os.path.dirname(os.path.abspath(__file__)))
 
     def tearDown(self):
         pass
 
-    def test_find_all_weekend_file(self):
-        pass
 
-    def test_init_tables(self):
-        pass
 
 
 if __name__ == '__main__':
