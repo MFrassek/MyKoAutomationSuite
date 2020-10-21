@@ -17,11 +17,12 @@ def init_db(all_weekends_file_name, db_name):
         with open("{}/data/participants/{}".format(
                 relative_path, weekend_file_name),
                 encoding='latin1') as CSV_file:
-            csv_reader = csv.reader(CSV_file, delimiter=",")
-            next(csv_reader)
-            for row in csv_reader:
-                add_entry_to_table_participants(c, row)
-                add_entry_to_table_weekend_participant(c, row, weekend_id)
+            participant_infos = csv.reader(CSV_file, delimiter=",")
+            next(participant_infos)
+            for participant_info in participant_infos:
+                add_entry_to_table_participants(c, participant_info)
+                add_entry_to_table_weekend_participant(
+                    c, participant_info, weekend_id)
     conn.commit()
     conn.close()
 
@@ -92,29 +93,29 @@ def add_entry_to_table_participants(c, row):
                 *extract_full_participant_info_from_csv_row(row)))
 
 
-def extract_full_participant_info_from_csv_row(row):
-    participantName = extract_participant_name_from_csv_row(row)
-    membershipNr = row[0]
-    status = row[1]
-    gender = row[9]
-    birthDate = YYYYMMDD_from_DDMMYYY(row[10])
+def extract_full_participant_info_from_csv_row(participant_info):
+    participantName = extract_participant_name_from_csv_row(participant_info)
+    membershipNr = participant_info[0]
+    status = participant_info[1]
+    gender = participant_info[9]
+    birthDate = YYYYMMDD_from_DDMMYYY(participant_info[10])
     return participantName, membershipNr, status, gender, birthDate
 
 
-def extract_participant_name_from_csv_row(row):
-    return row[8]
+def extract_participant_name_from_csv_row(participant_info):
+    return participant_info[8]
 
 
 def YYYYMMDD_from_DDMMYYY(date_string):
     return "-".join(date_string.split(".")[::-1])
 
 
-def add_entry_to_table_weekend_participant(c, row, weekend_id):
+def add_entry_to_table_weekend_participant(c, participant_info, weekend_id):
     c.execute(
         """INSERT INTO weekend_participant
             VALUES ('{}', '{}')""".format(
                 weekend_id,
-                extract_participant_name_from_csv_row(row)))
+                extract_participant_name_from_csv_row(participant_info)))
 
 
 init_db("weekends.txt", "Weekend.db")
