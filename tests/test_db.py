@@ -31,6 +31,13 @@ class TestInitiation(unittest.TestCase):
         self.c.execute("SELECT name FROM sqlite_master WHERE type='table';")
         self.assertEqual(self.c.fetchall(), [])
 
+    def test_make_new_tables(self):
+        init_db.create_all_tables(self.c)
+        self.c.execute("SELECT name FROM sqlite_master WHERE type='table';")
+        self.assertEqual(
+            self.c.fetchall(),
+            [('weekends',), ('participants',), ('weekend_participant',)])
+
 
 if __name__ == '__main__':
     unittest.main()
