@@ -3,11 +3,11 @@ import csv
 import os
 
 
-def init_db(data_path, all_weekends_file_name, db_name):
+def init_db(data_path, db_name):
     conn, c = connect_to_db(db_name)
     drop_old_tables(c)
     create_all_tables(c)
-    populate_all_tables(data_path, all_weekends_file_name, c)
+    populate_all_tables(data_path, c)
     deconnect_from_db(conn)
 
 
@@ -59,21 +59,21 @@ def get_relative_path_to_script():
     return os.path.dirname(os.path.abspath(__file__))
 
 
-def populate_all_tables(data_path, all_weekends_file_name, c):
-    populate_table_weekends(data_path, all_weekends_file_name, c)
+def populate_all_tables(data_path, c):
+    populate_table_weekends(data_path, c)
     populate_table_participants_and_table_weekend_participant(data_path, c)
 
 
-def populate_table_weekends(data_path, all_weekends_file_name, c):
+def populate_table_weekends(data_path, c):
     for weekend_base_info in read_base_info_weekends(
-            data_path, all_weekends_file_name):
+            data_path):
         c.execute(
             "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
 
 
-def read_base_info_weekends(data_path, all_weekends_file_name):
-    with open("{}/{}".format(
-            data_path, all_weekends_file_name),
+def read_base_info_weekends(data_path):
+    with open("{}/weekends.txt".format(
+            data_path),
             "r") as all_weekend_file:
         all_weekend_file.readline()
         result = all_weekend_file.readlines()
@@ -139,4 +139,4 @@ def deconnect_from_db(conn):
 
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
-    init_db(data_path, "weekends.txt", "Weekend.db")
+    init_db(data_path, "Weekend.db")
