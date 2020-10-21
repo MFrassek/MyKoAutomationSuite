@@ -17,9 +17,13 @@ def connect_to_db(db_name):
 
 
 def drop_old_tables(c):
+    for table in get_all_existing_table_names(c):
+        c.execute("DROP TABLE IF EXISTS {}".format(table))
+
+
+def get_all_existing_table_names(c):
     c.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    for table in c.fetchall():
-        c.execute("DROP TABLE IF EXISTS {}".format(table[0]))
+    return [table_tuple[0] for table_tuple in c.fetchall()]
 
 
 def create_all_tables(c):
