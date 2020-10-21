@@ -4,16 +4,19 @@ import os
 
 
 def init_db(data_path, all_weekends_file_name, db_name):
-    conn = sqlite3.connect(db_name)
-    c = conn.cursor()
+    conn, c = connect_to_db(db_name)
     drop_old_tables(c)
     create_table_weekends(c)
     create_table_participants(c)
     create_table_weekend_participant(c)
     populate_table_weekends(data_path, all_weekends_file_name, c)
     populate_table_participants_and_table_weekend_participant(data_path, c)
-    conn.commit()
-    conn.close()
+    deconnect_from_db(conn)
+
+
+def connect_to_db(db_name):
+    conn = sqlite3.connect(db_name)
+    return conn, conn.cursor()
 
 
 def drop_old_tables(c):
@@ -119,6 +122,11 @@ def add_entry_to_table_weekend_participant(c, participant_info, weekend_id):
             VALUES ('{}', '{}')""".format(
                 weekend_id,
                 extract_participant_name_from_csv_row(participant_info)))
+
+
+def deconnect_from_db(conn):
+    conn.commit()
+    conn.close()
 
 
 if __name__ == '__main__':
