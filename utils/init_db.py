@@ -13,7 +13,7 @@ def init_db(all_weekends_file_name, db_name):
     relative_path = get_relative_path_to_script()
     populate_table_weekends(relative_path, all_weekends_file_name, c)
     # Iterates of all participant CSV
-    for weekend_file_name, weekend_id in get_file_names_and_ids_weekends(c):
+    for weekend_file_name, weekend_id in get_weekend_file_names_and_ids(c):
         with open("{}/data/participants/{}".format(
                 relative_path, weekend_file_name),
                 encoding='latin1') as CSV_file:
@@ -95,7 +95,7 @@ def read_base_info_weekends(relative_path, all_weekends_file_name):
     return result
 
 
-def get_file_names_and_ids_weekends(c):
+def get_weekend_file_names_and_ids(c):
     c.execute(
         "SELECT startDate || '_' ||name || '.csv', weekendId from weekends")
     return c.fetchall()
