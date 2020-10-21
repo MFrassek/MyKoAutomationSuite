@@ -3,13 +3,14 @@ import csv
 import os
 
 
-def init_db(parent_dir, all_weekends_file_name, db_name):
+def init_db(all_weekends_file_name, db_name):
     conn = sqlite3.connect(db_name)
     c = conn.cursor()
     drop_old_tables(c)
     create_table_weekends(c)
     create_table_participants(c)
     create_table_weekend_participant(c)
+    parent_dir = get_relative_path_to_script()
     # Fills weekend table, based on input from the all_weekend_file.
     with open("{}/data/{}".format(
             parent_dir, all_weekends_file_name),
@@ -86,10 +87,12 @@ def create_table_weekend_participant(c):
             participantName text NOT NULL);""")
 
 
+def get_relative_path_to_script():
+    return os.path.dirname(os.path.abspath(__file__))
+
+
 def YYYYMMDD_from_DDMMYYY(date_string):
     return "-".join(date_string.split(".")[::-1])
 
 
-parent_dir = os.path.dirname(os.path.abspath(__file__))
-
-init_db(parent_dir, "weekends.txt", "Weekend.db")
+init_db("weekends.txt", "Weekend.db")
