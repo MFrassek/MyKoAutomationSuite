@@ -35,7 +35,8 @@ class TestInitiation(unittest.TestCase):
         self.c.execute("SELECT name FROM sqlite_master WHERE type='table';")
         self.assertEqual(
             self.c.fetchall(),
-            [('weekends',), ('participants',), ('weekend_participant',)])
+            [('weekends',), ('participants',), ('weekend_participant',),
+             ('regions',)])
         init_db.populate_all_tables(self.data_path, self.c)
         self.c.execute("SELECT COUNT(*) FROM weekends")
         self.assertEqual(self.c.fetchall(), [(2,)])
