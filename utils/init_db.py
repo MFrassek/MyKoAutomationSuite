@@ -14,7 +14,7 @@ def init_db(all_weekends_file_name, db_name):
     # Fills weekend table, based on input from the all_weekend_file.
     weekend_lines = read_base_info_weekends(
         relative_path, all_weekends_file_name)
-    for weekend_line in weekend_lines[1:]:
+    for weekend_line in weekend_lines:
         c.execute(
             "INSERT INTO weekends VALUES ({})".format(weekend_line))
     # Obtains the file names for all CSVs containing the weekend participants
@@ -93,6 +93,7 @@ def read_base_info_weekends(relative_path, all_weekends_file_name):
     with open("{}/data/{}".format(
             relative_path, all_weekends_file_name),
             "r") as all_weekend_file:
+        all_weekend_file.readline()
         result = all_weekend_file.readlines()
     return result
 
