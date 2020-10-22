@@ -7,8 +7,7 @@ import sqlite3
 
 def generate_mysec_map(data_path, output_path, db_name):
     soup = get_wellformed_soup_from_svg_file(data_path)
-    conn, c = connect_to_db(db_name)
-    change_fill_color_of_all_regions_based_on_db(c, soup)
+    change_fill_color_of_all_regions_based_on_db(db_name, soup)
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
 
 
@@ -29,7 +28,8 @@ def remove_malformed_attribute_from_soup(soup):
     del svg_tag["xmlns:"]
 
 
-def change_fill_color_of_all_regions_based_on_db(c, soup):
+def change_fill_color_of_all_regions_based_on_db(db_name, soup):
+    conn, c = connect_to_db(db_name)
     for regionName, lookingBool in get_regionNames_and_lookingBools(c):
         change_fill_color_of_path(
             soup, regionName, get_region_looking_color(lookingBool))
