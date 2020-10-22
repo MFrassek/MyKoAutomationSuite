@@ -5,7 +5,6 @@ import os
 def generate_mysec_map(data_path):
     with open("{}/LocSecRegions.svg".format(data_path), "r") as template_svg:
         svg_code = "".join(template_svg.readlines())
-    print(svg_code)
     svg2png(bytestring=svg_code, write_to='MYSec_map.png', dpi=300)
 
 
