@@ -13,10 +13,9 @@ class TestInitiation(unittest.TestCase):
         os.remove("{}/test_map.png".format(self.data_path))
 
     def test_make_png(self):
-        mysec_map.generate_mysec_map(
-            self.data_path,
-            "{}/test_map.png".format(self.data_path),
-            "Test.db")
+        soup = mysec_map.get_wellformed_soup_from_svg_file(self.data_path)
+        mysec_map.make_png_from_soup(
+            soup, "{}/test_map.png".format(self.data_path))
         self.assertTrue(
             os.path.exists("{}/test_map.png".format(self.data_path)),
             "test_Map.png does not exist at expected location")
