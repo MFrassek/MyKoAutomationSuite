@@ -1,6 +1,7 @@
 from cairosvg import svg2png
 from bs4 import BeautifulSoup
 import os
+import re
 
 
 def generate_mysec_map(data_path, output_path):
@@ -8,6 +9,11 @@ def generate_mysec_map(data_path, output_path):
         raw_code = "".join(template.readlines())
     soup = BeautifulSoup(raw_code, 'xml')
     remove_malformed_attribute_from_soup(soup)
+    region_path_tag = soup("path", {"id": "Düsseldorf"})[0]
+    region_style_attribute = region_path_tag["style"]
+    region_style_attribute = re.sub(
+        "(?<=fill:#).{6}", "111111", region_style_attribute)
+    region_path_tag["style"] = region_style_attribute
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
 
 
