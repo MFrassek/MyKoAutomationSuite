@@ -11,7 +11,7 @@ class TestInitiation(unittest.TestCase):
         self.db_name = "Test.db"
 
     def tearDown(self):
-        pass
+        mysec_map.input = input
 
     def test_make_png(self):
         soup = mysec_map.get_wellformed_soup_from_svg_file(self.data_path)
@@ -30,3 +30,12 @@ class TestInitiation(unittest.TestCase):
         c.execute("SELECT looking FROM regions WHERE regionId = 1020")
         new_looking_state = c.fetchone()[0]
         self.assertEqual(not original_looking_state, new_looking_state)
+
+    def test_prompt(self):
+        mysec_map.input = lambda x: ""
+        self.assertEqual(
+            mysec_map.prompt_regionIds_for_looking_state_change(), [])
+        mysec_map.input = lambda x: "1010, 2020"
+        self.assertEqual(
+            mysec_map.prompt_regionIds_for_looking_state_change(),
+            [1010, 2020])
