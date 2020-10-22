@@ -32,15 +32,16 @@ def change_fill_color_of_all_regions_based_on_db(db_name, soup):
     conn, c = connect_to_db(db_name)
     print_current_looking_state_of_regions(c)
     regionIds = prompt_regionIds_for_looking_state_change()
-    for regionName, lookingBool in get_regionNames_and_lookingBools(c):
+    for _, regionName, lookingBool \
+            in get_regionIds_regionNames_and_lookingBools(c):
         change_fill_color_of_path(
             soup, regionName, get_region_looking_color(lookingBool))
 
 
 def print_current_looking_state_of_regions(c):
-    for i, (regionName, lookingBool)\
-            in enumerate(get_regionNames_and_lookingBools(c)):
-        print("{}\t{}\t{}".format(i, lookingBool, regionName))
+    for regionId, regionName, lookingBool\
+            in get_regionIds_regionNames_and_lookingBools(c):
+        print("{}\t{}\t{}".format(regionId, lookingBool, regionName))
 
 
 def prompt_regionIds_for_looking_state_change():
@@ -53,8 +54,8 @@ def prompt_regionIds_for_looking_state_change():
         return []
 
 
-def get_regionNames_and_lookingBools(c):
-    c.execute("""SELECT regionName, looking FROM regions""")
+def get_regionIds_regionNames_and_lookingBools(c):
+    c.execute("""SELECT * FROM regions""")
     return c.fetchall()
 
 
