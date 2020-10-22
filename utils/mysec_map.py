@@ -8,7 +8,7 @@ import sqlite3
 def generate_mysec_map(data_path, output_path, db_name):
     soup = get_wellformed_soup_from_svg_file(data_path)
     change_fill_color_of_all_regions_based_on_db(db_name, soup)
-    svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
+    make_png_from_soup(soup, output_path)
 
 
 def get_wellformed_soup_from_svg_file(data_path):
@@ -51,6 +51,10 @@ def change_fill_color_of_path(soup, id, fill_color):
 def get_region_looking_color(lookingBool):
     looking_colors = {0: "ff7d24", 1: "005497"}
     return looking_colors[lookingBool]
+
+
+def make_png_from_soup(soup, output_path):
+    svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
 
 
 def get_relative_path_to_script():
