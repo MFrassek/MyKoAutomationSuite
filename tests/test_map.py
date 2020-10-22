@@ -14,7 +14,9 @@ class TestInitiation(unittest.TestCase):
 
     def test_make_png(self):
         mysec_map.generate_mysec_map(
-            self.data_path, "{}/test_map.png".format(self.data_path))
+            self.data_path,
+            "{}/test_map.png".format(self.data_path),
+            "Test.db")
         self.assertTrue(
             os.path.exists("{}/test_map.png".format(self.data_path)),
             "MYSec_Map.png does not exist at expected location")

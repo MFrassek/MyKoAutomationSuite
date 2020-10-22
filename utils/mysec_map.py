@@ -2,14 +2,18 @@ from cairosvg import svg2png
 from bs4 import BeautifulSoup
 import os
 import re
+import sqlite3
 
 
-def generate_mysec_map(data_path, output_path):
+def generate_mysec_map(data_path, output_path, db_name):
     with open("{}/LocSecRegions.svg".format(data_path), "r") as template:
         raw_code = "".join(template.readlines())
     soup = BeautifulSoup(raw_code, 'xml')
     remove_malformed_attribute_from_soup(soup)
-    change_fill_color_of_path(soup, "Düsseldorf")
+    conn, c = connect_to_db(db_name)
+    c.execute("""SELECT regionName, looking FROM regions""")
+    for regionName, lookingBool in c.fetchall():
+        change_fill_color_of_path(soup, regionName)
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
 
 
@@ -30,6 +34,11 @@ def get_relative_path_to_script():
     return os.path.dirname(os.path.abspath(__file__))
 
 
+def connect_to_db(db_name):
+    conn = sqlite3.connect(db_name)
+    return conn, conn.cursor()
+
+
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
-    generate_mysec_map(data_path, "MYSec_map.png")
+    generate_mysec_map(data_path, "MYSec_map.png", "Weekend.db")
