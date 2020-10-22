@@ -4,9 +4,9 @@ import os
 
 
 def generate_mysec_map(data_path, output_path):
-    with open("{}/LocSecRegions.svg".format(data_path), "r") as template_svg:
-        svg_code = "".join(template_svg.readlines())
-    soup = BeautifulSoup(svg_code, 'xml')
+    with open("{}/LocSecRegions.svg".format(data_path), "r") as template:
+        raw_code = "".join(template.readlines())
+    soup = BeautifulSoup(raw_code, 'xml')
     svg_tag = soup.svg
     del svg_tag["xmlns:"]
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
