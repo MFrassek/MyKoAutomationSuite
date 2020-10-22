@@ -19,4 +19,4 @@ class TestInitiation(unittest.TestCase):
             "Test.db")
         self.assertTrue(
             os.path.exists("{}/test_map.png".format(self.data_path)),
-            "MYSec_Map.png does not exist at expected location")
+            "test_Map.png does not exist at expected location")
