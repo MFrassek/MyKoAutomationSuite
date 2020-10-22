@@ -6,15 +6,19 @@ import sqlite3
 
 
 def generate_mysec_map(data_path, output_path, db_name):
-    with open("{}/LocSecRegions.svg".format(data_path), "r") as template:
-        raw_code = "".join(template.readlines())
-    soup = BeautifulSoup(raw_code, 'xml')
+    soup = read_soup_from_svg_file(data_path)
     remove_malformed_attribute_from_soup(soup)
     conn, c = connect_to_db(db_name)
     for regionName, lookingBool in get_regionNames_and_lookingBools(c):
         change_fill_color_of_path(
             soup, regionName, get_region_looking_color(lookingBool))
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
+
+
+def read_soup_from_svg_file(data_path):
+    with open("{}/LocSecRegions.svg".format(data_path), "r") as template:
+        raw_code = "".join(template.readlines())
+    return BeautifulSoup(raw_code, 'xml')
 
 
 def remove_malformed_attribute_from_soup(soup):
