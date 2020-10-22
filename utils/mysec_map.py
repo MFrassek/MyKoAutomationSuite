@@ -7,9 +7,13 @@ def generate_mysec_map(data_path, output_path):
     with open("{}/LocSecRegions.svg".format(data_path), "r") as template:
         raw_code = "".join(template.readlines())
     soup = BeautifulSoup(raw_code, 'xml')
+    remove_malformed_attribute_from_soup(soup)
+    svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
+
+
+def remove_malformed_attribute_from_soup(soup):
     svg_tag = soup.svg
     del svg_tag["xmlns:"]
-    svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
 
 
 def get_relative_path_to_script():
