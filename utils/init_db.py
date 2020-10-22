@@ -64,6 +64,7 @@ def create_table_weekend_participant(c):
 def creat_table_regions(c):
     c.execute(
         """CREATE TABLE regions (
+            regionId integer NOT NULL,
             regionName text PRIMARY KEY NOT NULL,
             looking boolean NOT NULL);""")
 
