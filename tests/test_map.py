@@ -8,9 +8,10 @@ class TestInitiation(unittest.TestCase):
         super(TestInitiation, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
+        self.db_name = "Test.db"
 
     def tearDown(self):
-        os.remove("{}/test_map.png".format(self.data_path))
+        pass
 
     def test_make_png(self):
         soup = mysec_map.get_wellformed_soup_from_svg_file(self.data_path)
@@ -19,3 +20,4 @@ class TestInitiation(unittest.TestCase):
         self.assertTrue(
             os.path.exists("{}/test_map.png".format(self.data_path)),
             "test_Map.png does not exist at expected location")
+        os.remove("{}/test_map.png".format(self.data_path))
