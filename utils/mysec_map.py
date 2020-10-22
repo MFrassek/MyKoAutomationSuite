@@ -31,6 +31,7 @@ def remove_malformed_attribute_from_soup(soup):
 def change_fill_color_of_all_regions_based_on_db(db_name, soup):
     conn, c = connect_to_db(db_name)
     print_current_looking_state_of_regions(c)
+    regionIds = prompt_regionIds_for_looking_state_change()
     for regionName, lookingBool in get_regionNames_and_lookingBools(c):
         change_fill_color_of_path(
             soup, regionName, get_region_looking_color(lookingBool))
@@ -40,6 +41,16 @@ def print_current_looking_state_of_regions(c):
     for i, (regionName, lookingBool)\
             in enumerate(get_regionNames_and_lookingBools(c)):
         print("{}\t{}\t{}".format(i, lookingBool, regionName))
+
+
+def prompt_regionIds_for_looking_state_change():
+    regionIds = input("\nType comma separated identifiers of regions "
+                      + "to change their looking state"
+                      + "\nPress enter to proceed without changes\n")
+    if regionIds:
+        return list(map(int, regionIds.split(",")))
+    else:
+        return []
 
 
 def get_regionNames_and_lookingBools(c):
