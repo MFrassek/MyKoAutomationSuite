@@ -6,11 +6,16 @@ import sqlite3
 
 
 def generate_mysec_map(data_path, output_path, db_name):
-    soup = read_soup_from_svg_file(data_path)
-    remove_malformed_attribute_from_soup(soup)
+    soup = get_wellformed_soup_from_svg_file(data_path)
     conn, c = connect_to_db(db_name)
     change_fill_color_of_all_regions_based_on_db(c, soup)
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
+
+
+def get_wellformed_soup_from_svg_file(data_path):
+    soup = read_soup_from_svg_file(data_path)
+    remove_malformed_attribute_from_soup(soup)
+    return soup
 
 
 def read_soup_from_svg_file(data_path):
