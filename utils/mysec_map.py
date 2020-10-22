@@ -11,9 +11,8 @@ def generate_mysec_map(data_path, output_path, db_name):
     soup = BeautifulSoup(raw_code, 'xml')
     remove_malformed_attribute_from_soup(soup)
     conn, c = connect_to_db(db_name)
-    c.execute("""SELECT regionName, looking FROM regions""")
     looking_colors = {0: "ff7d24", 1: "005497"}
-    for regionName, lookingBool in c.fetchall():
+    for regionName, lookingBool in get_regionNames_and_lookingBools(c):
         region_color = looking_colors[lookingBool]
         change_fill_color_of_path(soup, regionName, region_color)
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
@@ -22,6 +21,11 @@ def generate_mysec_map(data_path, output_path, db_name):
 def remove_malformed_attribute_from_soup(soup):
     svg_tag = soup.svg
     del svg_tag["xmlns:"]
+
+
+def get_regionNames_and_lookingBools(c):
+    c.execute("""SELECT regionName, looking FROM regions""")
+    return c.fetchall()
 
 
 def change_fill_color_of_path(soup, id, fill_color):
