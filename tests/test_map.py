@@ -21,3 +21,12 @@ class TestInitiation(unittest.TestCase):
             os.path.exists("{}/test_map.png".format(self.data_path)),
             "test_Map.png does not exist at expected location")
         os.remove("{}/test_map.png".format(self.data_path))
+
+    def test_toggle(self):
+        conn, c = mysec_map.connect_to_db(self.db_name)
+        c.execute("SELECT looking FROM regions WHERE regionId = 1020")
+        original_looking_state = c.fetchone()[0]
+        mysec_map.toggle_looking_state_in_db(c, "1020")
+        c.execute("SELECT looking FROM regions WHERE regionId = 1020")
+        new_looking_state = c.fetchone()[0]
+        self.assertEqual(not original_looking_state, new_looking_state)
