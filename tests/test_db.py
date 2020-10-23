@@ -36,7 +36,7 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(
             self.c.fetchall(),
             [('weekends',), ('participants',), ('weekend_participant',),
-             ('regions',), ('volunteers',)])
+             ('regions',), ('volunteers',), ('mysecs',)])
         init_db.populate_all_tables(self.data_path, self.c)
         self.c.execute("SELECT COUNT(*) FROM weekends")
         self.assertEqual(self.c.fetchall(), [(2,)])
