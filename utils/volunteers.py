@@ -28,11 +28,16 @@ def prompt_position_names():
 
 
 def add_entry_to_table_x(c, table, volunteerName):
-    regionName = input("Region name:\n")
-    startDate = input("Start date [YYYY-MM-DD]:\n")
+    regionName, startDate = prompt_regionName_and_startDate()
     c.execute(
         "INSERT INTO {} VALUES ('{}', '{}', '{}', '');"
         .format(table, volunteerName, regionName, startDate))
+
+
+def prompt_regionName_and_startDate():
+    regionName = input("Region name:\n")
+    startDate = input("Start date [YYYY-MM-DD]:\n")
+    return regionName, startDate
 
 
 def deconnect_from_db(conn):
