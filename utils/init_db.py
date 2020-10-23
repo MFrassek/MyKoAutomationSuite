@@ -31,6 +31,7 @@ def create_all_tables(c):
     create_table_participants(c)
     create_table_weekend_participant(c)
     create_table_regions(c)
+    create_table_volunteers(c)
 
 
 def create_table_weekends(c):
@@ -67,6 +68,14 @@ def create_table_regions(c):
             regionId integer NOT NULL,
             regionName text PRIMARY KEY NOT NULL,
             looking boolean NOT NULL);""")
+
+
+def create_table_volunteers(c):
+    c.execute(
+        """CREATE TABLE volunteers(
+            volunteerName text PRIMARY KEY NOT NULL,
+            gender text NOT NULL,
+            birthDate date NOT NULL);""")
 
 
 def get_relative_path_to_script():
