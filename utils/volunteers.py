@@ -4,9 +4,7 @@ import sqlite3
 def add_new_volunteer_and_position(db_name):
     conn, c = connect_to_db(db_name)
     volunteerName = input("Name:\n")
-    gender = input("Gender [f, m or d]:\n")
-    birthDate = input("Birthdate [YYYY-MM-DD]:\n")
-    add_entry_to_table_volunteers(c, volunteerName, gender, birthDate)
+    add_entry_to_table_volunteers(c, volunteerName)
     for position_name in prompt_position_names():
         add_entry_to_table_x(c, position_name, volunteerName)
     deconnect_from_db(conn)
@@ -17,7 +15,9 @@ def connect_to_db(db_name):
     return conn, conn.cursor()
 
 
-def add_entry_to_table_volunteers(c, volunteerName, gender, birthDate):
+def add_entry_to_table_volunteers(c, volunteerName):
+    gender = input("Gender [f, m or d]:\n")
+    birthDate = input("Birthdate [YYYY-MM-DD]:\n")
     c.execute(
         "INSERT INTO volunteers VALUES ('{}', '{}', '{}')"
         .format(volunteerName, gender, birthDate))
