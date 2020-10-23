@@ -30,7 +30,7 @@ def create_all_tables(c):
     create_table_weekends(c)
     create_table_participants(c)
     create_table_weekend_participant(c)
-    creat_table_regions(c)
+    create_table_regions(c)
 
 
 def create_table_weekends(c):
@@ -61,7 +61,7 @@ def create_table_weekend_participant(c):
             participantName text NOT NULL);""")
 
 
-def creat_table_regions(c):
+def create_table_regions(c):
     c.execute(
         """CREATE TABLE regions (
             regionId integer NOT NULL,
