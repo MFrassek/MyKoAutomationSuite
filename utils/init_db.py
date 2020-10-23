@@ -194,4 +194,4 @@ def deconnect_from_db(conn):
 
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
-    init_db(data_path, "Weekend.db")
+    init_db(data_path, "MY-Ko.db")

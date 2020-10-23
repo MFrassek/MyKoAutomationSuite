@@ -39,4 +39,4 @@ def deconnect_from_db(conn):
 
 
 if __name__ == '__main__':
-    add_new_volunteer_and_position("Weekend.db")
+    add_new_volunteer_and_position("MY-Ko.db")

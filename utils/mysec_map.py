@@ -101,4 +101,4 @@ def connect_to_db(db_name):
 
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
-    generate_mysec_map(data_path, "MYSec_map.png", "Weekend.db")
+    generate_mysec_map(data_path, "MYSec_map.png", "MY-Ko.db")
