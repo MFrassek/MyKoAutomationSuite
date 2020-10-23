@@ -3,8 +3,7 @@ import sqlite3
 
 def add_new_volunteer_and_position(db_name):
     conn, c = connect_to_db(db_name)
-    position_names = input(
-        "Comma separated positions [mysecs, myvers]:\n").split(",")
+    position_names = prompt_position_names()
     volunteerName = input("Name:\n")
     gender = input("Gender [f, m or d]:\n")
     birthDate = input("Birthdate [YYYY-MM-DD]:\n")
@@ -23,6 +22,10 @@ def add_entry_to_table_volunteers(c, volunteerName, gender, birthDate):
     c.execute(
         "INSERT INTO volunteers VALUES ('{}', '{}', '{}')"
         .format(volunteerName, gender, birthDate))
+
+
+def prompt_position_names():
+    return input("Comma separated positions [mysecs, myvers]:\n").split(",")
 
 
 def add_entry_to_table_x(c, table, volunteerName):
