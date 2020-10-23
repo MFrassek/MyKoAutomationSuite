@@ -16,11 +16,16 @@ def connect_to_db(db_name):
 
 
 def add_entry_to_table_volunteers(c, volunteerName):
-    gender = input("Gender [f, m or d]:\n")
-    birthDate = input("Birthdate [YYYY-MM-DD]:\n")
+    gender, birthDate = prompt_gender_and_birthDate()
     c.execute(
         "INSERT INTO volunteers VALUES ('{}', '{}', '{}')"
         .format(volunteerName, gender, birthDate))
+
+
+def prompt_gender_and_birthDate():
+    gender = input("Gender [f, m or d]:\n")
+    birthDate = input("Birthdate [YYYY-MM-DD]:\n")
+    return gender, birthDate
 
 
 def prompt_position_names():
