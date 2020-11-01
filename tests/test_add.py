@@ -1,6 +1,7 @@
 import unittest
 import os
 from utils import volunteer_add
+from utils import helper
 
 
 class TestInitiation(unittest.TestCase):
@@ -11,10 +12,10 @@ class TestInitiation(unittest.TestCase):
         self.db_name = "Test.db"
 
     def setUp(self):
-        self.conn, self.c = volunteer_add.connect_to_db(self.db_name)
+        self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):
-        volunteer_add.deconnect_from_db(self.conn)
+        helper.deconnect_from_db(self.conn)
 
     def test_add_entry_to_volunteers(self):
         container_prompt_gender_and_birthDate = \

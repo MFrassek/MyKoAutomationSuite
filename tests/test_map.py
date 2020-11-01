@@ -1,6 +1,7 @@
 import unittest
 import os
 from utils import mysec_map
+from utils import helper
 
 
 class TestInitiation(unittest.TestCase):
@@ -10,8 +11,11 @@ class TestInitiation(unittest.TestCase):
             os.path.dirname(os.path.abspath(__file__)))
         self.db_name = "Test.db"
 
+    def setUp(self):
+        self.conn, self.c = helper.connect_to_db(self.db_name)
+
     def tearDown(self):
-        mysec_map.input = input
+        helper.deconnect_from_db(self.conn)
 
     def test_make_png(self):
         soup = mysec_map.get_wellformed_soup_from_svg_file(self.data_path)
@@ -39,3 +43,4 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(
             mysec_map.prompt_regionIds_for_looking_state_change(),
             [1010, 2020])
+        mysec_map.input = input
