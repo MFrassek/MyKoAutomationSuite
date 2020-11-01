@@ -29,3 +29,13 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(volunteerName, "Max Mustermann")
         self.assertEqual(gender, "m")
         self.assertEqual(birthDate, "1992-10-01")
+
+    def test_prompt(self):
+        volunteer_add.input = lambda x: ""
+        self.assertEqual(
+            volunteer_add.prompt_position_names(), [""])
+        volunteer_add.input = lambda x: "mysecs, myvers"
+        self.assertEqual(
+            volunteer_add.prompt_position_names(),
+            ["mysecs", "myvers"])
+        volunteer_add.input = input
