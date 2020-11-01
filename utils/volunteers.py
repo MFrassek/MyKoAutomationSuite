@@ -1,4 +1,4 @@
-import sqlite3
+from helper import connect_to_db, deconnect_from_db
 
 
 def add_new_volunteer_and_position(db_name):
@@ -8,11 +8,6 @@ def add_new_volunteer_and_position(db_name):
     for position_name in prompt_position_names():
         add_entry_to_table_x(c, position_name, volunteerName)
     deconnect_from_db(conn)
-
-
-def connect_to_db(db_name):
-    conn = sqlite3.connect(db_name)
-    return conn, conn.cursor()
 
 
 def add_entry_to_table_volunteers(c, volunteerName):
@@ -43,11 +38,6 @@ def prompt_regionName_and_startDate():
     regionName = input("Region name:\n")
     startDate = input("Start date [YYYY-MM-DD]:\n")
     return regionName, startDate
-
-
-def deconnect_from_db(conn):
-    conn.commit()
-    conn.close()
 
 
 if __name__ == '__main__':

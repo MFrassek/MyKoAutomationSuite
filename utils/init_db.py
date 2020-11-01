@@ -1,6 +1,6 @@
-import sqlite3
 import csv
-import os
+from helper import connect_to_db, deconnect_from_db,\
+    get_relative_path_to_script
 
 
 def init_db(data_path, db_name):
@@ -9,11 +9,6 @@ def init_db(data_path, db_name):
     create_all_tables(c)
     populate_all_tables(data_path, c)
     deconnect_from_db(conn)
-
-
-def connect_to_db(db_name):
-    conn = sqlite3.connect(db_name)
-    return conn, conn.cursor()
 
 
 def drop_old_tables(c):
@@ -86,10 +81,6 @@ def create_table_mysecs(c):
             regionName text NOT NULL,
             startDate date NOT NULL,
             endDate date);""")
-
-
-def get_relative_path_to_script():
-    return os.path.dirname(os.path.abspath(__file__))
 
 
 def populate_all_tables(data_path, c):
@@ -185,11 +176,6 @@ def read_info_regions(data_path):
 def add_entry_to_table_region(c, region_info):
     c.execute(
         "INSERT INTO regions VALUES ({}, True)".format(region_info))
-
-
-def deconnect_from_db(conn):
-    conn.commit()
-    conn.close()
 
 
 if __name__ == '__main__':

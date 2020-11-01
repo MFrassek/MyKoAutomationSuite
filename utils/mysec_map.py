@@ -1,8 +1,7 @@
 from cairosvg import svg2png
 from bs4 import BeautifulSoup
-import os
 import re
-import sqlite3
+from helper import connect_to_db, get_relative_path_to_script
 
 
 def generate_mysec_map(data_path, output_path, db_name):
@@ -88,15 +87,6 @@ def get_region_looking_color(lookingBool):
 
 def make_png_from_soup(soup, output_path):
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
-
-
-def get_relative_path_to_script():
-    return os.path.dirname(os.path.abspath(__file__))
-
-
-def connect_to_db(db_name):
-    conn = sqlite3.connect(db_name)
-    return conn, conn.cursor()
 
 
 if __name__ == '__main__':
