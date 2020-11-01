@@ -1,4 +1,5 @@
-from helper import connect_to_db, deconnect_from_db
+from helper import connect_to_db, deconnect_from_db,\
+    get_general_volunteer_details
 
 
 def print_all_volunteer_details(db_name):
@@ -12,9 +13,7 @@ def print_all_volunteer_details(db_name):
 
 
 def print_general_volunteer_details(c, volunteerName):
-    c.execute("SELECT * FROM volunteers WHERE volunteerName = '{}'"
-              .format(volunteerName))
-    _, gender, birthDate = c.fetchall()[0]
+    _, gender, birthDate = get_general_volunteer_details(c, volunteerName)
     print("Gender: {}".format(gender))
     print("Birth date: {}".format(birthDate))
 
