@@ -1,3 +1,4 @@
+import re
 from helper import connect_to_db, deconnect_from_db
 
 
@@ -18,8 +19,12 @@ def add_entry_to_table_volunteers(c, volunteerName):
 
 
 def prompt_gender_and_birthDate():
-    gender = input("Gender [f, m or d]:\n")
-    birthDate = input("Birthdate [YYYY-MM-DD]:\n")
+    gender = ""
+    while gender not in ["f", "m", "d"]:
+        gender = input("Gender [f, m or d]:\n")
+    birthDate = ""
+    while not re.match(r"\d\d\d\d-\d\d-\d\d", birthDate):
+        birthDate = input("Birthdate [YYYY-MM-DD]:\n")
     return gender, birthDate
 
 
@@ -36,7 +41,9 @@ def add_entry_to_table_x(c, table, volunteerName):
 
 def prompt_regionName_and_startDate():
     regionName = input("Region name:\n")
-    startDate = input("Start date [YYYY-MM-DD]:\n")
+    startDate = ""
+    while not re.match(r"\d\d\d\d-\d\d-\d\d", startDate):
+        startDate = input("Start date [YYYY-MM-DD]:\n")
     return regionName, startDate
 
 
