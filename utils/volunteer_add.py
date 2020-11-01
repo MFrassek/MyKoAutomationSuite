@@ -29,7 +29,8 @@ def prompt_gender_and_birthDate():
 
 
 def prompt_position_names():
-    return input("Comma separated positions [mysecs, myvers]:\n").split(",")
+    return [position.strip() for position in
+            input("Comma separated positions [mysecs, myvers]:\n").split(",")]
 
 
 def add_entry_to_table_x(c, table, volunteerName):
