@@ -7,7 +7,7 @@ def connect_to_db(db_name):
     return conn, conn.cursor()
 
 
-def deconnect_from_db(conn):
+def disconnect_from_db(conn):
     conn.commit()
     conn.close()
 

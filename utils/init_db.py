@@ -1,5 +1,5 @@
 import csv
-from helper import connect_to_db, deconnect_from_db,\
+from helper import connect_to_db, disconnect_from_db,\
     get_relative_path_to_script
 
 
@@ -8,7 +8,7 @@ def init_db(data_path, db_name):
     drop_old_tables(c)
     create_all_tables(c)
     populate_all_tables(data_path, c)
-    deconnect_from_db(conn)
+    disconnect_from_db(conn)
 
 
 def drop_old_tables(c):

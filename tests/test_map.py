@@ -15,7 +15,7 @@ class TestInitiation(unittest.TestCase):
         self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):
-        helper.deconnect_from_db(self.conn)
+        helper.disconnect_from_db(self.conn)
 
     def test_make_png(self):
         soup = mysec_map.get_wellformed_soup_from_svg_file(self.data_path)

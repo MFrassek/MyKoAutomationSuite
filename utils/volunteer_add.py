@@ -1,5 +1,5 @@
 import re
-from helper import connect_to_db, deconnect_from_db
+from helper import connect_to_db, disconnect_from_db
 
 
 def add_new_volunteer_and_position(db_name):
@@ -8,7 +8,7 @@ def add_new_volunteer_and_position(db_name):
     add_entry_to_table_volunteers(c, volunteerName)
     for position_name in prompt_position_names():
         add_entry_to_table_x(c, position_name, volunteerName)
-    deconnect_from_db(conn)
+    disconnect_from_db(conn)
 
 
 def add_entry_to_table_volunteers(c, volunteerName):

@@ -2,6 +2,7 @@ import unittest
 import os
 from utils import init_db
 import sqlite3
+from utils import helper
 
 
 class TestInitiation(unittest.TestCase):
@@ -16,7 +17,7 @@ class TestInitiation(unittest.TestCase):
         pass
 
     def tearDown(self):
-        pass
+        helper.disconnect_from_db(self.conn)
 
     def test_weekend_file_exists(self):
         self.assertTrue(
@@ -46,7 +47,6 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(self.c.fetchall(), [(8,)])
         self.c.execute("SELECT COUNT(*) FROM regions")
         self.assertEqual(self.c.fetchall(), [(40,)])
-        init_db.deconnect_from_db(self.conn)
 
     def test_adding_entry(self):
         init_db.init_db(self.data_path, self.db_name)
@@ -76,7 +76,6 @@ class TestInitiation(unittest.TestCase):
             FROM weekends
             WHERE location == 'Place5'""")
         self.assertEqual(self.c.fetchall(), [(1,)])
-        init_db.deconnect_from_db(self.conn)
 
 
 if __name__ == '__main__':

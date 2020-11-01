@@ -1,4 +1,4 @@
-from helper import connect_to_db, deconnect_from_db,\
+from helper import connect_to_db, disconnect_from_db,\
     get_general_volunteer_details
 
 
@@ -9,7 +9,7 @@ def print_all_volunteer_details(db_name):
     positions = ["mysecs"]
     for position in positions:
         print_position_details(c, volunteerName, position)
-    deconnect_from_db(conn)
+    disconnect_from_db(conn)
 
 
 def print_general_volunteer_details(c, volunteerName):
