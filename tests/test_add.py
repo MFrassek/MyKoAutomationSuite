@@ -1,0 +1,31 @@
+import unittest
+import os
+from utils import volunteer_add
+
+
+class TestInitiation(unittest.TestCase):
+    def __init__(self, *args, **kwargs):
+        super(TestInitiation, self).__init__(*args, **kwargs)
+        self.data_path = "{}/test_data".format(
+            os.path.dirname(os.path.abspath(__file__)))
+        self.db_name = "Test.db"
+
+    def setUp(self):
+        self.conn, self.c = volunteer_add.connect_to_db(self.db_name)
+
+    def tearDown(self):
+        volunteer_add.deconnect_from_db(self.conn)
+
+    def test_add_entry_to_volunteers(self):
+        container_prompt_gender_and_birthDate = \
+            volunteer_add.prompt_gender_and_birthDate
+        volunteer_add.prompt_gender_and_birthDate = lambda: ("m", "1992-10-01")
+        volunteer_add.add_entry_to_table_volunteers(self.c, "Max Mustermann")
+        self.c.execute("SELECT * FROM volunteers WHERE volunteerName = '{}'"
+                       .format("Max Mustermann"))
+        volunteerName, gender, birthDate = self.c.fetchall()[0]
+        volunteer_add.prompt_gender_and_birthDate = \
+            container_prompt_gender_and_birthDate
+        self.assertEqual(volunteerName, "Max Mustermann")
+        self.assertEqual(gender, "m")
+        self.assertEqual(birthDate, "1992-10-01")
