@@ -1,5 +1,5 @@
 from helper import connect_to_db, disconnect_from_db,\
-    get_general_volunteer_details
+    get_general_volunteer_details, get_position_details
 
 
 def print_all_volunteer_details(db_name):
@@ -19,9 +19,8 @@ def print_general_volunteer_details(c, volunteerName):
 
 
 def print_position_details(c, volunteerName, position):
-    c.execute("SELECT * FROM {} WHERE volunteerName = '{}'"
-              .format(position, volunteerName))
-    _, regionName, startDate, endDate = c.fetchall()[0]
+    _, regionName, startDate, endDate = \
+        get_position_details(c, volunteerName, position)
     print("Region: {}".format(regionName))
     print("Start date: {}".format(startDate))
     print("End date: {}".format(endDate))
