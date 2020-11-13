@@ -2,6 +2,7 @@ import unittest
 import os
 from utils import mysec_map
 from utils import helper
+from bs4 import BeautifulSoup
 
 
 class TestInitiation(unittest.TestCase):
@@ -44,3 +45,25 @@ class TestInitiation(unittest.TestCase):
             mysec_map.prompt_regionIds_for_looking_state_change(),
             [1010, 2020])
         mysec_map.input = input
+
+    def test_get_regions_details(self):
+        self.assertEqual(
+            len(mysec_map.get_regionIds_regionNames_and_lookingBools(self.c)),
+            40)
+
+    def test_change_fill_color(self):
+        xml_path_raw = '''
+        <svg>
+            <path
+                d="m 0,0 0,1 1,1 1,0 z"
+                style="fill:#999999"
+                id="Reg1" />
+            <path
+                d="m 2,2 c 2,1 1,1 1,2 z"
+                style="fill:#999999"
+                id="Reg2" />
+        </svg>
+        '''
+        soup = BeautifulSoup(xml_path_raw, 'xml')
+        mysec_map.change_fill_color_of_path(soup, "Reg1", "123456")
+        self.assertEqual(soup.path["style"], "fill:#123456")
