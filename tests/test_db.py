@@ -11,10 +11,9 @@ class TestInitiation(unittest.TestCase):
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
         self.db_name = "Test.db"
-        self.conn, self.c = init_db.connect_to_db(self.db_name)
 
     def setUp(self):
-        pass
+        self.conn, self.c = init_db.connect_to_db(self.db_name)
 
     def tearDown(self):
         helper.disconnect_from_db(self.conn)
@@ -49,7 +48,6 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(self.c.fetchall(), [(40,)])
 
     def test_adding_entry(self):
-        init_db.init_db(self.data_path, self.db_name)
         init_db.add_entry_to_table_participants(
             self.c, ["0000000009", "Wohnhaft in Deutschland", "10.01.2018", "",
                      "Zoe", "", "Zoes", "Zoes, Zoe", "Zoe Zoes", "f",
