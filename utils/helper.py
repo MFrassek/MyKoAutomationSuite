@@ -12,6 +12,10 @@ def disconnect_from_db(conn):
     conn.close()
 
 
+def uncommited_disconnect_from_db(conn):
+    conn.close()
+
+
 def get_relative_path_to_script():
     return os.path.dirname(os.path.abspath(__file__))
 
