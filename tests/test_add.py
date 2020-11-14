@@ -31,7 +31,7 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(gender, "m")
         self.assertEqual(birthDate, "1992-10-01")
 
-    def test_prompt(self):
+    def test_prompt_position_names(self):
         volunteer_add.input = lambda x: ""
         self.assertEqual(
             volunteer_add.prompt_position_names(), [""])
@@ -40,6 +40,22 @@ class TestInitiation(unittest.TestCase):
             volunteer_add.prompt_position_names(),
             ["mysecs", "myvers"])
         volunteer_add.input = input
+
+    def test_prompt_gender_and_birthDate(self):
+        generator = (ele for ele in ["f", "1995-06-30"])
+        volunteer_add.input = lambda x: next(generator)
+        gender, birthDate = volunteer_add.prompt_gender_and_birthDate()
+        volunteer_add.input = input
+        self.assertEqual(gender, "f")
+        self.assertEqual(birthDate, "1995-06-30")
+
+    def test_prompt_regionName_and_startDate(self):
+        generator = (ele for ele in ["Münster", "2020-01-01"])
+        volunteer_add.input = lambda x: next(generator)
+        regionName, startDate = volunteer_add.prompt_regionName_and_startDate()
+        volunteer_add.input = input
+        self.assertEqual(regionName, "Münster")
+        self.assertEqual(startDate, "2020-01-01")
 
     def test_add_entry_to_mysecs(self):
         container_prompt_regionName_and_startDate = \
