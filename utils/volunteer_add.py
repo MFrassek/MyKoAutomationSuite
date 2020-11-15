@@ -1,10 +1,13 @@
-import re
-from helper import connect_to_db, disconnect_from_db
+from helper import connect_to_db, disconnect_from_db, \
+    string_follows_input_pattern
 
 
 def add_new_volunteer_and_position(db_name):
     conn, c = connect_to_db(db_name)
-    volunteerName = input("Name:\n")
+    while True:
+        volunteerName = input("Name [a-üA-Ü ,-]:\n")
+        if string_follows_input_pattern(volunteerName, "name"):
+            break
     add_entry_to_table_volunteers(c, volunteerName)
     for position_name in prompt_position_names():
         add_entry_to_table_x(c, position_name, volunteerName)
@@ -19,12 +22,14 @@ def add_entry_to_table_volunteers(c, volunteerName):
 
 
 def prompt_gender_and_birthDate():
-    gender = ""
-    while gender not in ["f", "m", "d"]:
-        gender = input("Gender [f, m or d]:\n")
-    birthDate = ""
-    while not re.match(r"\d\d\d\d-\d\d-\d\d", birthDate):
+    while True:
+        gender = input("Gender [f, m, d, u]:\n")
+        if string_follows_input_pattern(gender, "gender"):
+            break
+    while True:
         birthDate = input("Birthdate [YYYY-MM-DD]:\n")
+        if string_follows_input_pattern(birthDate, "date"):
+            break
     return gender, birthDate
 
 
@@ -41,10 +46,14 @@ def add_entry_to_table_x(c, table, volunteerName):
 
 
 def prompt_regionName_and_startDate():
-    regionName = input("Region name:\n")
-    startDate = ""
-    while not re.match(r"\d\d\d\d-\d\d-\d\d", startDate):
+    while True:
+        regionName = input("Region name:\n")
+        if string_follows_input_pattern(regionName, "name"):
+            break
+    while True:
         startDate = input("Start date [YYYY-MM-DD]:\n")
+        if string_follows_input_pattern(startDate, "date"):
+            break
     return regionName, startDate
 
 
