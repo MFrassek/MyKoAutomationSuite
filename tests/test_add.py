@@ -42,7 +42,9 @@ class TestInitiation(unittest.TestCase):
         volunteer_add.input = input
 
     def test_prompt_gender_and_birthDate(self):
-        generator = (ele for ele in ["f", "1995-06-30"])
+        generator = (ele for ele in
+                     ["Does not fit gender", "f",
+                      "Does not fit date", "1995-06-30"])
         volunteer_add.input = lambda x: next(generator)
         gender, birthDate = volunteer_add.prompt_gender_and_birthDate()
         volunteer_add.input = input
@@ -50,7 +52,8 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(birthDate, "1995-06-30")
 
     def test_prompt_regionName_and_startDate(self):
-        generator = (ele for ele in ["Münster", "2020-01-01"])
+        generator = (ele for ele in
+                     ["Does not fit region!", "Münster", "2020-01-01"])
         volunteer_add.input = lambda x: next(generator)
         regionName, startDate = volunteer_add.prompt_regionName_and_startDate()
         volunteer_add.input = input
