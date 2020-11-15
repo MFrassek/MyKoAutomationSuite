@@ -15,6 +15,7 @@ class TestInitiation(unittest.TestCase):
         self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):
+        volunteer_add.input = input
         helper.uncommited_disconnect_from_db(self.conn)
 
     def test_add_entry_to_volunteers(self):
@@ -39,7 +40,6 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(
             volunteer_add.prompt_position_names(),
             ["mysecs", "myvers"])
-        volunteer_add.input = input
 
     def test_prompt_gender_and_birthDate(self):
         generator = (ele for ele in
@@ -47,7 +47,6 @@ class TestInitiation(unittest.TestCase):
                       "Does not fit date", "1995-06-30"])
         volunteer_add.input = lambda x: next(generator)
         gender, birthDate = volunteer_add.prompt_gender_and_birthDate()
-        volunteer_add.input = input
         self.assertEqual(gender, "f")
         self.assertEqual(birthDate, "1995-06-30")
 
@@ -56,7 +55,6 @@ class TestInitiation(unittest.TestCase):
                      ["Does not fit region!", "Münster", "2020-01-01"])
         volunteer_add.input = lambda x: next(generator)
         regionName, startDate = volunteer_add.prompt_regionName_and_startDate()
-        volunteer_add.input = input
         self.assertEqual(regionName, "Münster")
         self.assertEqual(startDate, "2020-01-01")
 
