@@ -8,20 +8,10 @@ def update_details(db_name):
     volunteerName = input("Name:\n")
     all_positions = get_all_positions(c, volunteerName)
     if all_positions:
-        _, gender, birthDate = get_general_volunteer_details(c, volunteerName)
-        update_value_in_table(c, volunteerName, "volunteers", "gender", gender)
-        update_value_in_table(
-            c, volunteerName, "volunteers", "birthDate", birthDate)
+        update_volunteer_details(c, volunteerName)
         for position in all_positions:
             print(position)
-            _, regionName, startDate, endDate = get_position_details(
-                c, volunteerName, position)
-            update_value_in_table(
-                c, volunteerName, position, "regionName", regionName)
-            update_value_in_table(
-                c, volunteerName, position, "startDate", startDate)
-            update_value_in_table(
-                c, volunteerName, position, "endDate", endDate)
+            update_position_details(c, volunteerName, position)
     else:
         print("No positions found for this name")
     disconnect_from_db(conn)
@@ -38,6 +28,21 @@ def get_all_positions(c, volunteerName):
             if len(c.fetchall()) >= 1:
                 all_positions.append(table[0])
     return all_positions
+
+
+def update_volunteer_details(c, volunteerName):
+    _, gender, birthDate = get_general_volunteer_details(c, volunteerName)
+    update_value_in_table(c, volunteerName, "volunteers", "gender", gender)
+    update_value_in_table(
+        c, volunteerName, "volunteers", "birthDate", birthDate)
+
+
+def update_position_details(c, volunteerName, position):
+    _, regionName, startDate, endDate = get_position_details(
+        c, volunteerName, position)
+    update_value_in_table(c, volunteerName, position, "regionName", regionName)
+    update_value_in_table(c, volunteerName, position, "startDate", startDate)
+    update_value_in_table(c, volunteerName, position, "endDate", endDate)
 
 
 def update_value_in_table(c, volunteerName, table, column_name, value):
