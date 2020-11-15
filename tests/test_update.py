@@ -19,12 +19,6 @@ class TestInitiation(unittest.TestCase):
         helper.uncommited_disconnect_from_db(self.conn)
 
     def test_get_all_positions(self):
-        generator = (ele for ele in
-                     ["Test Name", "d", "1990-10-21",
-                      "mysecs", "Münster", "2020-10-10"])
-        volunteer_add.input = lambda x: next(generator)
-        volunteer_add.add_new_volunteer_and_position(self.db_name)
-        volunteer_add.input = input
         all_positions = \
             volunteer_update_details.get_all_positions(self.c, "Test Name")
         self.assertEqual(all_positions, ["mysecs"])
