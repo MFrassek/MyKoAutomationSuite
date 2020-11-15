@@ -9,10 +9,18 @@ def update_details(db_name):
     if all_positions:
         _, gender, birthDate = get_general_volunteer_details(c, volunteerName)
         update_value_in_table(c, volunteerName, "volunteers", "gender", gender)
-        update_value_in_table(c, volunteerName, "volunteers", "birthDate", birthDate)
+        update_value_in_table(
+            c, volunteerName, "volunteers", "birthDate", birthDate)
         for position in all_positions:
-            _, regionId, startDate, endDate = get_position_details(
+            print(position)
+            _, regionName, startDate, endDate = get_position_details(
                 c, volunteerName, position)
+            update_value_in_table(
+                c, volunteerName, position, "regionName", regionName)
+            update_value_in_table(
+                c, volunteerName, position, "startDate", startDate)
+            update_value_in_table(
+                c, volunteerName, position, "endDate", endDate)
     else:
         print("No positions found for this name")
     disconnect_from_db(conn)
@@ -27,7 +35,6 @@ def get_all_positions(c, volunteerName):
             c.execute("SELECT * FROM {} WHERE volunteerName = '{}';"
                       .format(table[0], volunteerName))
             if len(c.fetchall()) >= 1:
-                print(table[0])
                 all_positions.append(table[0])
     return all_positions
 
