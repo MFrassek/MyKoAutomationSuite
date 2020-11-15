@@ -39,3 +39,12 @@ def string_follows_input_pattern(string, data_type):
         "date": r"^\d\d\d\d-\d\d-\d\d$",
         "gender": r"^[mfdu]$"}
     return string == "" or re.match(data_type_patterns[data_type], string)
+
+
+def get_data_type_from_column_name(column_name):
+    if column_name.endswith("Name"):
+        return "name"
+    elif column_name.endswith("Date"):
+        return "date"
+    elif column_name.endswith("gender"):
+        return "gender"

@@ -1,5 +1,6 @@
 from helper import connect_to_db, disconnect_from_db,\
-    get_general_volunteer_details, get_position_details
+    get_general_volunteer_details, get_position_details, \
+    get_data_type_from_column_name, string_follows_input_pattern
 
 
 def update_details(db_name):
@@ -40,8 +41,12 @@ def get_all_positions(c, volunteerName):
 
 
 def update_value_in_table(c, volunteerName, table, column_name, value):
-    new_value = input(
-        f"Current {column_name}: {value}\nNew {column_name}: ")
+    data_type = get_data_type_from_column_name(column_name)
+    while True:
+        new_value = input(
+            f"Current {column_name}: {value}\nNew {column_name}: ")
+        if string_follows_input_pattern(new_value, data_type):
+            break
     if new_value:
         c.execute(f"""UPDATE {table}
             SET {column_name} = '{new_value}'
