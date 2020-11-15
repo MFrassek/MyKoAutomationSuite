@@ -9,13 +9,13 @@ class TestInitiation(unittest.TestCase):
         super(TestInitiation, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "Test.db"
+        self.db_name = "tests/Test.db"
 
     def setUp(self):
         self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):
-        helper.disconnect_from_db(self.conn)
+        helper.uncommited_disconnect_from_db(self.conn)
 
     def test_add_entry_to_volunteers(self):
         container_prompt_gender_and_birthDate = \
