@@ -10,7 +10,7 @@ class TestInitiation(unittest.TestCase):
         super(TestInitiation, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "Test.db"
+        self.db_name = "tests/Test_init.db"
 
     def setUp(self):
         self.conn, self.c = init_db.connect_to_db(self.db_name)
