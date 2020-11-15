@@ -22,3 +22,21 @@ class TestInitiation(unittest.TestCase):
         all_positions = \
             volunteer_update_details.get_all_positions(self.c, "Test Name")
         self.assertEqual(all_positions, ["mysecs"])
+
+    def test_update_value_in_table_without_input(self):
+        volunteer_update_details.input = lambda x: ""
+        volunteer_update_details.update_value_in_table(
+            self.c, "Test Name", "mysecs", "startDate", "")
+        volunteer_update_details.input = input
+        self.c.execute("""SELECT startDate FROM mysecs
+                          WHERE volunteerName = 'Test Name'""")
+        self.assertEqual(self.c.fetchall()[0], ("2020-10-10",))
+
+    def test_update_value_in_table_with_input(self):
+        volunteer_update_details.input = lambda x: "2020-11-11"
+        volunteer_update_details.update_value_in_table(
+            self.c, "Test Name", "mysecs", "endDate", "")
+        volunteer_update_details.input = input
+        self.c.execute("""SELECT endDate FROM mysecs
+                          WHERE volunteerName = 'Test Name'""")
+        self.assertEqual(self.c.fetchall()[0], ("2020-11-11",))
