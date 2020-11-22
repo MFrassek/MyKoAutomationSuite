@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{calc}
+\usepackage{fontspec}
+\usepackage{wrapfig}
+\usepackage{xcolor}
+\usepackage{xifthen}
+\usepackage[paperwidth=8.27in, paperheight=11.69in, top=0.49in, bottom=0.79in, left=0.98in, right=0.98in]{geometry}
+\usepackage{setspace}
+\usepackage[hidelinks]{hyperref}
+\hypersetup{
+    colorlinks,
+    urlcolor={blue!50!black}
+    }
+\usepackage{bookmark}
+\setlength\parindent{0pt}
+\definecolor{mensared}{RGB}{221, 4, 45}
+
+\begin{document}
+\setmainfont{CronosPro}[
+    Path=data/,
+    Extension=.otf,
+    UprightFont=*-Regular,
+    BoldFont=*-Regular,
+    BoldFeatures={FakeBold=3},
+    ItalicFont=*-Regular,
+    ItalicFeatures={FakeSlant=0.3},
+    BoldItalicFont=*-Regular,
+    BoldItalicFeatures={FakeBold=3,FakeSlant=0.3},
+    ]
+\thispagestyle{empty}
+\begin{tikzpicture}[overlay, remember picture]
+    \draw let \p1 = (current page.west), \p2 = (current page.east) in
+      node[minimum width=\x2-\x1, minimum height=1.375in, draw, rectangle, fill=mensared, color=mensared, anchor=north west, align=left, text width=\x2-\x1] at ($(current page.north west)$){};
+\end{tikzpicture}
+
+\fontsize{38}{38}\selectfont
+\vspace{-9pt}
+\hspace{-0.695in}
+\textcolor{white}{MinD}
+
+\fontsize{17}{17}\selectfont
+\vspace{-1.5pt}
+\hspace{-0.63in}
+\textcolor{white}{Mensa in Deutschland e.V.}
+
+\vspace{-73pt}
+\hspace{415.5pt}
+\includegraphics[width=1.025in]{data/Mblem.png}
+
+
+\vspace{80pt}
+\parbox{6.31in}{
+\fontsize{18}{18}\selectfont
+\textbf{Neue\ifthenelse{\equal{%(Geschlecht)s}{m}}{r}{} MYSec für %(Gebiet)s}
+
+\vspace{36pt}
+\fontsize{14}{16}\selectfont
+Liebe \textbf{M}s im LocSec-Gebiet %(Gebiet)s,
+
+\vspace{18pt}
+im Dezember 2017 begann MinD damit Strukturen für junge Erwachsene aufzubauen
+(„Mensa Youth“, kurz "MY"). Inzwischen ist MY ein fester Bestandteil des
+Vereins geworden. In ganz Deutschland werden regionale Ansprechpartner für
+junge Erwachsene („MYSecs“) eingesetzt. Im LocSec-Gebiet %(Gebiet)s\ übt
+\textbf{%(Vorname)s\ %(Nachname)s} diese Aufgabe nun seit dem
+%(Amtsantritt)s\ aus\ifthenelse{\equal{%(MYSecAbgelöst)s}{}}{.}{ und hat damit das Amt von %(MYSecAbgelöst)s übernommen.}
+
+\vspace{18pt}
+Falls Ihr %(Vorname)s\ noch nicht kennt, anbei eine kurze Selbstvorstellung von
+\ifthenelse{\equal{%(Geschlecht)s}{m}}{ihm}{ihr}. Ihr erreicht
+\ifthenelse{\equal{%(Geschlecht)s}{m}}{ihn}{sie} unter
+\href{mailto:%(Mailadresse)s}{%(Mailadresse)s}.
+
+\vspace{18pt}
+Wenn ihr selbst MY mitgestalten wollt, meldet euch doch bei
+\ifthenelse{\equal{%(Geschlecht)s}{m}}{ihm}{ihr}.
+\ifthenelse{\equal{%(AlleVeranstalter)s}{}}{}{Bisher wird %(Vorname)s\ vor Ort
+bereits durch %(AlleVeranstalter)s\ unterstützt.}
+
+\vspace{18pt}
+Liebe\ifthenelse{\equal{%(Geschlecht)s}{m}}{r}{} %(Vorname)s, vielen Dank
+für dein bisheriges Engagement!
+
+\vspace{18pt}
+Und Euch allen weiterhin viel Spaß bei Euren ge\textbf{MY}nsa\textbf{M}en
+Aktivitäten!
+
+
+\vspace{36pt}
+Herzliche Grüße
+
+\vspace{10pt}
+\includegraphics[width=1.13in]{data/Mel.png}
+\hspace{80pt}\includegraphics[width=1.65in]{data/Martin.png}
+
+\textit{Melanie Jäger} \hspace{105pt}\textit{Martin Frassek}
+
+\textbf{M}inD MY-Koordinatorin  \hspace{45pt}\textbf{M}inD MY-Koordinator
+}
+\vfill
+\parbox{6.31in}{
+\fontsize{13}{15}\selectfont
+\_\_\_
+
+* Falls Ihr besser verstehen möchtet, was Mensa Youth ist und was MYSecs
+eigentlich sind bzw. tun, dann schaut doch mal in das Mensa Youth Handbuch,
+das Ihr hier findet:
+\href{https://www2.mensa.de/mein-mensa/fuer-aktive/locsecs/}
+{https://www2.mensa.de/mein-mensa/fuer-aktive/locsecs/}
+}
+\newpage
+
+\thispagestyle{empty}
+\begin{tikzpicture}[overlay, remember picture]
+    \draw let \p1 = (current page.west), \p2 = (current page.east) in
+      node[minimum width=\x2-\x1, minimum height=1.375in, draw, rectangle, fill=mensared, color=mensared, anchor=north west, align=left, text width=\x2-\x1] at ($(current page.north west)$){};
+  \end{tikzpicture}
+
+\fontsize{38}{38}\selectfont
+\vspace{-9pt}
+\hspace{-0.695in}
+\textcolor{white}{MinD}
+
+\fontsize{17}{17}\selectfont
+\vspace{-1.5pt}
+\hspace{-0.63in}
+\textcolor{white}{Mensa in Deutschland e.V.}
+
+\vspace{-73pt}
+\hspace{415.5pt}
+\includegraphics[width=1.025in]{data/Mblem.png}
+
+\vspace{80pt}
+\fontsize{18}{18}\selectfont
+\textbf{%(Vorname)s %(Nachname)s}
+
+\vspace{36pt}
+\fontsize{14}{16}\selectfont
+%(VorstellungStart)s\\
+
+\begin{wrapfigure}{R}{0pt}
+\raisebox{0pt}[\dimexpr\height-0.82\baselineskip\relax]{\includegraphics[height=164pt]{%(BildPfad)s}}
+\end{wrapfigure}
+%(VorstellungText)s
+
+\end{document}
