@@ -1,0 +1,12 @@
+Liebe Ms im LocSec-Gebiet %(Gebiet)s,
+
+Seit Dezember 2017 schafft MinD Strukturen für junge Erwachsene ("Mensa Youth"). Ziel von MY ist es insbesondere, die jungen Erwachsenen bei MinD besser untereinander in Kontakt zu bringen; organisiert wird das von den lokalen MYSecs.
+
+Im LocSec-Gebiet %(Gebiet)s hat %(Vorname)s %(Nachname)s sich bereit erklärt, als MYSec, Mensa Youth bekannter zu machen und neue Angebote für die jungen Erwachsenen zu schaffen.
+
+Falls ihr aber noch keine Gelegenheit hattet %(Vorname)s kennenzulernen: Im Anhang stellt %(Pronomen)s sich vor.
+
+Bei Anregungen, Fragen oder Ideen erreicht ihr %(Vorname)s unter %(Mailadresse)s
+
+Beste Grüße
+Martin

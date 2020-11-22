@@ -68,6 +68,24 @@ def make_mysec_intro(db_name):
     os.unlink(f"{underscored_volunteerName}.log")
     os.unlink(f"{underscored_volunteerName}.aux")
 
+    with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
+        raw_mail = "".join(template.readlines())
+    pronouns = {
+        "m": "er",
+        "f": "sie",
+        "d": "em",
+        "n": "em"
+    }
+    mail_vars = {
+        "Gebiet": regionName,
+        "Vorname": firstName,
+        "Nachname": lastName,
+        "Pronomen": pronouns[gender],
+        "Mailadresse": mailAddress
+        }
+
+    print(raw_mail % mail_vars)
+
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
