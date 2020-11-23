@@ -23,14 +23,14 @@ def make_mysec_intro(db_name):
         f"""SELECT regionMailName FROM regions
             WHERE regionName = '{regionName}'""").fetchall()[0][0]
     mailAddress = f"mysec-{regionMailName}@mensa.de"
-    underscored_volunteerName = volunteerName.replace(" ", "_")
-    with open(f"{data_path}/intros/texts/{underscored_volunteerName}.txt", "r")\
+    basename = volunteerName.replace(" ", "_")
+    with open(f"{data_path}/intros/texts/{basename}.txt", "r")\
             as intro_text:
         intro_first_line = intro_text.readline()
         intro_remaining_text = re.sub(
             r"(?<!\n)\n", r"\\\\\n", "".join(intro_text.readlines()[1:]))
     picture_path = f"""{data_path}/intros/pictures/{list(filter(
-        lambda x: x.startswith(underscored_volunteerName),
+        lambda x: x.startswith(basename),
         (os.listdir(f'{data_path}/intros/pictures'))))[0]}"""
     formatting_vars = {
         "Geschlecht": gender,
@@ -45,13 +45,13 @@ def make_mysec_intro(db_name):
         "VorstellungText": intro_remaining_text,
         "BildPfad": picture_path}
 
-    with open(f"{underscored_volunteerName}.tex", "w") as tex_file:
+    with open(f"{basename}.tex", "w") as tex_file:
         tex_file.write(raw_content % formatting_vars)
 
     for i in range(2):
-        generate_pdf_from_tex_file(underscored_volunteerName)
+        generate_pdf_from_tex_file(basename)
 
-    remove_byproduct_files(underscored_volunteerName)
+    remove_byproduct_files(basename)
 
     with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
         raw_mail = "".join(template.readlines())
@@ -76,27 +76,23 @@ def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
 
 
-def generate_pdf_from_tex_file(underscored_volunteerName):
-    cmd = [
-        "xelatex",
-        "-interaction",
-        "nonstopmode",
-        f"{underscored_volunteerName}.tex"]
-    proc = subprocess.Popen(cmd)
+def generate_pdf_from_tex_file(basename):
+    proc = subprocess.Popen(
+        ["xelatex", "-interaction", "nonstopmode", f"{basename}.tex"])
     proc.communicate()
-    raise_error_if_returncode_is_not_zero(proc, underscored_volunteerName)
+    raise_error_if_returncode_is_not_zero(proc, basename)
 
 
-def raise_error_if_returncode_is_not_zero(proc, underscored_volunteerName):
+def raise_error_if_returncode_is_not_zero(proc, basename):
     if proc.returncode:
-        os.unlink(f"{underscored_volunteerName}.pdf")
+        os.unlink(f"{basename}.pdf")
         raise ValueError(f"Error {proc.returncode}")
 
 
-def remove_byproduct_files(underscored_volunteerName):
-    os.unlink(f"{underscored_volunteerName}.tex")
-    os.unlink(f"{underscored_volunteerName}.log")
-    os.unlink(f"{underscored_volunteerName}.aux")
+def remove_byproduct_files(basename):
+    os.unlink(f"{basename}.tex")
+    os.unlink(f"{basename}.log")
+    os.unlink(f"{basename}.aux")
 
 
 if __name__ == "__main__":
