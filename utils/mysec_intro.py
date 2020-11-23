@@ -84,6 +84,10 @@ def generate_pdf_from_tex_file(underscored_volunteerName):
         f"{underscored_volunteerName}.tex"]
     proc = subprocess.Popen(cmd)
     proc.communicate()
+    raise_error_if_returncode_is_not_zero(proc, underscored_volunteerName)
+
+
+def raise_error_if_returncode_is_not_zero(proc, underscored_volunteerName):
     if proc.returncode:
         os.unlink(f"{underscored_volunteerName}.pdf")
         raise ValueError(f"Error {proc.returncode}")
