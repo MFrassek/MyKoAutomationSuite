@@ -19,15 +19,13 @@ def make_mysec_intro(db_name):
 
 def make_format_variable_dicts(db_name, volunteerName):
     firstName = volunteerName.split(" ")[0]
-    formerMYSec = input("Name of former MYSec: ")
-    allOrganizers = input("All organizers: ")
     conn, c = connect_to_db(db_name)
     _, gender, _ = get_general_volunteer_details(c, volunteerName)
     _, regionName, startDate, _ =\
         get_position_details(c, volunteerName, "mysecs")
     startDate = convert_YYYYMMDD_to_DDMMYYYY_date(startDate)
     regionMailName = get_regionMailName(c, regionName)
-    mailAddress = f"mysec-{regionMailName}@mensa.de"
+    mysecAddress = f"mysec-{regionMailName}@mensa.de"
     basename = volunteerName.replace(" ", "_")
     data_path = f"{get_relative_path_to_script()}/data"
     with open(f"{data_path}/intros/texts/{basename}.txt", "r")\
@@ -41,9 +39,9 @@ def make_format_variable_dicts(db_name, volunteerName):
         "Name": volunteerName,
         "Vorname": firstName,
         "Amtsantritt": startDate,
-        "Mailadresse": mailAddress,
-        "MYSecAbgelöst": formerMYSec,
-        "AlleVeranstalter": allOrganizers,
+        "Mailadresse": mysecAddress,
+        "MYSecAbgelöst": input("Name of former MYSec: "),
+        "AlleVeranstalter": input("All organizers: "),
         "VorstellungStart": intro_first_line,
         "VorstellungText": intro_remaining_text,
         "BildPfad": get_path_to_picture(basename)}
@@ -52,7 +50,7 @@ def make_format_variable_dicts(db_name, volunteerName):
         "Name": volunteerName,
         "Vorname": firstName,
         "Pronomen": get_pronoun_from_gender(gender),
-        "Mailadresse": mailAddress}
+        "Mailadresse": mysecAddress}
     return intro_format_variables, mail_format_variables
 
 
