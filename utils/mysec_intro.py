@@ -27,12 +27,8 @@ def make_format_variable_dicts(db_name, volunteerName):
     regionMailName = get_regionMailName(c, regionName)
     mysecAddress = f"mysec-{regionMailName}@mensa.de"
     basename = volunteerName.replace(" ", "_")
-    data_path = f"{get_relative_path_to_script()}/data"
-    with open(f"{data_path}/intros/texts/{basename}.txt", "r")\
-            as intro_text:
-        intro_first_line = intro_text.readline()
-        intro_remaining_text = re.sub(
-            r"(?<!\n)\n", r"\\\\\n", "".join(intro_text.readlines()[1:]))
+    intro_first_line, intro_remaining_text = \
+        get_intro_first_line_and_remaining_text(basename)
     intro_format_variables = {
         "Geschlecht": gender,
         "Gebiet": regionName,
@@ -62,6 +58,16 @@ def get_regionMailName(c, regionName):
     return c.execute(
         f"""SELECT regionMailName FROM regions
             WHERE regionName = '{regionName}'""").fetchall()[0][0]
+
+
+def get_intro_first_line_and_remaining_text(basename):
+    data_path = f"{get_relative_path_to_script()}/data"
+    with open(f"{data_path}/intros/texts/{basename}.txt", "r")\
+            as intro_text:
+        intro_first_line = intro_text.readline()
+        intro_remaining_text = re.sub(
+            r"(?<!\n)\n", r"\\\\\n", "".join(intro_text.readlines()[1:]))
+    return intro_first_line, intro_remaining_text
 
 
 def get_path_to_picture(basename):
