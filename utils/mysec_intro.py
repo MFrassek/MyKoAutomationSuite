@@ -63,9 +63,7 @@ def make_mysec_intro(db_name):
             raise ValueError(
                 "Error {} executing command: {}".format(retcode, " ".join(cmd)))
 
-    os.unlink(f"{underscored_volunteerName}.tex")
-    os.unlink(f"{underscored_volunteerName}.log")
-    os.unlink(f"{underscored_volunteerName}.aux")
+    remove_byproduct_files(underscored_volunteerName)
 
     with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
         raw_mail = "".join(template.readlines())
@@ -88,6 +86,12 @@ def make_mysec_intro(db_name):
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
+
+
+def remove_byproduct_files(underscored_volunteerName):
+    os.unlink(f"{underscored_volunteerName}.tex")
+    os.unlink(f"{underscored_volunteerName}.log")
+    os.unlink(f"{underscored_volunteerName}.aux")
 
 
 if __name__ == "__main__":
