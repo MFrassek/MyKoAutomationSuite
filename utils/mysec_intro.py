@@ -15,9 +15,7 @@ def make_mysec_intro(db_name):
     _, regionName, startDate, _ =\
         get_position_details(c, volunteerName, "mysecs")
     startDate = convert_YYYYMMDD_to_DDMMYYYY_date(startDate)
-    regionMailName = c.execute(
-        f"""SELECT regionMailName FROM regions
-            WHERE regionName = '{regionName}'""").fetchall()[0][0]
+    regionMailName = get_regionMailName(c, regionName)
     mailAddress = f"mysec-{regionMailName}@mensa.de"
     basename = volunteerName.replace(" ", "_")
     data_path = f"{get_relative_path_to_script()}/data"
@@ -54,6 +52,12 @@ def make_mysec_intro(db_name):
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
+
+
+def get_regionMailName(c, regionName):
+    return c.execute(
+        f"""SELECT regionMailName FROM regions
+            WHERE regionName = '{regionName}'""").fetchall()[0][0]
 
 
 def get_path_to_picture(basename):
