@@ -6,10 +6,6 @@ from helper import get_relative_path_to_script, connect_to_db,\
 
 
 def make_mysec_intro(db_name):
-    data_path = "{}/data".format(get_relative_path_to_script())
-    with open(f"{data_path}/IntroTemplate.txt", "r") as template:
-        raw_content = "".join(template.readlines())
-
     volunteerName = input("MYSec name: ")
     firstName = volunteerName.split(" ")[0]
     formerMYSec = input("Name of former MYSec: ")
@@ -24,6 +20,7 @@ def make_mysec_intro(db_name):
             WHERE regionName = '{regionName}'""").fetchall()[0][0]
     mailAddress = f"mysec-{regionMailName}@mensa.de"
     basename = volunteerName.replace(" ", "_")
+    data_path = f"{get_relative_path_to_script()}/data"
     with open(f"{data_path}/intros/texts/{basename}.txt", "r")\
             as intro_text:
         intro_first_line = intro_text.readline()
@@ -32,7 +29,7 @@ def make_mysec_intro(db_name):
     picture_path = f"""{data_path}/intros/pictures/{list(filter(
         lambda x: x.startswith(basename),
         (os.listdir(f'{data_path}/intros/pictures'))))[0]}"""
-    formatting_vars = {
+    intro_formatting_variables = {
         "Geschlecht": gender,
         "Gebiet": regionName,
         "Name": volunteerName,
@@ -45,12 +42,9 @@ def make_mysec_intro(db_name):
         "VorstellungText": intro_remaining_text,
         "BildPfad": picture_path}
 
-    with open(f"{basename}.tex", "w") as tex_file:
-        tex_file.write(raw_content % formatting_vars)
-
-    for i in range(2):
-        generate_pdf_from_tex_file(basename)
-
+    generate_tex_file_from_template(basename, intro_formatting_variables)
+    generate_pdf_from_tex_file(basename)
+    generate_pdf_from_tex_file(basename)
     remove_byproduct_files(basename)
 
     with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
@@ -74,6 +68,14 @@ def make_mysec_intro(db_name):
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
+
+
+def generate_tex_file_from_template(basename, intro_formatting_variables):
+    data_path = f"{get_relative_path_to_script()}/data"
+    with open(f"{data_path}/IntroTemplate.txt", "r") as template:
+        raw_intro = "".join(template.readlines())
+    with open(f"{basename}.tex", "w") as tex_file:
+        tex_file.write(raw_intro % intro_formatting_variables)
 
 
 def generate_pdf_from_tex_file(basename):
