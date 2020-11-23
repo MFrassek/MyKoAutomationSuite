@@ -7,6 +7,17 @@ from helper import get_relative_path_to_script, connect_to_db,\
 
 def make_mysec_intro(db_name):
     volunteerName = input("MYSec name: ")
+    intro_format_variables, mail_format_variables = \
+        make_format_variable_dicts(db_name, volunteerName)
+    basename = volunteerName.replace(" ", "_")
+    generate_tex_file_from_template(basename, intro_format_variables)
+    generate_pdf_from_tex_file(basename)
+    generate_pdf_from_tex_file(basename)
+    remove_byproduct_files(basename)
+    print(generate_mail_text_from_template(basename, mail_format_variables))
+
+
+def make_format_variable_dicts(db_name, volunteerName):
     firstName = volunteerName.split(" ")[0]
     formerMYSec = input("Name of former MYSec: ")
     allOrganizers = input("All organizers: ")
@@ -36,18 +47,13 @@ def make_mysec_intro(db_name):
         "VorstellungStart": intro_first_line,
         "VorstellungText": intro_remaining_text,
         "BildPfad": get_path_to_picture(basename)}
-    generate_tex_file_from_template(basename, intro_format_variables)
-    generate_pdf_from_tex_file(basename)
-    generate_pdf_from_tex_file(basename)
-    remove_byproduct_files(basename)
     mail_format_variables = {
         "Gebiet": regionName,
         "Name": volunteerName,
         "Vorname": firstName,
         "Pronomen": get_pronoun_from_gender(gender),
-        "Mailadresse": mailAddress
-        }
-    print(generate_mail_text_from_template(basename, mail_format_variables))
+        "Mailadresse": mailAddress}
+    return intro_format_variables, mail_format_variables
 
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
