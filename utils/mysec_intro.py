@@ -49,19 +49,7 @@ def make_mysec_intro(db_name):
         tex_file.write(raw_content % formatting_vars)
 
     for i in range(2):
-        cmd = [
-            "xelatex",
-            "-interaction",
-            "nonstopmode",
-            f"{underscored_volunteerName}.tex"]
-        proc = subprocess.Popen(cmd)
-        proc.communicate()
-
-        retcode = proc.returncode
-        if not retcode == 0:
-            os.unlink(f"{underscored_volunteerName}.pdf")
-            raise ValueError(
-                "Error {} executing command: {}".format(retcode, " ".join(cmd)))
+        generate_pdf_from_tex_file(underscored_volunteerName)
 
     remove_byproduct_files(underscored_volunteerName)
 
@@ -86,6 +74,19 @@ def make_mysec_intro(db_name):
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
+
+
+def generate_pdf_from_tex_file(underscored_volunteerName):
+    cmd = [
+        "xelatex",
+        "-interaction",
+        "nonstopmode",
+        f"{underscored_volunteerName}.tex"]
+    proc = subprocess.Popen(cmd)
+    proc.communicate()
+    if proc.returncode:
+        os.unlink(f"{underscored_volunteerName}.pdf")
+        raise ValueError(f"Error {proc.returncode}")
 
 
 def remove_byproduct_files(underscored_volunteerName):
