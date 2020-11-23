@@ -26,7 +26,7 @@ def make_mysec_intro(db_name):
         intro_first_line = intro_text.readline()
         intro_remaining_text = re.sub(
             r"(?<!\n)\n", r"\\\\\n", "".join(intro_text.readlines()[1:]))
-    intro_formatting_variables = {
+    intro_format_variables = {
         "Geschlecht": gender,
         "Gebiet": regionName,
         "Name": volunteerName,
@@ -39,20 +39,18 @@ def make_mysec_intro(db_name):
         "VorstellungText": intro_remaining_text,
         "BildPfad": get_path_to_picture(basename)}
 
-    generate_tex_file_from_template(basename, intro_formatting_variables)
+    generate_tex_file_from_template(basename, intro_format_variables)
     generate_pdf_from_tex_file(basename)
     generate_pdf_from_tex_file(basename)
     remove_byproduct_files(basename)
 
-    with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
-        raw_mail = "".join(template.readlines())
     pronouns = {
         "m": "er",
         "f": "sie",
         "d": "em",
         "n": "em"
     }
-    mail_vars = {
+    mail_format_variables = {
         "Gebiet": regionName,
         "Name": volunteerName,
         "Vorname": firstName,
@@ -60,7 +58,7 @@ def make_mysec_intro(db_name):
         "Mailadresse": mailAddress
         }
 
-    print(raw_mail % mail_vars)
+    print(generate_mail_text_from_template(basename, mail_format_variables))
 
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
@@ -74,12 +72,12 @@ def get_path_to_picture(basename):
         (os.listdir(f'{data_path}/intros/pictures'))))[0]}"""
 
 
-def generate_tex_file_from_template(basename, intro_formatting_variables):
+def generate_tex_file_from_template(basename, intro_format_variables):
     data_path = f"{get_relative_path_to_script()}/data"
     with open(f"{data_path}/IntroTemplate.txt", "r") as template:
         raw_intro = "".join(template.readlines())
     with open(f"{basename}.tex", "w") as tex_file:
-        tex_file.write(raw_intro % intro_formatting_variables)
+        tex_file.write(raw_intro % intro_format_variables)
 
 
 def generate_pdf_from_tex_file(basename):
@@ -99,6 +97,13 @@ def remove_byproduct_files(basename):
     os.unlink(f"{basename}.tex")
     os.unlink(f"{basename}.log")
     os.unlink(f"{basename}.aux")
+
+
+def generate_mail_text_from_template(basename, mail_format_variables):
+    data_path = f"{get_relative_path_to_script()}/data"
+    with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
+        raw_mail = "".join(template.readlines())
+    return raw_mail % mail_format_variables
 
 
 if __name__ == "__main__":
