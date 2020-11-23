@@ -26,9 +26,6 @@ def make_mysec_intro(db_name):
         intro_first_line = intro_text.readline()
         intro_remaining_text = re.sub(
             r"(?<!\n)\n", r"\\\\\n", "".join(intro_text.readlines()[1:]))
-    picture_path = f"""{data_path}/intros/pictures/{list(filter(
-        lambda x: x.startswith(basename),
-        (os.listdir(f'{data_path}/intros/pictures'))))[0]}"""
     intro_formatting_variables = {
         "Geschlecht": gender,
         "Gebiet": regionName,
@@ -40,7 +37,7 @@ def make_mysec_intro(db_name):
         "AlleVeranstalter": allOrganizers,
         "VorstellungStart": intro_first_line,
         "VorstellungText": intro_remaining_text,
-        "BildPfad": picture_path}
+        "BildPfad": get_path_to_picture(basename)}
 
     generate_tex_file_from_template(basename, intro_formatting_variables)
     generate_pdf_from_tex_file(basename)
@@ -68,6 +65,13 @@ def make_mysec_intro(db_name):
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
+
+
+def get_path_to_picture(basename):
+    data_path = f"{get_relative_path_to_script()}/data"
+    return f"""{data_path}/intros/pictures/{list(filter(
+        lambda x: x.startswith(basename),
+        (os.listdir(f'{data_path}/intros/pictures'))))[0]}"""
 
 
 def generate_tex_file_from_template(basename, intro_formatting_variables):
