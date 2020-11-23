@@ -38,26 +38,17 @@ def make_mysec_intro(db_name):
         "VorstellungStart": intro_first_line,
         "VorstellungText": intro_remaining_text,
         "BildPfad": get_path_to_picture(basename)}
-
     generate_tex_file_from_template(basename, intro_format_variables)
     generate_pdf_from_tex_file(basename)
     generate_pdf_from_tex_file(basename)
     remove_byproduct_files(basename)
-
-    pronouns = {
-        "m": "er",
-        "f": "sie",
-        "d": "em",
-        "n": "em"
-    }
     mail_format_variables = {
         "Gebiet": regionName,
         "Name": volunteerName,
         "Vorname": firstName,
-        "Pronomen": pronouns[gender],
+        "Pronomen": get_pronoun_from_gender(gender),
         "Mailadresse": mailAddress
         }
-
     print(generate_mail_text_from_template(basename, mail_format_variables))
 
 
@@ -97,6 +88,11 @@ def remove_byproduct_files(basename):
     os.unlink(f"{basename}.tex")
     os.unlink(f"{basename}.log")
     os.unlink(f"{basename}.aux")
+
+
+def get_pronoun_from_gender(gender):
+    pronouns = {"m": "er", "f": "sie", "d": "em", "n": "em"}
+    return pronouns[gender]
 
 
 def generate_mail_text_from_template(basename, mail_format_variables):
