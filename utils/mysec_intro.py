@@ -12,7 +12,6 @@ def make_mysec_intro(db_name):
 
     volunteerName = input("MYSec name: ")
     firstName = volunteerName.split(" ")[0]
-    lastName = volunteerName.split(" ")[-1]
     formerMYSec = input("Name of former MYSec: ")
     allOrganizers = input("All organizers: ")
     conn, c = connect_to_db(db_name)
@@ -36,8 +35,8 @@ def make_mysec_intro(db_name):
     formatting_vars = {
         "Geschlecht": gender,
         "Gebiet": regionName,
+        "Name": volunteerName,
         "Vorname": firstName,
-        "Nachname": lastName,
         "Amtsantritt": startDate,
         "Mailadresse": mailAddress,
         "MYSecAbgelöst": formerMYSec,
@@ -78,8 +77,8 @@ def make_mysec_intro(db_name):
     }
     mail_vars = {
         "Gebiet": regionName,
+        "Name": volunteerName,
         "Vorname": firstName,
-        "Nachname": lastName,
         "Pronomen": pronouns[gender],
         "Mailadresse": mailAddress
         }

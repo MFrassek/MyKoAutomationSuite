@@ -63,7 +63,7 @@ im Dezember 2017 begann MinD damit Strukturen für junge Erwachsene aufzubauen
 („Mensa Youth“, kurz "MY"). Inzwischen ist MY ein fester Bestandteil des
 Vereins geworden. In ganz Deutschland werden regionale Ansprechpartner für
 junge Erwachsene („MYSecs“) eingesetzt. Im LocSec-Gebiet %(Gebiet)s\ übt
-\textbf{%(Vorname)s\ %(Nachname)s} diese Aufgabe nun seit dem
+\textbf{%(Name)s} diese Aufgabe nun seit dem
 %(Amtsantritt)s\ aus\ifthenelse{\equal{%(MYSecAbgelöst)s}{}}{.}{ und hat damit das Amt von %(MYSecAbgelöst)s übernommen.}
 
 \vspace{18pt}
@@ -133,7 +133,7 @@ das Ihr hier findet:
 
 \vspace{80pt}
 \fontsize{18}{18}\selectfont
-\textbf{%(Vorname)s %(Nachname)s}
+\textbf{%(Name)s}
 
 \vspace{36pt}
 \fontsize{14}{16}\selectfont
