@@ -7,6 +7,6 @@ Individualized documents can be produced and send to recipients with little effo
 
 Figures depicting the current state of the team or open volunteering positions, can be generated for newsletters or presentations. E.g.
 
-<img src="out/MYSec-map.png" height="100">
+<img src="out/MYSec_map.png" height="100">
 
 The DB can be directly prompted to look up basic information or extract interesting statistical details in a straight-forward manner.
