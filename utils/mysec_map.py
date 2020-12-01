@@ -31,7 +31,7 @@ def change_fill_color_of_all_regions_based_on_db(db_name, soup):
     conn, c = connect_to_db(db_name)
     print_current_looking_state_of_regions(c)
     toggle_looking_states_in_db(c, prompt_regionIds_for_looking_state_change())
-    for _, regionName, lookingBool \
+    for _, regionName, _, lookingBool \
             in get_regionIds_regionNames_and_lookingBools(c):
         change_fill_color_of_path(
             soup, regionName, get_region_looking_color(lookingBool))
@@ -39,7 +39,7 @@ def change_fill_color_of_all_regions_based_on_db(db_name, soup):
 
 
 def print_current_looking_state_of_regions(c):
-    for regionId, regionName, lookingBool\
+    for regionId, regionName, _, lookingBool\
             in get_regionIds_regionNames_and_lookingBools(c):
         print("{}\t{}\t{}".format(regionId, lookingBool, regionName))
 
