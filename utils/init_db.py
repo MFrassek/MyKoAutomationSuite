@@ -78,7 +78,8 @@ def create_table_volunteers(c):
 def create_table_mysecs(c):
     c.execute(
         """CREATE TABLE mysecs(
-            volunteerName text PRIMARY KEY NOT NULL,
+            positionId integer PRIMARY KEY NOT NULL,
+            volunteerName text NOT NULL,
             regionName text NOT NULL,
             startDate date NOT NULL,
             endDate date);""")
