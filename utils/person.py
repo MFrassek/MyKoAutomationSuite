@@ -1,3 +1,6 @@
+from position import Position
+
+
 class Person:
     def __init__(self, name: str, birth_date: str, gender: str, region: str):
         self._name = name
@@ -35,12 +38,10 @@ class Person:
 class Volunteer(Person):
     def __init__(
             self, name: str, birth_date: str, gender: str,
-            region: str, positions: tuple):
+            region: str):
         super(Volunteer, self).__init__(
             name, birth_date, gender, region)
-        assert isinstance(positions, tuple), \
-            "'positions' must be of type tuple"
-        self._positions = positions
+        self._positions = self.get_held_positions()
 
     def __str__(self):
         return "Volunteer " + super().__str__()
@@ -48,3 +49,11 @@ class Volunteer(Person):
     @property
     def positions(self):
         return self._positions
+
+    def get_held_positions(self):
+        all_titles_in_use = ["MYSec"]
+        positions = []
+        for title in all_titles_in_use:
+            positions.extend(Position.create_all_positions_fitting_data(
+                title, held_by=self._name))
+        return tuple(positions)
