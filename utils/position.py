@@ -20,6 +20,12 @@ class Position():
             return f"{self._title} {self._region}: Held by {self._held_by}" \
                 + f" since {self._start_date}"
 
+    @staticmethod
+    def create_position_from_db_data_tuple(title: str, data_tuple: tuple):
+        position_id, held_by, region, start_date, end_date = data_tuple
+        return Position(
+            title, region, held_by, start_date, end_date, position_id)
+
     @property
     def title(self):
         return self._title
