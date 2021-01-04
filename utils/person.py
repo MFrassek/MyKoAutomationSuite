@@ -42,3 +42,7 @@ class Volunteer(Person):
 
     def __str__(self):
         return "Volunteer " + super().__str__()
+
+    @property
+    def positions(self):
+        return self._positions
