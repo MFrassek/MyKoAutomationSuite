@@ -39,3 +39,6 @@ class Volunteer(Person):
         super(Volunteer, self).__init__(
             name, birth_date, gender, region)
         self._positions = positions
+
+    def __str__(self):
+        return "Volunteer " + super().__str__()
