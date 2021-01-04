@@ -3,6 +3,28 @@ import subprocess
 import re
 from helper import get_relative_path_to_script, connect_to_db,\
     get_general_volunteer_details, get_position_details
+from person import Volunteer
+
+
+def get_target_volunteer():
+    kwargs = {}
+    user_inputs = input(
+        "Specify comma separated 'keyword name':'argument' pairs\n")
+    for user_input in user_inputs.split(","):
+        split_input = user_input.split(":")
+        kwargs[split_input[0]] = split_input[1]
+    print(kwargs)
+    volunteers = Volunteer.create_all_volunteers_fitting_data(**kwargs)
+    while len(volunteers) > 1:
+        print(str(len(volunteers)) + " volunteers fitting the parameters")
+        user_inputs = input(
+            "Specify further comma separated 'keyword name':'argument' pairs\n")
+        for user_input in user_inputs.split(","):
+            split_input = user_input.split(":")
+            kwargs[split_input[0]] = split_input[1]
+        volunteers = Volunteer.create_all_volunteers_fitting_data(**kwargs)
+    print(volunteers[0])
+    return volunteers[0]
 
 
 def make_mysec_intro(db_name):
