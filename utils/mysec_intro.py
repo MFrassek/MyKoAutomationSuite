@@ -1,9 +1,10 @@
 import os
 import subprocess
 import re
-from helper import get_relative_path_to_script, connect_to_db
+from helper import get_relative_path_to_script
 from person import Volunteer
 from position import Position
+from region import Region
 
 
 def get_target_volunteer():
@@ -36,11 +37,16 @@ def get_target_position(volunteer: Volunteer):
     return volunteer.positions[selected_index]
 
 
-def make_mysec_intro(db_name):
+def get_target_region(position: Position):
+    return Region.create_region(position.region)
+
+
+def make_mysec_intro():
     volunteer = get_target_volunteer()
     position = get_target_position(volunteer)
+    region = get_target_region(position)
     intro_format_variables, mail_format_variables = \
-        make_format_variable_dicts(db_name, volunteer, position)
+        make_format_variable_dicts(volunteer, position, region)
     basename = volunteer.name.replace(" ", "_")
     generate_tex_file_from_template(basename, intro_format_variables)
     generate_pdf_from_tex_file(basename)
@@ -50,11 +56,9 @@ def make_mysec_intro(db_name):
 
 
 def make_format_variable_dicts(
-        db_name, volunteer: Volunteer, position: Position):
+        volunteer: Volunteer, position: Position, region: Region):
     firstName = volunteer.name.split(" ")[0]
-    conn, c = connect_to_db(db_name)
-    regionMailName = get_regionMailName(c, position.region)
-    mysecAddress = f"mysec-{regionMailName}@mensa.de"
+    mysecAddress = f"mysec-{region.mail_name}@mensa.de"
     basename = volunteer.name.replace(" ", "_")
     intro_first_line, intro_remaining_text = \
         get_intro_first_line_and_remaining_text(basename)
@@ -81,12 +85,6 @@ def make_format_variable_dicts(
 
 def convert_YYYYMMDD_to_DDMMYYYY_date(date):
     return ".".join(date.split("-")[::-1])
-
-
-def get_regionMailName(c, regionName):
-    return c.execute(
-        f"""SELECT regionMailName FROM regions
-            WHERE regionName = '{regionName}'""").fetchall()[0][0]
 
 
 def get_intro_first_line_and_remaining_text(basename):
@@ -146,4 +144,4 @@ def generate_mail_text_from_template(basename, mail_format_variables):
 
 
 if __name__ == "__main__":
-    make_mysec_intro("MY-Ko.db")
+    make_mysec_intro()
