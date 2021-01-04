@@ -35,9 +35,11 @@ class Person:
 class Volunteer(Person):
     def __init__(
             self, name: str, birth_date: str, gender: str,
-            region: str, positions: list):
+            region: str, positions: tuple):
         super(Volunteer, self).__init__(
             name, birth_date, gender, region)
+        assert isinstance(positions, tuple), \
+            "'positions' must be of type tuple"
         self._positions = positions
 
     def __str__(self):
