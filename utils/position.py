@@ -1,5 +1,7 @@
-from helper import connect_to_db, disconnect_from_db
 import re
+from helper import connect_to_db, disconnect_from_db
+from sqlite3 import IntegrityError
+import sys
 
 
 class Position():
@@ -20,6 +22,38 @@ class Position():
         else:
             return f"{self._title} {self._region}: Held by {self._held_by}" \
                 + f" since {self._start_date}"
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def position_id(self):
+        return self._position_id
+
+    @property
+    def held_by(self):
+        return self._held_by
+
+    @property
+    def region(self):
+        return self._region
+
+    @property
+    def start_date(self):
+        return self._start_date
+
+    @property
+    def end_date(self):
+        return self._end_date
+
+    @end_date.setter
+    def end_date(self, end_date: str):
+        assert isinstance(end_date, str), \
+            "'end_date' can only be set to type string."
+        assert re.match("\d{4}-\d{2}-\d{2}", end_date), \
+            "'end_date' does not match data format YYYY-MM-DD"
+        self._end_date = end_date
 
     @staticmethod
     def create_all_positions_fitting_data(db_name: str, title: str, **kwargs):
@@ -68,34 +102,31 @@ class Position():
             "position_id": "positionId"}
         return kwarg_to_column_name[kwarg]
 
-    @property
-    def title(self):
-        return self._title
+    def add_to_db(self, db_name: str):
+        conn, c = connect_to_db(db_name)
+        try:
+            if self._position_id:
+                c.execute(self.get_command_for_db_insertion_with_id())
+            else:
+                c.execute(self.get_command_for_db_insertion_without_id())
+        except IntegrityError:
+            print(f"{sys.exc_info()[0].__name__}: {sys.exc_info()[1]}")
+        disconnect_from_db(conn)
 
-    @property
-    def position_id(self):
-        return self._position_id
+    def get_command_for_db_insertion_with_id(self):
+        return f"""INSERT INTO {Position.title_to_table_name(self._title)}(
+                positionId, volunteerName,
+                regionName, startDate, endDate)
+            VALUES (
+                {self._position_id}, '{self._held_by}',
+                '{self._region}', '{self._start_date}',
+                '{self._end_date}');"""
 
-    @property
-    def held_by(self):
-        return self._held_by
-
-    @property
-    def region(self):
-        return self._region
-
-    @property
-    def start_date(self):
-        return self._start_date
-
-    @property
-    def end_date(self):
-        return self._end_date
-
-    @end_date.setter
-    def end_date(self, end_date: str):
-        assert isinstance(end_date, str), \
-            "'end_date' can only be set to type string."
-        assert re.match("\d{4}-\d{2}-\d{2}", end_date), \
-            "'end_date' does not match data format YYYY-MM-DD"
-        self._end_date = end_date
+    def get_command_for_db_insertion_without_id(self):
+        return f"""INSERT INTO {Position.title_to_table_name(self._title)}(
+                volunteerName,
+                regionName, startDate, endDate)
+            VALUES (
+                '{self._held_by}',
+                '{self._region}', '{self._start_date}',
+                '{self._end_date}');"""
