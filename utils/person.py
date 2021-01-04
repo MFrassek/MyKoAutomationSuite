@@ -33,7 +33,8 @@ class Volunteer(Person):
         self._positions = self.get_held_positions()
 
     def __repr__(self):
-        return "Volunteer " + super().__repr__()
+        return "Volunteer " + super().__repr__() + "\n\t" \
+            + ("\n\t").join(list(map(str, self._positions)))
 
     @property
     def positions(self):
