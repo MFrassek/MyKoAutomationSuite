@@ -5,6 +5,8 @@ import sys
 
 
 class Position():
+    db_name = "MY-Ko.db"
+
     def __init__(
             self, title: str, region: str, held_by: str,
             start_date: str, end_date: str = "", position_id: str = None):
@@ -56,8 +58,8 @@ class Position():
         self._end_date = end_date
 
     @staticmethod
-    def create_all_positions_fitting_data(db_name: str, title: str, **kwargs):
-        conn, c = connect_to_db(db_name)
+    def create_all_positions_fitting_data(title: str, **kwargs):
+        conn, c = connect_to_db(Position.db_name)
         positions = [
             Position.create_position_from_db_data_tuple(title, data_tuple)
             for data_tuple
@@ -102,8 +104,8 @@ class Position():
             "position_id": "positionId"}
         return kwarg_to_column_name[kwarg]
 
-    def add_to_db(self, db_name: str):
-        conn, c = connect_to_db(db_name)
+    def add_to_db(self):
+        conn, c = connect_to_db(Position.db_name)
         try:
             if self._position_id:
                 c.execute(self.get_command_for_db_insertion_with_id())
@@ -131,8 +133,8 @@ class Position():
                 '{self._region}', '{self._start_date}',
                 '{self._end_date}');"""
 
-    def update_in_db(self, db_name: str):
-        conn, c = connect_to_db(db_name)
+    def update_in_db(self):
+        conn, c = connect_to_db(Position.db_name)
         c.execute(f"""UPDATE {Position.title_to_table_name(self._title)}
             SET endDate = '{self._end_date}'
             WHERE positionId = '{self._position_id}';""")
