@@ -26,6 +26,16 @@ def add_promped_kwargs(kwargs: dict):
         kwargs[split_input[0]] = split_input[1]
 
 
+def get_target_position(volunteer: Volunteer):
+    if len(volunteer.positions) == 1:
+        return volunteer.positions[0]
+    else:
+        for i, position in enumerate(volunteer.positions):
+            print(str(i) + ": " + str(position))
+        selected_index = int(input("Select number:\n"))
+    return volunteer.positions[selected_index]
+
+
 def make_mysec_intro(db_name):
     volunteerName = input("MYSec name: ")
     intro_format_variables, mail_format_variables = \
