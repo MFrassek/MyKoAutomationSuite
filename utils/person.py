@@ -30,3 +30,12 @@ class Person:
         assert isinstance(region, str), \
             "'region' can only be set to type string."
         self._region = region
+
+
+class Volunteer(Person):
+    def __init__(
+            self, name: str, birth_date: str, gender: str,
+            region: str, positions: list):
+        super(Volunteer, self).__init__(
+            name, birth_date, gender, region)
+        self._positions = positions
