@@ -130,3 +130,10 @@ class Position():
                 '{self._held_by}',
                 '{self._region}', '{self._start_date}',
                 '{self._end_date}');"""
+
+    def update_in_db(self, db_name: str):
+        conn, c = connect_to_db(db_name)
+        c.execute(f"""UPDATE {Position.title_to_table_name(self._title)}
+            SET endDate = '{self._end_date}'
+            WHERE positionId = '{self._position_id}';""")
+        disconnect_from_db(conn)
