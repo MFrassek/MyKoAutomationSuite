@@ -1,3 +1,4 @@
+from helper import connect_to_db, disconnect_from_db
 import re
 
 
@@ -21,10 +22,51 @@ class Position():
                 + f" since {self._start_date}"
 
     @staticmethod
+    def create_all_positions_fitting_data(db_name: str, title: str, **kwargs):
+        conn, c = connect_to_db(db_name)
+        positions = [
+            Position.create_position_from_db_data_tuple(title, data_tuple)
+            for data_tuple
+            in Position.get_position_details_fitting_data(c, title, **kwargs)]
+        disconnect_from_db(conn)
+        return positions
+
+    @staticmethod
     def create_position_from_db_data_tuple(title: str, data_tuple: tuple):
         position_id, held_by, region, start_date, end_date = data_tuple
         return Position(
             title, region, held_by, start_date, end_date, position_id)
+
+    @staticmethod
+    def get_position_details_fitting_data(c, title: str, **kwargs):
+        assert len(kwargs) > 0, \
+            "At least one specifying key word argument must be given"
+        c.execute(
+            f"""SELECT *
+            FROM {Position.title_to_table_name(title)}
+            WHERE """
+            + " AND ".join(
+                [Position.kwarg_to_column_name(kwarg) + f" = '{kwargs[kwarg]}'"
+                 for kwarg in kwargs.keys()]))
+        return c.fetchall()
+
+    @staticmethod
+    def title_to_table_name(title: str):
+        title_to_table_name = {
+            "MYSec": "mysecs",
+            "MY-VeranstalterIn": "myvers",
+            "MY-Weekend Orga": "myweorgas"}
+        return title_to_table_name[title]
+
+    @staticmethod
+    def kwarg_to_column_name(kwarg: str):
+        kwarg_to_column_name = {
+            "held_by": "volunteerName",
+            "region": "regionName",
+            "start_date": "startDate",
+            "end_date": "endDate",
+            "position_id": "positionId"}
+        return kwarg_to_column_name[kwarg]
 
     @property
     def title(self):
