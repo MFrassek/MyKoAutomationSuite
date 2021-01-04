@@ -1,3 +1,6 @@
+import re
+
+
 class Position():
     def __init__(
             self, title: str, region: str, held_by: str,
@@ -8,3 +11,35 @@ class Position():
         self._start_date = start_date
         self._end_date = end_date
         self._position_id = position_id
+
+    @property
+    def title(self):
+        return self._title
+
+    @property
+    def position_id(self):
+        return self._position_id
+
+    @property
+    def held_by(self):
+        return self._held_by
+
+    @property
+    def region(self):
+        return self._region
+
+    @property
+    def start_date(self):
+        return self._start_date
+
+    @property
+    def end_date(self):
+        return self._end_date
+
+    @end_date.setter
+    def end_date(self, end_date: str):
+        assert isinstance(end_date, str), \
+            "'end_date' can only be set to type string."
+        assert re.match("\d{4}-\d{2}-\d{2}", end_date), \
+            "'end_date' does not match data format YYYY-MM-DD"
+        self._end_date = end_date
