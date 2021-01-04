@@ -8,7 +8,7 @@ class Person:
         self._gender = gender
         self._region = region
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self._name}, born: {self._birth_date}, " \
             + f"gender: {self._gender}, region: {self._region}"
 
@@ -43,8 +43,8 @@ class Volunteer(Person):
             name, birth_date, gender, region)
         self._positions = self.get_held_positions()
 
-    def __str__(self):
-        return "Volunteer " + super().__str__()
+    def __repr__(self):
+        return "Volunteer " + super().__repr__()
 
     @property
     def positions(self):
