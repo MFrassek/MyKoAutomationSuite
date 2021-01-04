@@ -12,6 +12,14 @@ class Position():
         self._end_date = end_date
         self._position_id = position_id
 
+    def __str__(self):
+        if self._end_date:
+            return f"{self._title} {self._region}: Held by {self._held_by}" \
+                + f" from {self._start_date} until {self._end_date}"
+        else:
+            return f"{self._title} {self._region}: Held by {self._held_by}" \
+                + f" since {self._start_date}"
+
     @property
     def title(self):
         return self._title
