@@ -57,12 +57,12 @@ def toggle_looking_state_in_db(c, regionId):
               .format(toggled_looking_state, regionId))
 
 
-def prompt_regionIds_for_looking_state_change():
-    regionIds = input("\nType comma separated identifiers of regions "
-                      + "to change their looking state"
-                      + "\nPress enter to proceed without changes\n")
-    if regionIds:
-        return list(map(int, regionIds.split(",")))
+def prompt_region_ids_for_looking_state_change():
+    region_ids = input("\nType comma separated identifiers of regions "
+                       + "to change their looking state"
+                       + "\nPress enter to proceed without changes\n")
+    if region_ids:
+        return list(map(int, region_ids.split(",")))
     else:
         return []
 
