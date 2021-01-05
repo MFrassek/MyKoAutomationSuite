@@ -52,3 +52,11 @@ class Region():
         data_tuple = c.fetchall()[0]
         disconnect_from_db(conn)
         return Region(*data_tuple)
+
+    @staticmethod
+    def create_all_regions():
+        conn, c = connect_to_db(Region.db_name)
+        c.execute("SELECT * FROM regions")
+        regions = [Region(*data_tuple) for data_tuple in c.fetchall()]
+        disconnect_from_db(conn)
+        return regions
