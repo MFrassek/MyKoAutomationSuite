@@ -43,12 +43,23 @@ class Region():
         self._looking_state = looking_state
 
     @staticmethod
-    def create_region(name: str):
+    def create_region_by_name(name: str):
         conn, c = connect_to_db(Region.db_name)
         c.execute(
             f"""SELECT *
             FROM regions
             WHERE regionName = '{name}'""")
+        data_tuple = c.fetchall()[0]
+        disconnect_from_db(conn)
+        return Region(*data_tuple)
+
+    @staticmethod
+    def create_region_by_id(id_: str):
+        conn, c = connect_to_db(Region.db_name)
+        c.execute(
+            f"""SELECT *
+            FROM regions
+            WHERE regionId = '{id_}'""")
         data_tuple = c.fetchall()[0]
         disconnect_from_db(conn)
         return Region(*data_tuple)

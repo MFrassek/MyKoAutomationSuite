@@ -32,7 +32,7 @@ def let_user_select_from_options(options: super(list)):
 
 
 def get_target_region(position: Position):
-    return Region.create_region(position.region)
+    return Region.create_region_by_name(position.region)
 
 
 def make_mysec_intro():
