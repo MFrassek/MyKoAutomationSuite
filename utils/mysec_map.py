@@ -1,13 +1,13 @@
 from cairosvg import svg2png
 from bs4 import BeautifulSoup
 import re
-from helper import connect_to_db, get_relative_path_to_script
+from helper import get_relative_path_to_script
 from region import Region
 
 
-def generate_mysec_map(data_path, output_path, db_name):
+def generate_mysec_map(data_path, output_path):
     soup = get_wellformed_soup_from_svg_file(data_path)
-    change_fill_color_of_all_regions_based_on_db(db_name, soup)
+    change_fill_color_of_all_regions_based_on_db(soup)
     make_png_from_soup(soup, output_path)
 
 
@@ -28,15 +28,12 @@ def remove_malformed_attribute_from_soup(soup):
     del svg_tag["xmlns:"]
 
 
-def change_fill_color_of_all_regions_based_on_db(db_name, soup):
-    conn, c = connect_to_db(db_name)
+def change_fill_color_of_all_regions_based_on_db(soup):
     print_current_looking_state_of_regions()
     toggle_looking_states_in_db(prompt_region_ids_for_looking_state_change())
-    for _, regionName, _, lookingBool \
-            in get_regionIds_regionNames_and_lookingBools(c):
+    for region in Region.create_all_regions():
         change_fill_color_of_path(
-            soup, regionName, get_region_looking_color(lookingBool))
-    conn.commit()
+            soup, region.name, get_region_looking_color(region.looking_state))
 
 
 def print_current_looking_state_of_regions():
@@ -89,4 +86,4 @@ def make_png_from_soup(soup, output_path):
 
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
-    generate_mysec_map(data_path, "MYSec_map.png", "MY-Ko.db")
+    generate_mysec_map(data_path, "MYSec_map.png")
