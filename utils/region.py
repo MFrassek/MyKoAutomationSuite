@@ -6,12 +6,12 @@ class Region():
 
     def __init__(
             self, id_: int, name: str, mail_name: str,
-            magazine_name: str, looking_state: bool):
+            magazine_name: str, looking_state: int):
         self._id = id_
         self._name = name
         self._mail_name = mail_name
         self._magazine_name = magazine_name
-        self._looking_state = looking_state
+        self._looking_state = int(looking_state)
 
     def __repr__(self):
         return f"Region: {self._name}"
@@ -38,8 +38,8 @@ class Region():
 
     @looking_state.setter
     def looking_state(self, looking_state):
-        assert isinstance(looking_state, bool), \
-            "'looking_state' must be of type bool"
+        assert looking_state in [0, 1], \
+            "'looking_state' must be either 0 or 1"
         self._looking_state = looking_state
 
     @staticmethod
