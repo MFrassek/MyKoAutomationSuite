@@ -7,7 +7,7 @@ class Region():
     def __init__(
             self, id_: int, name: str, mail_name: str,
             magazine_name: str, looking_state: bool):
-        self._id_ = id_
+        self._id = id_
         self._name = name
         self._mail_name = mail_name
         self._magazine_name = magazine_name
@@ -17,8 +17,8 @@ class Region():
         return f"Region: {self._name}"
 
     @property
-    def id_(self):
-        return self._id_
+    def id(self):
+        return self._id
 
     @property
     def name(self):
