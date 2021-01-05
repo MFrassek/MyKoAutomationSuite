@@ -8,23 +8,17 @@ from region import Region
 
 
 def get_target_volunteer():
+    volunteers = Volunteer.create_all_volunteers_fitting_data(
+        **let_user_specify_kwargs())
+    return let_user_select_from_options(volunteers)
+
+
+def let_user_specify_kwargs():
     kwargs = {}
-    add_promped_kwargs(kwargs)
-    volunteers = Volunteer.create_all_volunteers_fitting_data(**kwargs)
-    while len(volunteers) > 1:
-        print(str(len(volunteers)) + " volunteers fitting the parameters")
-        add_promped_kwargs(kwargs)
-        volunteers = Volunteer.create_all_volunteers_fitting_data(**kwargs)
-    print(volunteers[0])
-    return volunteers[0]
-
-
-def add_promped_kwargs(kwargs: dict):
-    user_inputs = input(
-        "Specify comma separated 'keyword name':'argument' pairs\n")
-    for user_input in user_inputs.split(","):
-        split_input = user_input.split(":")
-        kwargs[split_input[0]] = split_input[1]
+    user_input = input(
+        "Specify 'keyword name':'argument' pair\n").split(":")
+    kwargs[user_input[0]] = user_input[1]
+    return kwargs
 
 
 def let_user_select_from_options(options: super(list)):
