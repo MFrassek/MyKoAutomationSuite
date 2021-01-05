@@ -27,14 +27,14 @@ def add_promped_kwargs(kwargs: dict):
         kwargs[split_input[0]] = split_input[1]
 
 
-def get_target_position(volunteer: Volunteer):
-    if len(volunteer.positions) == 1:
-        return volunteer.positions[0]
+def let_user_select_from_options(options: super(list)):
+    if len(options) == 1:
+        return options[0]
     else:
-        for i, position in enumerate(volunteer.positions):
-            print(str(i) + ": " + str(position))
+        for i, option in enumerate(options):
+            print(str(i) + ": " + str(option))
         selected_index = int(input("Select number:\n"))
-    return volunteer.positions[selected_index]
+    return options[selected_index]
 
 
 def get_target_region(position: Position):
@@ -43,7 +43,7 @@ def get_target_region(position: Position):
 
 def make_mysec_intro():
     volunteer = get_target_volunteer()
-    position = get_target_position(volunteer)
+    position = let_user_select_from_options(volunteer.positions)
     region = get_target_region(position)
     intro_format_variables, mail_format_variables = \
         make_format_variable_dicts(volunteer, position, region)
