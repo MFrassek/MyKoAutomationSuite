@@ -5,10 +5,12 @@ class Region():
     db_name = "MY-Ko.db"
 
     def __init__(
-            self, id_: int, name: str, mail_name: str, looking_state: bool):
+            self, id_: int, name: str, mail_name: str,
+            magazine_name: str, looking_state: bool):
         self._id_ = id_
         self._name = name
         self._mail_name = mail_name
+        self._magazine_name = magazine_name
         self._looking_state = looking_state
 
     def __repr__(self):
@@ -25,6 +27,10 @@ class Region():
     @property
     def mail_name(self):
         return self._mail_name
+
+    @property
+    def magazine_name(self):
+        return self._magazine_name
 
     @property
     def looking_state(self):
