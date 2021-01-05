@@ -13,6 +13,7 @@ class TestInitiation(unittest.TestCase):
         self.db_name = "tests/Test.db"
 
     def setUp(self):
+        mysec_map.Region.db_name = self.db_name
         self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):
@@ -29,20 +30,18 @@ class TestInitiation(unittest.TestCase):
 
     def test_toggle(self):
         conn, c = mysec_map.connect_to_db(self.db_name)
-        c.execute("SELECT looking FROM regions WHERE regionId = 1020")
-        original_looking_state = c.fetchone()[0]
-        mysec_map.toggle_looking_state_in_db(c, "1020")
-        c.execute("SELECT looking FROM regions WHERE regionId = 1020")
-        new_looking_state = c.fetchone()[0]
-        self.assertEqual(not original_looking_state, new_looking_state)
+        original_looking_state = mysec_map.Region.create_region_by_id("1020").looking_state
+        mysec_map.toggle_looking_state_in_db("1020")
+        new_looking_state = mysec_map.Region.create_region_by_id("1020").looking_state
+        self.assertEqual(original_looking_state, not new_looking_state)
 
     def test_prompt(self):
         mysec_map.input = lambda x: ""
         self.assertEqual(
-            mysec_map.prompt_regionIds_for_looking_state_change(), [])
+            mysec_map.prompt_region_ids_for_looking_state_change(), [])
         mysec_map.input = lambda x: "1010, 2020"
         self.assertEqual(
-            mysec_map.prompt_regionIds_for_looking_state_change(),
+            mysec_map.prompt_region_ids_for_looking_state_change(),
             [1010, 2020])
         mysec_map.input = input
 
