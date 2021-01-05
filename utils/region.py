@@ -60,3 +60,10 @@ class Region():
         regions = [Region(*data_tuple) for data_tuple in c.fetchall()]
         disconnect_from_db(conn)
         return regions
+
+    def update_in_db(self):
+        conn, c = connect_to_db(Region.db_name)
+        c.execute(f"""UPDATE regions
+            SET looking = '{self._looking_state}'
+            WHERE regionName = '{self._name}';""")
+        disconnect_from_db(conn)
