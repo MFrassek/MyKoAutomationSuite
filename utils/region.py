@@ -16,6 +16,15 @@ class Region():
     def __repr__(self):
         return f"Region: {self._name}"
 
+    def __hash__(self):
+        return hash(self._id)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.id == other.id
+        else:
+            return False
+
     @property
     def id(self):
         return self._id
