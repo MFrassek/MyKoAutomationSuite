@@ -58,12 +58,12 @@ class Position():
         self._end_date = end_date
 
     @staticmethod
-    def create_all_positions_fitting_data(title: str, **kwargs):
+    def create_all_positions_fitting_data(title: str, commands: list):
         conn, c = connect_to_db(Position.db_name)
         positions = [
             Position.create_position_from_db_data_tuple(title, data_tuple)
             for data_tuple
-            in Position.get_position_details_fitting_data(c, title, **kwargs)]
+            in Position.get_position_details_fitting_data(c, title, commands)]
         disconnect_from_db(conn)
         return positions
 
@@ -74,16 +74,17 @@ class Position():
             title, region, held_by, start_date, end_date, position_id)
 
     @staticmethod
-    def get_position_details_fitting_data(c, title: str, **kwargs):
-        assert len(kwargs) > 0, \
+    def get_position_details_fitting_data(c, title: str, commands: list):
+        assert len(commands) > 0, \
             "At least one specifying key word argument must be given"
         c.execute(
             f"""SELECT *
             FROM {Position.title_to_table_name(title)}
             WHERE """
             + " AND ".join(
-                [Position.kwarg_to_column_name(kwarg) + f" = '{kwargs[kwarg]}'"
-                 for kwarg in kwargs.keys()]))
+                [Position.argument_name_to_column_name(command[0])
+                 + f" {command[1]} '{' '.join(command[2:])}'"
+                 for command in commands]))
         return c.fetchall()
 
     @staticmethod
@@ -95,14 +96,14 @@ class Position():
         return title_to_table_name[title]
 
     @staticmethod
-    def kwarg_to_column_name(kwarg: str):
-        kwarg_to_column_name = {
+    def argument_name_to_column_name(argument_name: str):
+        argument_name_to_column_name = {
             "held_by": "volunteerName",
             "region": "regionName",
             "start_date": "startDate",
             "end_date": "endDate",
             "position_id": "positionId"}
-        return kwarg_to_column_name[kwarg]
+        return argument_name_to_column_name[argument_name]
 
     def add_to_db(self):
         conn, c = connect_to_db(Position.db_name)
