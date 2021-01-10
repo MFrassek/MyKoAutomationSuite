@@ -49,12 +49,12 @@ class Volunteer(Person):
         return tuple(positions)
 
     @staticmethod
-    def create_all_volunteers_fitting_data(**kwargs):
+    def create_all_volunteers_fitting_data(commands: list):
         conn, c = connect_to_db(Position.db_name)
         volunteers = [
             Volunteer.create_volunteer_from_db_data_tuple(data_tuple)
             for data_tuple
-            in Volunteer.get_volunteer_details_fitting_data(c, **kwargs)]
+            in Volunteer.get_volunteer_details_fitting_data(c, commands)]
         disconnect_from_db(conn)
         return volunteers
 
@@ -64,22 +64,23 @@ class Volunteer(Person):
         return Volunteer(name, birth_date, gender)
 
     @staticmethod
-    def get_volunteer_details_fitting_data(c, **kwargs):
-        assert len(kwargs) > 0, \
-            "At least one specifying key word argument must be given"
+    def get_volunteer_details_fitting_data(c, commands: list):
+        assert len(commands) > 0, \
+            "At least one specifying command must be given"
         c.execute(
             """SELECT *
             FROM volunteers
             WHERE """
             + " AND ".join(
-             [Volunteer.kwarg_to_column_name(kwarg) + f" = '{kwargs[kwarg]}'"
-              for kwarg in kwargs.keys()]))
+             [Volunteer.argument_name_to_column_name(command[0])
+              + f" {command[1]} '{' '.join(command[2:])}'"
+              for command in commands]))
         return c.fetchall()
 
     @staticmethod
-    def kwarg_to_column_name(kwarg: str):
-        kwarg_to_column_name = {
+    def argument_name_to_column_name(argument_name: str):
+        argument_name_to_column_name = {
             "name": "volunteerName",
             "birth_date": "birthDate",
             "gender": "gender"}
-        return kwarg_to_column_name[kwarg]
+        return argument_name_to_column_name[argument_name]

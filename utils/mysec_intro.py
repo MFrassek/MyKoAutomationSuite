@@ -9,16 +9,13 @@ from region import Region
 
 def get_target_volunteer():
     volunteers = Volunteer.create_all_volunteers_fitting_data(
-        **let_user_specify_kwargs())
+        let_user_specify_command())
     return let_user_select_from_options(volunteers)
 
 
-def let_user_specify_kwargs():
-    kwargs = {}
-    user_input = input(
-        "Specify 'keyword name':'argument' pair\n").split(":")
-    kwargs[user_input[0]] = user_input[1]
-    return kwargs
+def let_user_specify_command():
+    return [input(
+        "Specify 'keyword name' 'comparator' 'argument'\n").split(" ")]
 
 
 def let_user_select_from_options(options: super(list)):
