@@ -3,11 +3,18 @@ from bs4 import BeautifulSoup
 import re
 from helper import get_relative_path_to_script
 from region import Region
+from position import Position
 
 
 def generate_mysec_map(data_path, output_path):
     soup = get_wellformed_soup_from_svg_file(data_path)
     change_fill_color_of_all_regions_based_on_db(soup)
+    make_png_from_soup(soup, output_path)
+
+
+def generate_mysec_presence_map(data_path, output_path):
+    soup = get_wellformed_soup_from_svg_file(data_path)
+    change_fill_color_of_all_regions_based_on_presence_of_mysec(soup)
     make_png_from_soup(soup, output_path)
 
 
@@ -36,6 +43,14 @@ def change_fill_color_of_all_regions_based_on_db(soup):
             soup, region.name, get_region_looking_color(region.looking_state))
 
 
+def change_fill_color_of_all_regions_based_on_presence_of_mysec(soup):
+    all_regions_with_active_mysec = get_all_regions_with_active_mysec()
+    for region in Region.create_all_regions():
+        change_fill_color_of_path(
+            soup, region.name, get_region_mysec_presence_color(
+                region in all_regions_with_active_mysec))
+
+
 def print_current_looking_state_of_regions():
     for region in Region.create_all_regions():
         print(f"{region.id}\t{region.looking_state}\t{region.name}")
@@ -62,6 +77,16 @@ def prompt_region_ids_for_looking_state_change():
         return []
 
 
+def get_all_regions_with_active_mysec():
+    all_active_mysec_positions = Position.create_all_positions_fitting_data(
+        "MYSec", [["end_date", "=", ""]])
+    all_regions_with_active_mysec = set()
+    for mysec in all_active_mysec_positions:
+        all_regions_with_active_mysec.add(
+            Region.create_region_by_name(mysec.region))
+    return all_regions_with_active_mysec
+
+
 def get_regionIds_regionNames_and_lookingBools(c):
     c.execute("""SELECT * FROM regions""")
     return c.fetchall()
@@ -80,10 +105,16 @@ def get_region_looking_color(lookingBool):
     return looking_colors[lookingBool]
 
 
+def get_region_mysec_presence_color(presenceBool):
+    presence_colors = {True: "ffaa11", False: "00bbbb"}
+    return presence_colors[presenceBool]
+
+
 def make_png_from_soup(soup, output_path):
     svg2png(bytestring=str(soup), write_to=output_path, dpi=300)
 
 
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
+    generate_mysec_presence_map(data_path, "MYSec_presence_map.png")
     generate_mysec_map(data_path, "MYSec_map.png")
