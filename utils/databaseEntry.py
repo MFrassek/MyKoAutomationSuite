@@ -26,6 +26,7 @@ class DatabaseEntry(abc.ABC):
     @staticmethod
     def argument_name_to_column_name(argument_name: str):
         argument_name_to_column_name = {
+            "": "''",
             "name": "volunteerName",
             "birth_date": "birthDate",
             "gender": "gender",
@@ -33,7 +34,8 @@ class DatabaseEntry(abc.ABC):
             "region": "regionName",
             "start_date": "startDate",
             "end_date": "endDate",
-            "position_id": "positionId"}
+            "position_id": "positionId",
+            "region_id": "regionId"}
         return argument_name_to_column_name[argument_name]
 
     @staticmethod
