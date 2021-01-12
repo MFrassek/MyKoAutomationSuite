@@ -7,7 +7,7 @@ class DatabaseEntry(abc.ABC):
 
     @classmethod
     def create_all_fitting_data(cls, commands: list, **kwargs):
-        conn, c = connect_to_db(DatabaseEntry.db_name)
+        conn, c = connect_to_db(cls.db_name)
         entries = [
             cls.create_from_db_data_tuple(data_tuple, **kwargs)
             for data_tuple
