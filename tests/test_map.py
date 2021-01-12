@@ -13,14 +13,14 @@ class TestInitiation(unittest.TestCase):
 
     def setUp(self):
         mysec_map.Region.db_name = self.db_name
+        mysec_map.Position.db_name = self.db_name
 
     def tearDown(self):
         pass
 
-    def test_make_png(self):
+    def test_make_looking_state_map(self):
         functionTemp = mysec_map.prompt_region_ids_for_looking_state_change
         mysec_map.prompt_region_ids_for_looking_state_change = lambda: []
-        print(self.db_name)
         mysec_map.generate_looking_state_map(
             self.data_path, f"{self.data_path}/test_map.png")
         self.assertTrue(
@@ -28,6 +28,14 @@ class TestInitiation(unittest.TestCase):
             "test_Map.png does not exist at expected location")
         os.remove(f"{self.data_path}/test_map.png")
         mysec_map.prompt_region_ids_for_looking_state_change = functionTemp
+
+    def test_make_mysec_presence_map(self):
+        mysec_map.generate_mysec_presence_map(
+            self.data_path, f"{self.data_path}/test_map.png")
+        self.assertTrue(
+            os.path.exists(f"{self.data_path}/test_map.png"),
+            "test_Map.png does not exist at expected location")
+        os.remove(f"{self.data_path}/test_map.png")
 
     def test_prompt(self):
         mysec_map.input = lambda x: ""
