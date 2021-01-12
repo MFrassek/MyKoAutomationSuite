@@ -23,6 +23,10 @@ class DatabaseEntry(abc.ABC):
     def get_entry_details_fitting_data():
         pass
 
+    @classmethod
+    def create_all_entries(cls):
+        return cls.create_all_entries_fitting_data([["", "=", ""]])
+
     @staticmethod
     def argument_name_to_column_name(argument_name: str):
         argument_name_to_column_name = {
