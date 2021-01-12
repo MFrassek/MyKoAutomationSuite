@@ -68,16 +68,9 @@ class Region(DatabaseEntry):
               for command in commands]))
         return c.fetchall()
 
-    @staticmethod
-    def create_region_by_name(name: str):
-        conn, c = connect_to_db(DatabaseEntry.db_name)
-        c.execute(
-            f"""SELECT *
-            FROM regions
-            WHERE regionName = '{name}'""")
-        data_tuple = c.fetchall()[0]
-        disconnect_from_db(conn)
-        return Region(*data_tuple)
+    @classmethod
+    def create_region_by_name(cls, name: str):
+        return cls.create_all_entries_fitting_data([["region", "=", name]])[0]
 
     @staticmethod
     def create_region_by_id(id_: str):
