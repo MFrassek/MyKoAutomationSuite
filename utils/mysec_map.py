@@ -87,11 +87,6 @@ def get_all_regions_with_active_mysec():
     return all_regions_with_active_mysec
 
 
-def get_regionIds_regionNames_and_lookingBools(c):
-    c.execute("""SELECT * FROM regions""")
-    return c.fetchall()
-
-
 def change_fill_color_of_path(soup, id, fill_color):
     region_path_tag = soup("path", {"id": id})[0]
     region_style_attribute = region_path_tag["style"]
