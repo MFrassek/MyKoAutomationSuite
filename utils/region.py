@@ -51,11 +51,11 @@ class Region(DatabaseEntry):
         self._looking_state = looking_state
 
     @classmethod
-    def create_entry_from_db_data_tuple(cls, data_tuple: tuple):
+    def create_from_db_data_tuple(cls, data_tuple: tuple):
         return cls(*data_tuple)
 
     @classmethod
-    def get_entry_details_fitting_data(cls, c, commands: list):
+    def get_details_fitting_data(cls, c, commands: list):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
         c.execute(
@@ -69,12 +69,12 @@ class Region(DatabaseEntry):
         return c.fetchall()
 
     @classmethod
-    def create_region_by_name(cls, name: str):
-        return cls.create_all_entries_fitting_data([["region", "=", name]])[0]
+    def create_by_name(cls, name: str):
+        return cls.create_all_fitting_data([["region", "=", name]])[0]
 
     @classmethod
-    def create_region_by_id(cls, id_: str):
-        return cls.create_all_entries_fitting_data([["region_id", "=", id_]])[0]
+    def create_by_id(cls, id_: str):
+        return cls.create_all_fitting_data([["region_id", "=", id_]])[0]
 
     def update_in_db(self):
         conn, c = connect_to_db(DatabaseEntry.db_name)

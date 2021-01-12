@@ -38,21 +38,21 @@ def remove_malformed_attribute_from_soup(soup):
 def change_fill_color_of_all_regions_based_on_db(soup):
     print_current_looking_state_of_regions()
     toggle_looking_states_in_db(prompt_region_ids_for_looking_state_change())
-    for region in Region.create_all_regions():
+    for region in Region.create_all():
         change_fill_color_of_path(
             soup, region.name, get_region_looking_color(region.looking_state))
 
 
 def change_fill_color_of_all_regions_based_on_presence_of_mysec(soup):
     all_regions_with_active_mysec = get_all_regions_with_active_mysec()
-    for region in Region.create_all_regions():
+    for region in Region.create_all():
         change_fill_color_of_path(
             soup, region.name, get_region_mysec_presence_color(
                 region in all_regions_with_active_mysec))
 
 
 def print_current_looking_state_of_regions():
-    for region in Region.create_all_regions():
+    for region in Region.create_all():
         print(f"{region.id}\t{region.looking_state}\t{region.name}")
 
 
@@ -62,7 +62,7 @@ def toggle_looking_states_in_db(region_ids):
 
 
 def toggle_looking_state_in_db(region_id):
-    region = Region.create_region_by_id(region_id)
+    region = Region.create_by_id(region_id)
     region.looking_state = int(not region.looking_state)
     region.update_in_db()
 
@@ -78,12 +78,12 @@ def prompt_region_ids_for_looking_state_change():
 
 
 def get_all_regions_with_active_mysec():
-    all_active_mysec_positions = Position.create_all_entries_fitting_data(
+    all_active_mysec_positions = Position.create_all_fitting_data(
         [["end_date", "=", ""]], title="MYSec")
     all_regions_with_active_mysec = set()
     for mysec in all_active_mysec_positions:
         all_regions_with_active_mysec.add(
-            Region.create_region_by_name(mysec.region))
+            Region.create_by_name(mysec.region))
     return all_regions_with_active_mysec
 
 

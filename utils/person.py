@@ -44,17 +44,17 @@ class Volunteer(Person):
         all_titles_in_use = ["MYSec"]
         positions = []
         for title in all_titles_in_use:
-            positions.extend(Position.create_all_entries_fitting_data(
+            positions.extend(Position.create_all_fitting_data(
                 [["held_by", "=", self._name]], title=title))
         return tuple(positions)
 
     @classmethod
-    def create_entry_from_db_data_tuple(cls, data_tuple: tuple):
+    def create_from_db_data_tuple(cls, data_tuple: tuple):
         name, birth_date, gender = data_tuple
         return cls(name, birth_date, gender)
 
     @classmethod
-    def get_entry_details_fitting_data(cls, c, commands: list):
+    def get_details_fitting_data(cls, c, commands: list):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
         c.execute(

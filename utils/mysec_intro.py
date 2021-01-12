@@ -8,7 +8,7 @@ from region import Region
 
 
 def get_target_volunteer():
-    volunteers = Volunteer.create_all_entries_fitting_data(
+    volunteers = Volunteer.create_all_fitting_data(
         let_user_specify_command())
     return let_user_select_from_options(volunteers)
 
@@ -29,7 +29,7 @@ def let_user_select_from_options(options: super(list)):
 
 
 def get_target_region(position: Position):
-    return Region.create_region_by_name(position.region)
+    return Region.create_by_name(position.region)
 
 
 def make_mysec_intro():

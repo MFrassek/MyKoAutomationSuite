@@ -57,13 +57,13 @@ class Position(DatabaseEntry):
         self._end_date = end_date
 
     @classmethod
-    def create_entry_from_db_data_tuple(cls, data_tuple: tuple, title: str):
+    def create_from_db_data_tuple(cls, data_tuple: tuple, title: str):
         position_id, held_by, region, start_date, end_date = data_tuple
         return cls(
             title, region, held_by, start_date, end_date, position_id)
 
     @classmethod
-    def get_entry_details_fitting_data(cls, c, commands: list, title: str):
+    def get_details_fitting_data(cls, c, commands: list, title: str):
         assert len(commands) > 0, \
             "At least one specifying key word argument must be given"
         c.execute(
