@@ -66,11 +66,3 @@ class Volunteer(Person):
               + f" {command[1]} '{' '.join(command[2:])}'"
               for command in commands]))
         return c.fetchall()
-
-    @staticmethod
-    def argument_name_to_column_name(argument_name: str):
-        argument_name_to_column_name = {
-            "name": "volunteerName",
-            "birth_date": "birthDate",
-            "gender": "gender"}
-        return argument_name_to_column_name[argument_name]

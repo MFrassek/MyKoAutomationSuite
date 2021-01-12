@@ -76,24 +76,6 @@ class Position(DatabaseEntry):
                  for command in commands]))
         return c.fetchall()
 
-    @staticmethod
-    def title_to_table_name(title: str):
-        title_to_table_name = {
-            "MYSec": "mysecs",
-            "MY-VeranstalterIn": "myvers",
-            "MY-Weekend Orga": "myweorgas"}
-        return title_to_table_name[title]
-
-    @staticmethod
-    def argument_name_to_column_name(argument_name: str):
-        argument_name_to_column_name = {
-            "held_by": "volunteerName",
-            "region": "regionName",
-            "start_date": "startDate",
-            "end_date": "endDate",
-            "position_id": "positionId"}
-        return argument_name_to_column_name[argument_name]
-
     def add_to_db(self):
         conn, c = connect_to_db(DatabaseEntry.db_name)
         try:

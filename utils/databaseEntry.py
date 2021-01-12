@@ -22,3 +22,24 @@ class DatabaseEntry(abc.ABC):
     @abc.abstractmethod
     def get_entry_details_fitting_data():
         pass
+
+    @staticmethod
+    def argument_name_to_column_name(argument_name: str):
+        argument_name_to_column_name = {
+            "name": "volunteerName",
+            "birth_date": "birthDate",
+            "gender": "gender",
+            "held_by": "volunteerName",
+            "region": "regionName",
+            "start_date": "startDate",
+            "end_date": "endDate",
+            "position_id": "positionId"}
+        return argument_name_to_column_name[argument_name]
+
+    @staticmethod
+    def title_to_table_name(title: str):
+        title_to_table_name = {
+            "MYSec": "mysecs",
+            "MY-VeranstalterIn": "myvers",
+            "MY-Weekend Orga": "myweorgas"}
+        return title_to_table_name[title]
