@@ -78,8 +78,8 @@ def prompt_region_ids_for_looking_state_change():
 
 
 def get_all_regions_with_active_mysec():
-    all_active_mysec_positions = Position.create_all_positions_fitting_data(
-        "MYSec", [["end_date", "=", ""]])
+    all_active_mysec_positions = Position.create_all_entries_fitting_data(
+        [["end_date", "=", ""]], title="MYSec")
     all_regions_with_active_mysec = set()
     for mysec in all_active_mysec_positions:
         all_regions_with_active_mysec.add(

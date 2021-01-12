@@ -57,23 +57,13 @@ class Position(DatabaseEntry):
         self._end_date = end_date
 
     @staticmethod
-    def create_all_positions_fitting_data(title: str, commands: list):
-        conn, c = connect_to_db(DatabaseEntry.db_name)
-        positions = [
-            Position.create_position_from_db_data_tuple(title, data_tuple)
-            for data_tuple
-            in Position.get_position_details_fitting_data(c, title, commands)]
-        disconnect_from_db(conn)
-        return positions
-
-    @staticmethod
-    def create_position_from_db_data_tuple(title: str, data_tuple: tuple):
+    def create_entry_from_db_data_tuple(data_tuple: tuple, title: str):
         position_id, held_by, region, start_date, end_date = data_tuple
         return Position(
             title, region, held_by, start_date, end_date, position_id)
 
     @staticmethod
-    def get_position_details_fitting_data(c, title: str, commands: list):
+    def get_entry_details_fitting_data(c, commands: list, title: str):
         assert len(commands) > 0, \
             "At least one specifying key word argument must be given"
         c.execute(

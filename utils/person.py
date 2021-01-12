@@ -45,8 +45,8 @@ class Volunteer(Person):
         all_titles_in_use = ["MYSec"]
         positions = []
         for title in all_titles_in_use:
-            positions.extend(Position.create_all_positions_fitting_data(
-                title, [["held_by", "=", self._name]]))
+            positions.extend(Position.create_all_entries_fitting_data(
+                [["held_by", "=", self._name]], title=title))
         return tuple(positions)
 
     @staticmethod
