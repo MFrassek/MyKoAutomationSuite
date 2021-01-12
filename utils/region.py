@@ -1,9 +1,8 @@
+from databaseEntry import DatabaseEntry
 from helper import connect_to_db, disconnect_from_db
 
 
-class Region():
-    db_name = "MY-Ko.db"
-
+class Region(DatabaseEntry):
     def __init__(
             self, id_: int, name: str, mail_name: str,
             magazine_name: str, looking_state: int):
@@ -53,7 +52,7 @@ class Region():
 
     @staticmethod
     def create_region_by_name(name: str):
-        conn, c = connect_to_db(Region.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         c.execute(
             f"""SELECT *
             FROM regions
@@ -64,7 +63,7 @@ class Region():
 
     @staticmethod
     def create_region_by_id(id_: str):
-        conn, c = connect_to_db(Region.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         c.execute(
             f"""SELECT *
             FROM regions
@@ -75,14 +74,14 @@ class Region():
 
     @staticmethod
     def create_all_regions():
-        conn, c = connect_to_db(Region.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         c.execute("SELECT * FROM regions")
         regions = [Region(*data_tuple) for data_tuple in c.fetchall()]
         disconnect_from_db(conn)
         return regions
 
     def update_in_db(self):
-        conn, c = connect_to_db(Region.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         c.execute(f"""UPDATE regions
             SET looking = '{self._looking_state}'
             WHERE regionName = '{self._name}';""")

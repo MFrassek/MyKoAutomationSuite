@@ -1,8 +1,9 @@
+from databaseEntry import DatabaseEntry
 from position import Position
 from helper import connect_to_db, disconnect_from_db
 
 
-class Person:
+class Person(DatabaseEntry):
     def __init__(self, name: str, gender: str, birth_date: str):
         self._name = name
         self._gender = gender
@@ -50,7 +51,7 @@ class Volunteer(Person):
 
     @staticmethod
     def create_all_volunteers_fitting_data(commands: list):
-        conn, c = connect_to_db(Position.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         volunteers = [
             Volunteer.create_volunteer_from_db_data_tuple(data_tuple)
             for data_tuple

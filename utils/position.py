@@ -1,12 +1,11 @@
+from databaseEntry import DatabaseEntry
 import re
 from helper import connect_to_db, disconnect_from_db
 from sqlite3 import IntegrityError
 import sys
 
 
-class Position():
-    db_name = "MY-Ko.db"
-
+class Position(DatabaseEntry):
     def __init__(
             self, title: str, region: str, held_by: str,
             start_date: str, end_date: str = "", position_id: str = None):
@@ -59,7 +58,7 @@ class Position():
 
     @staticmethod
     def create_all_positions_fitting_data(title: str, commands: list):
-        conn, c = connect_to_db(Position.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         positions = [
             Position.create_position_from_db_data_tuple(title, data_tuple)
             for data_tuple
@@ -106,7 +105,7 @@ class Position():
         return argument_name_to_column_name[argument_name]
 
     def add_to_db(self):
-        conn, c = connect_to_db(Position.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         try:
             if self._position_id:
                 c.execute(self.get_command_for_db_insertion_with_id())
@@ -135,7 +134,7 @@ class Position():
                 '{self._end_date}');"""
 
     def update_in_db(self):
-        conn, c = connect_to_db(Position.db_name)
+        conn, c = connect_to_db(DatabaseEntry.db_name)
         c.execute(f"""UPDATE {Position.title_to_table_name(self._title)}
             SET endDate = '{self._end_date}'
             WHERE positionId = '{self._position_id}';""")
