@@ -56,22 +56,22 @@ class Position(DatabaseEntry):
             "'end_date' does not match data format YYYY-MM-DD"
         self._end_date = end_date
 
-    @staticmethod
-    def create_entry_from_db_data_tuple(data_tuple: tuple, title: str):
+    @classmethod
+    def create_entry_from_db_data_tuple(cls, data_tuple: tuple, title: str):
         position_id, held_by, region, start_date, end_date = data_tuple
-        return Position(
+        return cls(
             title, region, held_by, start_date, end_date, position_id)
 
-    @staticmethod
-    def get_entry_details_fitting_data(c, commands: list, title: str):
+    @classmethod
+    def get_entry_details_fitting_data(cls, c, commands: list, title: str):
         assert len(commands) > 0, \
             "At least one specifying key word argument must be given"
         c.execute(
             f"""SELECT *
-            FROM {Position.title_to_table_name(title)}
+            FROM {cls.title_to_table_name(title)}
             WHERE """
             + " AND ".join(
-                [Position.argument_name_to_column_name(command[0])
+                [cls.argument_name_to_column_name(command[0])
                  + f" {command[1]} '{' '.join(command[2:])}'"
                  for command in commands]))
         return c.fetchall()

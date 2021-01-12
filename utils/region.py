@@ -50,12 +50,12 @@ class Region(DatabaseEntry):
             "'looking_state' must be either 0 or 1"
         self._looking_state = looking_state
 
-    @staticmethod
-    def create_entry_from_db_data_tuple(data_tuple: tuple):
-        return Region(*data_tuple)
+    @classmethod
+    def create_entry_from_db_data_tuple(cls, data_tuple: tuple):
+        return cls(*data_tuple)
 
-    @staticmethod
-    def get_entry_details_fitting_data(c, commands: list):
+    @classmethod
+    def get_entry_details_fitting_data(cls, c, commands: list):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
         c.execute(
@@ -63,7 +63,7 @@ class Region(DatabaseEntry):
             FROM regions
             WHERE """
             + " AND ".join(
-             [Region.argument_name_to_column_name(command[0])
+             [cls.argument_name_to_column_name(command[0])
               + f" {command[1]} '{' '.join(command[2:])}'"
               for command in commands]))
         return c.fetchall()
