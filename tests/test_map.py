@@ -21,7 +21,7 @@ class TestInitiation(unittest.TestCase):
         functionTemp = mysec_map.prompt_region_ids_for_looking_state_change
         mysec_map.prompt_region_ids_for_looking_state_change = lambda: []
         print(self.db_name)
-        mysec_map.generate_mysec_map(
+        mysec_map.generate_looking_state_map(
             self.data_path, f"{self.data_path}/test_map.png")
         self.assertTrue(
             os.path.exists(f"{self.data_path}/test_map.png"),

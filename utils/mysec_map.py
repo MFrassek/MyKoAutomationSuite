@@ -6,15 +6,23 @@ from region import Region
 from position import Position
 
 
-def generate_mysec_map(data_path, output_path):
-    soup = get_wellformed_soup_from_svg_file(data_path)
-    change_fill_color_of_all_regions_based_on_looking_state(soup)
-    make_png_from_soup(soup, output_path)
+def generate_looking_state_map(data_path, output_path):
+    generate_mysec_map(
+        data_path,
+        change_fill_color_of_all_regions_based_on_looking_state,
+        output_path)
 
 
 def generate_mysec_presence_map(data_path, output_path):
+    generate_mysec_map(
+        data_path,
+        change_fill_color_of_all_regions_based_on_presence_of_mysec,
+        output_path)
+
+
+def generate_mysec_map(data_path, coloring_function, output_path):
     soup = get_wellformed_soup_from_svg_file(data_path)
-    change_fill_color_of_all_regions_based_on_presence_of_mysec(soup)
+    coloring_function(soup)
     make_png_from_soup(soup, output_path)
 
 
@@ -112,4 +120,4 @@ def make_png_from_soup(soup, output_path):
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
     generate_mysec_presence_map(data_path, "MYSec_presence_map.png")
-    generate_mysec_map(data_path, "MYSec_map.png")
+    generate_looking_state_map(data_path, "MYSec_map.png")
