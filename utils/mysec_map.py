@@ -8,7 +8,7 @@ from position import Position
 
 def generate_mysec_map(data_path, output_path):
     soup = get_wellformed_soup_from_svg_file(data_path)
-    change_fill_color_of_all_regions_based_on_db(soup)
+    change_fill_color_of_all_regions_based_on_looking_state(soup)
     make_png_from_soup(soup, output_path)
 
 
@@ -35,7 +35,7 @@ def remove_malformed_attribute_from_soup(soup):
     del svg_tag["xmlns:"]
 
 
-def change_fill_color_of_all_regions_based_on_db(soup):
+def change_fill_color_of_all_regions_based_on_looking_state(soup):
     print_current_looking_state_of_regions()
     toggle_looking_states_in_db(prompt_region_ids_for_looking_state_change())
     for region in Region.create_all():
