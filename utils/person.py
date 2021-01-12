@@ -1,6 +1,5 @@
 from databaseEntry import DatabaseEntry
 from position import Position
-from helper import connect_to_db, disconnect_from_db
 
 
 class Person(DatabaseEntry):
@@ -50,22 +49,12 @@ class Volunteer(Person):
         return tuple(positions)
 
     @staticmethod
-    def create_all_volunteers_fitting_data(commands: list):
-        conn, c = connect_to_db(DatabaseEntry.db_name)
-        volunteers = [
-            Volunteer.create_volunteer_from_db_data_tuple(data_tuple)
-            for data_tuple
-            in Volunteer.get_volunteer_details_fitting_data(c, commands)]
-        disconnect_from_db(conn)
-        return volunteers
-
-    @staticmethod
-    def create_volunteer_from_db_data_tuple(data_tuple: tuple):
+    def create_entry_from_db_data_tuple(data_tuple: tuple):
         name, birth_date, gender = data_tuple
         return Volunteer(name, birth_date, gender)
 
     @staticmethod
-    def get_volunteer_details_fitting_data(c, commands: list):
+    def get_entry_details_fitting_data(c, commands: list):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
         c.execute(

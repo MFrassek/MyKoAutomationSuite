@@ -8,7 +8,7 @@ from region import Region
 
 
 def get_target_volunteer():
-    volunteers = Volunteer.create_all_volunteers_fitting_data(
+    volunteers = Volunteer.create_all_entries_fitting_data(
         let_user_specify_command())
     return let_user_select_from_options(volunteers)
 
