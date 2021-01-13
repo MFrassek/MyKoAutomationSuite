@@ -54,6 +54,10 @@ class TestInitiation(unittest.TestCase):
             mysec_map.prompt_region_ids_for_looking_state_change(),
             [1010, 2020])
 
+    def test_get_regions_with_active_mysec(self):
+        active_regions = mysec_map.get_all_regions_with_active_mysec()
+        self.assertEqual(len(active_regions), 1)
+
     def test_change_fill_color(self):
         xml_path_raw = '''
         <svg>
