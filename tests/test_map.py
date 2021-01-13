@@ -16,7 +16,7 @@ class TestInitiation(unittest.TestCase):
         mysec_map.Position.db_name = self.db_name
 
     def tearDown(self):
-        pass
+        mysec_map.input = input
 
     def test_make_looking_state_map(self):
         functionTemp = mysec_map.prompt_region_ids_for_looking_state_change
@@ -53,7 +53,6 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(
             mysec_map.prompt_region_ids_for_looking_state_change(),
             [1010, 2020])
-        mysec_map.input = input
 
     def test_change_fill_color(self):
         xml_path_raw = '''
