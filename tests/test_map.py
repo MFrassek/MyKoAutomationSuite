@@ -37,6 +37,14 @@ class TestInitiation(unittest.TestCase):
             "test_Map.png does not exist at expected location")
         os.remove(f"{self.data_path}/test_map.png")
 
+    def test_remove_malformed_attribute(self):
+        soup = BeautifulSoup("""
+            <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+            <svg xmlns="http://www.w3.org/2000/svg">
+            </svg>""", 'xml')
+        mysec_map.remove_malformed_attribute_from_soup(soup)
+        self.assertEqual(len(soup.svg.attrs), 0)
+
     def test_prompt(self):
         mysec_map.input = lambda x: ""
         self.assertEqual(
