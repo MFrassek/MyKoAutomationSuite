@@ -80,7 +80,7 @@ class Position(DatabaseEntry):
         return result
 
     def add_to_db(self):
-        conn, c = connect_to_db(DatabaseEntry.db_name)
+        conn, c = connect_to_db(self.__class__.db_name)
         try:
             if self._position_id:
                 c.execute(self.get_command_for_db_insertion_with_id())
@@ -91,7 +91,7 @@ class Position(DatabaseEntry):
         disconnect_from_db(conn)
 
     def get_command_for_db_insertion_with_id(self):
-        return f"""INSERT INTO {Position.title_to_table_name(self._title)}(
+        return f"""INSERT INTO {self.__class__.title_to_table_name(self._title)}(
                 positionId, volunteerName,
                 regionName, startDate, endDate)
             VALUES (
@@ -100,7 +100,7 @@ class Position(DatabaseEntry):
                 '{self._end_date}');"""
 
     def get_command_for_db_insertion_without_id(self):
-        return f"""INSERT INTO {Position.title_to_table_name(self._title)}(
+        return f"""INSERT INTO {self.__class__.title_to_table_name(self._title)}(
                 volunteerName,
                 regionName, startDate, endDate)
             VALUES (
@@ -109,8 +109,8 @@ class Position(DatabaseEntry):
                 '{self._end_date}');"""
 
     def update_in_db(self):
-        conn, c = connect_to_db(DatabaseEntry.db_name)
-        c.execute(f"""UPDATE {Position.title_to_table_name(self._title)}
+        conn, c = connect_to_db(self.__class__.db_name)
+        c.execute(f"""UPDATE {self.__class__.title_to_table_name(self._title)}
             SET endDate = '{self._end_date}'
             WHERE positionId = '{self._position_id}';""")
         disconnect_from_db(conn)

@@ -80,7 +80,7 @@ class Region(DatabaseEntry):
         return cls.create_all_fitting_data([["region_id", "=", id_]])[0]
 
     def update_in_db(self):
-        conn, c = connect_to_db(DatabaseEntry.db_name)
+        conn, c = connect_to_db(self.__class__.db_name)
         c.execute(f"""UPDATE regions
             SET looking = '{self._looking_state}'
             WHERE regionName = '{self._name}';""")
