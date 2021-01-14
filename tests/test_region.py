@@ -72,3 +72,10 @@ class TestInitiation(unittest.TestCase):
         self.assertNotEqual(
             hash(Region(1, "A", "B", "C", True)),
             hash(Region(2, "A", "B", "C", True)))
+
+    def test_region_factory_methods(self):
+        self.assertEqual(len(Region.create_all()), 40)
+        self.assertEqual(len(Region.create_all_fitting_data(
+            [["region_id", ">", "4000"]])), 27)
+        self.assertEqual(Region.create_by_name("Münster").id, 2050)
+        self.assertEqual(Region.create_by_id("8005").name, "Aschaffenburg")
