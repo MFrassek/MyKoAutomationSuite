@@ -55,9 +55,10 @@ class Region(DatabaseEntry):
         return cls(*data_tuple)
 
     @classmethod
-    def get_details_fitting_data(cls, c, commands: list):
+    def get_details_fitting_data(cls, commands: list):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
+        conn, c = connect_to_db(cls.db_name)
         c.execute(
             """SELECT *
             FROM regions
@@ -66,7 +67,9 @@ class Region(DatabaseEntry):
              [cls.argument_name_to_column_name(command[0])
               + f" {command[1]} '{' '.join(command[2:])}'"
               for command in commands]))
-        return c.fetchall()
+        result = c.fetchall()
+        disconnect_from_db(conn)
+        return result
 
     @classmethod
     def create_by_name(cls, name: str):

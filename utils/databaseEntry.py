@@ -1,5 +1,4 @@
 import abc
-from helper import connect_to_db, disconnect_from_db
 
 
 class DatabaseEntry(abc.ABC):
@@ -7,12 +6,10 @@ class DatabaseEntry(abc.ABC):
 
     @classmethod
     def create_all_fitting_data(cls, commands: list, **kwargs):
-        conn, c = connect_to_db(cls.db_name)
         entries = [
             cls.create_from_db_data_tuple(data_tuple, **kwargs)
             for data_tuple
-            in cls.get_details_fitting_data(c, commands, **kwargs)]
-        disconnect_from_db(conn)
+            in cls.get_details_fitting_data(commands, **kwargs)]
         return entries
 
     @abc.abstractmethod

@@ -1,6 +1,6 @@
 from databaseEntry import DatabaseEntry
 from position import Position
-
+from helper import connect_to_db, disconnect_from_db
 
 class Person(DatabaseEntry):
     def __init__(self, name: str, gender: str, birth_date: str):
@@ -54,9 +54,10 @@ class Volunteer(Person):
         return cls(name, birth_date, gender)
 
     @classmethod
-    def get_details_fitting_data(cls, c, commands: list):
+    def get_details_fitting_data(cls, commands: list):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
+        conn, c = connect_to_db(cls.db_name)
         c.execute(
             """SELECT *
             FROM volunteers
@@ -65,4 +66,6 @@ class Volunteer(Person):
              [cls.argument_name_to_column_name(command[0])
               + f" {command[1]} '{' '.join(command[2:])}'"
               for command in commands]))
-        return c.fetchall()
+        result = c.fetchall()
+        disconnect_from_db(conn)
+        return result
