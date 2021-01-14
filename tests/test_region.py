@@ -79,3 +79,9 @@ class TestInitiation(unittest.TestCase):
             [["region_id", ">", "4000"]])), 27)
         self.assertEqual(Region.create_by_name("Münster").id, 2050)
         self.assertEqual(Region.create_by_id("8005").name, "Aschaffenburg")
+
+    def test_get_details_fitting_data(self):
+        self.assertEqual(
+            Region.get_details_fitting_data([["region_id", "<=", "1030"]]),
+            [(1020, "Kiel", "kiel", "minsh", 1),
+             (1030, "Hamburg", "hamburg", "hamlet", 1)])
