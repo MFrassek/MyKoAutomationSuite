@@ -85,3 +85,15 @@ class TestInitiation(unittest.TestCase):
             Region.get_details_fitting_data([["region_id", "<=", "1030"]]),
             [(1020, "Kiel", "kiel", "minsh", 1),
              (1030, "Hamburg", "hamburg", "hamlet", 1)])
+
+    def test_update_db(self):
+        reg = Region.create_by_name("Hamburg")
+        original_looking_state = reg.looking_state
+        reg.looking_state = int(not reg.looking_state)
+        reg.update_in_db()
+        reg = Region.create_by_name("Hamburg")
+        new_looking_state = reg.looking_state
+        print(str(original_looking_state) + " " + str(new_looking_state))
+        reg.looking_state = original_looking_state
+        reg.update_in_db()
+        self.assertNotEqual(original_looking_state, new_looking_state)
