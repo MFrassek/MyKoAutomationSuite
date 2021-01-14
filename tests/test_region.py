@@ -56,3 +56,19 @@ class TestInitiation(unittest.TestCase):
             pass
         else:
             self.assertTrue(False, "Setting magazine_name should fail")
+
+    def test_region_equal(self):
+        self.assertEqual(
+            Region(1, "A", "B", "C", True),
+            Region(1, "D", "E", "F", False))
+        self.assertNotEqual(
+            Region(1, "A", "B", "C", True),
+            Region(2, "A", "B", "C", True))
+
+    def test_region_hash(self):
+        self.assertEqual(
+            hash(Region(1, "A", "B", "C", True)),
+            hash(Region(1, "D", "E", "F", False)))
+        self.assertNotEqual(
+            hash(Region(1, "A", "B", "C", True)),
+            hash(Region(2, "A", "B", "C", True)))
