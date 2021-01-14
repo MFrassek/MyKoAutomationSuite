@@ -15,3 +15,13 @@ class TestInitiation(unittest.TestCase):
 
     def tearDown(self):
         pass
+
+    def test_region_accessibility(self):
+        reg = Region(
+            id_=1, name="Münster", mail_name="ms",
+            magazine_name="mo", looking_state=True)
+        self.assertEqual(reg.id, 1)
+        self.assertEqual(reg.name, "Münster")
+        self.assertEqual(reg.mail_name, "ms")
+        self.assertEqual(reg.magazine_name, "mo")
+        self.assertEqual(reg.looking_state, 1)
