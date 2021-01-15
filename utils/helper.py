@@ -37,7 +37,8 @@ def string_follows_input_pattern(string, data_type):
     data_type_patterns = {
         "name": r"^[a-üA-Ü, -]+$",
         "date": r"^\d\d\d\d-\d\d-\d\d$",
-        "gender": r"^[mfdu]$"}
+        "gender": r"^[mfdu]$",
+        "id": r"\d+"}
     return string == "" or re.match(data_type_patterns[data_type], string)
 
 

@@ -1,61 +1,84 @@
-from helper import connect_to_db, disconnect_from_db, \
-    string_follows_input_pattern
+from helper import string_follows_input_pattern
+from person import Volunteer
+from position import Position
 
 
-def add_new_volunteer_and_position(db_name):
-    conn, c = connect_to_db(db_name)
-    while True:
-        volunteerName = input("Name [a-üA-Ü ,-]:\n")
-        if string_follows_input_pattern(volunteerName, "name"):
-            break
-    add_entry_to_table_volunteers(c, volunteerName)
+def add_new_volunteer_and_positions():
+    volunteer_name = prompt_volunteer_name()
+    add_new_volunteer(volunteer_name)
     for position_name in prompt_position_names():
-        add_entry_to_table_x(c, position_name, volunteerName)
-    disconnect_from_db(conn)
+        add_new_position(position_name, volunteer_name)
 
 
-def add_entry_to_table_volunteers(c, volunteerName):
-    gender, birthDate = prompt_gender_and_birthDate()
-    c.execute(
-        "INSERT INTO volunteers VALUES ('{}', '{}', '{}')"
-        .format(volunteerName, gender, birthDate))
+def add_new_volunteer(volunteer_name):
+    new_volunteer = Volunteer(
+        name=volunteer_name, birth_date=prompt_birth_date(),
+        gender=prompt_gender())
+    new_volunteer.add_to_db()
 
 
-def prompt_gender_and_birthDate():
+def add_new_position(title, volunteer_name):
+    new_postion = Position(
+        title=title, region=prompt_region_name(), held_by=volunteer_name,
+        start_date=prompt_start_date(), end_date=prompt_end_date(),
+        position_id=prompt_position_id())
+    new_postion.add_to_db()
+
+
+def prompt_volunteer_name():
+    while True:
+        volunteer_name = input("Name [a-üA-Ü ,-]:\n")
+        if string_follows_input_pattern(volunteer_name, "name"):
+            return volunteer_name
+
+
+def prompt_gender():
     while True:
         gender = input("Gender [f, m, d, u]:\n")
         if string_follows_input_pattern(gender, "gender"):
-            break
+            return gender
+
+
+def prompt_birth_date():
     while True:
-        birthDate = input("Birthdate [YYYY-MM-DD]:\n")
-        if string_follows_input_pattern(birthDate, "date"):
-            break
-    return gender, birthDate
+        birth_date = input("Birthdate [YYYY-MM-DD]:\n")
+        if string_follows_input_pattern(birth_date, "date"):
+            return birth_date
 
 
 def prompt_position_names():
     return [position.strip() for position in
-            input("Comma separated positions [mysecs, myvers]:\n").split(",")]
+            input("Comma separated positions [MYSec, MY-VeranstalterIn]:\n")
+            .split(",")]
 
 
-def add_entry_to_table_x(c, table, volunteerName):
-    regionName, startDate = prompt_regionName_and_startDate()
-    c.execute(
-        "INSERT INTO {} VALUES ('{}', '{}', '{}', '');"
-        .format(table, volunteerName, regionName, startDate))
-
-
-def prompt_regionName_and_startDate():
+def prompt_region_name():
     while True:
-        regionName = input("Region name:\n")
-        if string_follows_input_pattern(regionName, "name"):
-            break
+        region_name = input("Region name:\n")
+        if string_follows_input_pattern(region_name, "name"):
+            return region_name
+
+
+def prompt_start_date():
     while True:
-        startDate = input("Start date [YYYY-MM-DD]:\n")
-        if string_follows_input_pattern(startDate, "date"):
-            break
-    return regionName, startDate
+        start_date = input("Start date [YYYY-MM-DD]:\n")
+        if string_follows_input_pattern(start_date, "date"):
+            return start_date
+
+
+def prompt_end_date():
+    while True:
+        end_date = input("End date [YYYY-MM-DD]:\n")
+        if string_follows_input_pattern(end_date, "date"):
+            return end_date
+
+
+def prompt_position_id():
+    while True:
+        position_id = input("Position id:\n")
+        if string_follows_input_pattern(position_id, "id"):
+            return position_id
 
 
 if __name__ == '__main__':
-    add_new_volunteer_and_position("MY-Ko.db")
+    add_new_volunteer_and_positions()
