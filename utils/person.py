@@ -2,6 +2,7 @@ from databaseEntry import DatabaseEntry
 from position import Position
 from helper import connect_to_db, disconnect_from_db
 
+
 class Person(DatabaseEntry):
     def __init__(self, name: str, gender: str, birth_date: str):
         self._name = name
@@ -69,3 +70,9 @@ class Volunteer(Person):
         result = c.fetchall()
         disconnect_from_db(conn)
         return result
+
+    def get_insertion_command(self):
+        return f"""INSERT INTO volunteers (
+                volunteerName, gender, birthDate)
+            VALUES (
+                '{self._name}', '{self._gender}', '{self._birth_date}');"""
