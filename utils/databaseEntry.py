@@ -57,3 +57,7 @@ class DatabaseEntry(abc.ABC):
         except IntegrityError:
             print(f"{sys.exc_info()[0].__name__}: {sys.exc_info()[1]}")
         disconnect_from_db(conn)
+
+    @abc.abstractmethod
+    def get_insertion_command():
+        pass
