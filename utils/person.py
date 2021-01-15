@@ -28,9 +28,9 @@ class Person(DatabaseEntry):
 
 class Volunteer(Person):
     def __init__(
-            self, name: str, birth_date: str, gender: str):
+            self, name: str, gender: str, birth_date: str):
         super(Volunteer, self).__init__(
-            name, birth_date, gender)
+            name=name, gender=gender, birth_date=birth_date)
         self._positions = self.get_held_positions()
 
     def __repr__(self):
