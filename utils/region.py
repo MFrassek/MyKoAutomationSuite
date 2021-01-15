@@ -85,3 +85,10 @@ class Region(DatabaseEntry):
             SET looking = '{self._looking_state}'
             WHERE regionName = '{self._name}';""")
         disconnect_from_db(conn)
+
+    def get_insertion_command(self):
+        return f"""INSERT INTO regions (
+                regionId, regionName, regionMailName, magazineName, looking)
+            VALUES (
+                '{self._id}', '{self._name}', '{self._mail_name}',
+                '{self._magazine_name}', '{self._looking_state}');"""
