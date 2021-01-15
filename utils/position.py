@@ -1,8 +1,6 @@
 from databaseEntry import DatabaseEntry
 import re
 from helper import connect_to_db, disconnect_from_db
-from sqlite3 import IntegrityError
-import sys
 
 
 class Position(DatabaseEntry):
@@ -78,14 +76,6 @@ class Position(DatabaseEntry):
         result = c.fetchall()
         disconnect_from_db(conn)
         return result
-
-    def add_to_db(self):
-        conn, c = connect_to_db(self.__class__.db_name)
-        try:
-            c.execute(self.get_insertion_command())
-        except IntegrityError:
-            print(f"{sys.exc_info()[0].__name__}: {sys.exc_info()[1]}")
-        disconnect_from_db(conn)
 
     def get_insertion_command(self):
         if self._position_id:

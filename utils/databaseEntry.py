@@ -1,4 +1,7 @@
 import abc
+from helper import connect_to_db, disconnect_from_db
+from sqlite3 import IntegrityError
+import sys
 
 
 class DatabaseEntry(abc.ABC):
@@ -46,3 +49,11 @@ class DatabaseEntry(abc.ABC):
             "MY-VeranstalterIn": "myvers",
             "MY-Weekend Orga": "myweorgas"}
         return title_to_table_name[title]
+
+    def add_to_db(self):
+        conn, c = connect_to_db(self.__class__.db_name)
+        try:
+            c.execute(self.get_insertion_command())
+        except IntegrityError:
+            print(f"{sys.exc_info()[0].__name__}: {sys.exc_info()[1]}")
+        disconnect_from_db(conn)
