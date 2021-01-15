@@ -82,31 +82,29 @@ class Position(DatabaseEntry):
     def add_to_db(self):
         conn, c = connect_to_db(self.__class__.db_name)
         try:
-            if self._position_id:
-                c.execute(self.get_command_for_db_insertion_with_id())
-            else:
-                c.execute(self.get_command_for_db_insertion_without_id())
+            c.execute(self.get_insertion_command())
         except IntegrityError:
             print(f"{sys.exc_info()[0].__name__}: {sys.exc_info()[1]}")
         disconnect_from_db(conn)
 
-    def get_command_for_db_insertion_with_id(self):
-        return f"""INSERT INTO {self.__class__.title_to_table_name(self._title)}(
-                positionId, volunteerName,
-                regionName, startDate, endDate)
-            VALUES (
-                {self._position_id}, '{self._held_by}',
-                '{self._region}', '{self._start_date}',
-                '{self._end_date}');"""
-
-    def get_command_for_db_insertion_without_id(self):
-        return f"""INSERT INTO {self.__class__.title_to_table_name(self._title)}(
-                volunteerName,
-                regionName, startDate, endDate)
-            VALUES (
-                '{self._held_by}',
-                '{self._region}', '{self._start_date}',
-                '{self._end_date}');"""
+    def get_insertion_command(self):
+        if self._position_id:
+            return f"""INSERT INTO {
+                self.__class__.title_to_table_name(self._title)}(
+                    positionId, volunteerName,
+                    regionName, startDate, endDate)
+                VALUES (
+                    {self._position_id}, '{self._held_by}',
+                    '{self._region}', '{self._start_date}',
+                    '{self._end_date}');"""
+        else:
+            return f"""INSERT INTO {
+                self.__class__.title_to_table_name(self._title)}(
+                    volunteerName,
+                    regionName, startDate, endDate)
+                VALUES (
+                    '{self._held_by}', '{self._region}', '{self._start_date}',
+                    '{self._end_date}');"""
 
     def update_in_db(self):
         conn, c = connect_to_db(self.__class__.db_name)
