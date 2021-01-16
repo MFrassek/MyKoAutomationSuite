@@ -27,19 +27,9 @@ class TestInitiation(unittest.TestCase):
         volunteer_add.add_new_volunteer("Test Person")
         self.assertEqual(len(volunteer_add.Volunteer.create_all()), 1)
 
-    def test_add_entry_to_mysecs(self):
-        container_prompt_regionName_and_startDate = \
-            volunteer_add.prompt_regionName_and_startDate
-        volunteer_add.prompt_regionName_and_startDate = \
-            lambda: ("Münster", "2020-01-02")
-        volunteer_add.add_entry_to_table_x(
-            self.c, "mysecs", "Franz Mustermann")
-        self.c.execute("SELECT * FROM mysecs WHERE volunteerName = '{}'"
-                       .format("Franz Mustermann"))
-        volunteerName, regionName, startDate, endDate = self.c.fetchall()[0]
-        volunteer_add.prompt_regionName_and_startDate = \
-            container_prompt_regionName_and_startDate
-        self.assertEqual(volunteerName, "Franz Mustermann")
-        self.assertEqual(regionName, "Münster")
-        self.assertEqual(startDate, "2020-01-02")
-        self.assertEqual(endDate, "")
+    def test_add_mysec(self):
+        generator = (ele for ele in ["Münster", "2020-01-01", "", ""])
+        self.monkeypatch.setattr("builtins.input", lambda x: next(generator))
+        volunteer_add.add_new_position("MYSec", "Test Person")
+        self.assertEqual(
+            len(volunteer_add.Position.create_all(title="MYSec")), 1)
