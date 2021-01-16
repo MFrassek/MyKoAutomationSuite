@@ -1,6 +1,5 @@
 import sqlite3
 import os
-import re
 
 
 def connect_to_db(db_name):
@@ -31,15 +30,6 @@ def get_position_details(c, volunteerName, position):
     c.execute("SELECT * FROM {} WHERE volunteerName = '{}'"
               .format(position, volunteerName))
     return c.fetchall()[0]
-
-
-def string_follows_input_pattern(string, data_type):
-    data_type_patterns = {
-        "name": r"^[a-üA-Ü, -]+$",
-        "date": r"^\d\d\d\d-\d\d-\d\d$",
-        "gender": r"^[mfdu]$",
-        "id": r"\d+"}
-    return string == "" or re.match(data_type_patterns[data_type], string)
 
 
 def get_data_type_from_column_name(column_name):
