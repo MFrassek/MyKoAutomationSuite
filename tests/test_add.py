@@ -1,6 +1,8 @@
 import unittest
 import os
 from utils import volunteer_add
+from utils import init_db
+from _pytest.monkeypatch import MonkeyPatch
 
 
 class TestInitiation(unittest.TestCase):
@@ -8,29 +10,22 @@ class TestInitiation(unittest.TestCase):
         super(TestInitiation, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "tests/Test.db"
+        self.db_name = "tests/Test_add.db"
 
     def setUp(self):
         volunteer_add.Position.db_name = self.db_name
         volunteer_add.Volunteer.db_name = self.db_name
+        init_db.init_db(self.data_path, self.db_name)
+        self.monkeypatch = MonkeyPatch()
 
     def tearDown(self):
-        volunteer_add.input = input
+        self.monkeypatch.undo()
 
-
-    def test_add_entry_to_volunteers(self):
-        container_prompt_gender_and_birthDate = \
-            volunteer_add.prompt_gender_and_birthDate
-        volunteer_add.prompt_gender_and_birthDate = lambda: ("m", "1992-10-01")
-        volunteer_add.add_entry_to_table_volunteers(self.c, "Max Mustermann")
-        self.c.execute("SELECT * FROM volunteers WHERE volunteerName = '{}'"
-                       .format("Max Mustermann"))
-        volunteerName, gender, birthDate = self.c.fetchall()[0]
-        volunteer_add.prompt_gender_and_birthDate = \
-            container_prompt_gender_and_birthDate
-        self.assertEqual(volunteerName, "Max Mustermann")
-        self.assertEqual(gender, "m")
-        self.assertEqual(birthDate, "1992-10-01")
+    def test_add_volunteer(self):
+        generator = (ele for ele in ["1995-03-03", "d"])
+        self.monkeypatch.setattr("builtins.input", lambda x: next(generator))
+        volunteer_add.add_new_volunteer("Test Person")
+        self.assertEqual(len(volunteer_add.Volunteer.create_all()), 1)
 
     def test_add_entry_to_mysecs(self):
         container_prompt_regionName_and_startDate = \
