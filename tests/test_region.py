@@ -32,30 +32,14 @@ class TestInitiation(unittest.TestCase):
             magazine_name="mo", looking_state=True)
         reg.looking_state = 0
         self.assertEqual(reg.looking_state, 0)
-        try:
+        with self.assertRaises(AttributeError):
             reg.id = 2
-        except (AttributeError):
-            pass
-        else:
-            self.assertTrue(False, "Setting id should fail")
-        try:
+        with self.assertRaises(AttributeError):
             reg.name = "New"
-        except (AttributeError):
-            pass
-        else:
-            self.assertTrue(False, "Setting name should fail")
-        try:
+        with self.assertRaises(AttributeError):
             reg.mail_name = "New"
-        except (AttributeError):
-            pass
-        else:
-            self.assertTrue(False, "Setting mail_name should fail")
-        try:
+        with self.assertRaises(AttributeError):
             reg.magazine_name = "New"
-        except (AttributeError):
-            pass
-        else:
-            self.assertTrue(False, "Setting magazine_name should fail")
 
     def test_region_equal(self):
         self.assertEqual(
