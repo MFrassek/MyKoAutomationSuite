@@ -24,8 +24,8 @@ class DatabaseEntry(abc.ABC):
         pass
 
     @classmethod
-    def create_all(cls):
-        return cls.create_all_fitting_data([["", "=", ""]])
+    def create_all(cls, **kwargs):
+        return cls.create_all_fitting_data([["", "=", ""]], **kwargs)
 
     @staticmethod
     def argument_name_to_column_name(argument_name: str):
