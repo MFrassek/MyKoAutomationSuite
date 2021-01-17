@@ -5,9 +5,9 @@ from utils import init_db
 from _pytest.monkeypatch import MonkeyPatch
 
 
-class TestInitiation(unittest.TestCase):
+class TestAdd(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestInitiation, self).__init__(*args, **kwargs)
+        super(TestAdd, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
         self.db_name = "tests/Test_add.db"

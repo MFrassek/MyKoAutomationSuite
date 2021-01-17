@@ -5,9 +5,9 @@ import sqlite3
 from utils import helper
 
 
-class TestInitiation(unittest.TestCase):
+class TestDbInitiation(unittest.TestCase):
     def __init__(self, *args, **kwargs):
-        super(TestInitiation, self).__init__(*args, **kwargs)
+        super(TestDbInitiation, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
         self.db_name = "tests/Test_init.db"
