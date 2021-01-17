@@ -8,16 +8,6 @@ from region import Region
 from userInteraction import UserInteraction
 
 
-def get_target_volunteer():
-    volunteers = Volunteer.create_all_fitting_data(
-        UserInteraction.specify_command())
-    return UserInteraction.select_from_options(volunteers)
-
-
-def get_target_region(position: Position):
-    return Region.create_by_name(position.region)
-
-
 def make_mysec_intro():
     volunteer = get_target_volunteer()
     position = UserInteraction.select_from_options(volunteer.positions)
@@ -31,6 +21,44 @@ def make_mysec_intro():
     print(generate_mail_text_from_template(
         volunteer.base_name,
         make_mail_format_variables(volunteer, position, region)))
+
+
+def get_target_volunteer():
+    volunteers = Volunteer.create_all_fitting_data(
+        UserInteraction.specify_command())
+    return UserInteraction.select_from_options(volunteers)
+
+
+def get_target_region(position: Position):
+    return Region.create_by_name(position.region)
+
+
+def generate_tex_file_from_template(basename, intro_format_variables):
+    data_path = f"{get_relative_path_to_script()}/data"
+    with open(f"{data_path}/IntroTemplate.txt", "r") as template:
+        raw_intro = "".join(template.readlines())
+    with open(f"{basename}.tex", "w") as tex_file:
+        tex_file.write(raw_intro % intro_format_variables)
+
+
+def generate_pdf_from_tex_file(basename):
+    proc = subprocess.Popen(
+        ["xelatex", "-interaction", "nonstopmode", f"{basename}.tex"])
+    proc.communicate()
+    raise_error_if_returncode_is_not_zero(proc, basename)
+
+
+def remove_byproduct_files(basename):
+    os.unlink(f"{basename}.tex")
+    os.unlink(f"{basename}.log")
+    os.unlink(f"{basename}.aux")
+
+
+def generate_mail_text_from_template(basename, mail_format_variables):
+    data_path = f"{get_relative_path_to_script()}/data"
+    with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
+        raw_mail = "".join(template.readlines())
+    return raw_mail % mail_format_variables
 
 
 def make_file_format_variables(
@@ -80,38 +108,10 @@ def get_path_to_picture(basename):
         (os.listdir(f'{data_path}/intros/pictures'))))[0]}"""
 
 
-def generate_tex_file_from_template(basename, intro_format_variables):
-    data_path = f"{get_relative_path_to_script()}/data"
-    with open(f"{data_path}/IntroTemplate.txt", "r") as template:
-        raw_intro = "".join(template.readlines())
-    with open(f"{basename}.tex", "w") as tex_file:
-        tex_file.write(raw_intro % intro_format_variables)
-
-
-def generate_pdf_from_tex_file(basename):
-    proc = subprocess.Popen(
-        ["xelatex", "-interaction", "nonstopmode", f"{basename}.tex"])
-    proc.communicate()
-    raise_error_if_returncode_is_not_zero(proc, basename)
-
-
 def raise_error_if_returncode_is_not_zero(proc, basename):
     if proc.returncode:
         os.unlink(f"{basename}.pdf")
         raise ValueError(f"Error {proc.returncode}")
-
-
-def remove_byproduct_files(basename):
-    os.unlink(f"{basename}.tex")
-    os.unlink(f"{basename}.log")
-    os.unlink(f"{basename}.aux")
-
-
-def generate_mail_text_from_template(basename, mail_format_variables):
-    data_path = f"{get_relative_path_to_script()}/data"
-    with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
-        raw_mail = "".join(template.readlines())
-    return raw_mail % mail_format_variables
 
 
 if __name__ == "__main__":
