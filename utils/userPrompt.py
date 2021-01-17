@@ -66,11 +66,17 @@ class UserPrompt():
     def select_from_options(options: super(list)):
         if len(options) == 1:
             return options[0]
+        elif len(options) == 0:
+            raise LookupError("Found no options to select from")
         else:
             for i, option in enumerate(options):
                 print(str(i) + ": " + str(option))
             selected_index = int(input("Select number:\n"))
         return options[selected_index]
+
+    @staticmethod
+    def inform_about_update_start():
+        print("\nPrompting for new values of all mutable attributes:")
 
 
 def string_follows_input_pattern(string, data_type):
