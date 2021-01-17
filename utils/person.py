@@ -25,6 +25,10 @@ class Person(DatabaseEntry):
     def gender(self):
         return self._gender
 
+    @property
+    def pronoun(self):
+        return get_pronoun_from_gender(self._gender)
+
 
 class Volunteer(Person):
     def __init__(
@@ -68,3 +72,8 @@ class Volunteer(Person):
                 volunteerName, gender, birthDate)
             VALUES (
                 '{self._name}', '{self._gender}', '{self._birth_date}');"""
+
+
+def get_pronoun_from_gender(gender):
+    pronouns = {"m": "er", "f": "sie", "d": "em", "n": "em"}
+    return pronouns[gender]

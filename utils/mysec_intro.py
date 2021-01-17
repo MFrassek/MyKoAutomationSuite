@@ -55,7 +55,7 @@ def make_format_variable_dicts(
         "Gebiet": position.region,
         "Name": volunteer.name,
         "Vorname": firstName,
-        "Pronomen": get_pronoun_from_gender(volunteer.gender),
+        "Pronomen": volunteer.pronoun,
         "Mailadresse": mysecAddress}
     return intro_format_variables, mail_format_variables
 
@@ -106,11 +106,6 @@ def remove_byproduct_files(basename):
     os.unlink(f"{basename}.tex")
     os.unlink(f"{basename}.log")
     os.unlink(f"{basename}.aux")
-
-
-def get_pronoun_from_gender(gender):
-    pronouns = {"m": "er", "f": "sie", "d": "em", "n": "em"}
-    return pronouns[gender]
 
 
 def generate_mail_text_from_template(basename, mail_format_variables):
