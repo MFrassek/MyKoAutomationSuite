@@ -61,3 +61,6 @@ class DatabaseEntry(abc.ABC):
     @abc.abstractmethod
     def get_insertion_command():
         pass
+
+    def convert_YYYYMMDD_to_DDMMYYYY_date(self, date):
+        return ".".join(date.split("-")[::-1])

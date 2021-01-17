@@ -41,7 +41,7 @@ def make_format_variable_dicts(
         "Gebiet": position.region,
         "Name": volunteer.name,
         "Vorname": volunteer.first_name,
-        "Amtsantritt": convert_YYYYMMDD_to_DDMMYYYY_date(position.start_date),
+        "Amtsantritt": position.start_date_ddmmyyyy,
         "Mailadresse": region.mysec_mail_address,
         "MYSecAbgelöst": input("Name of former MYSec: "),
         "AlleVeranstalter": input("All organizers: "),
@@ -55,10 +55,6 @@ def make_format_variable_dicts(
         "Pronomen": volunteer.pronoun,
         "Mailadresse": region.mysec_mail_address}
     return intro_format_variables, mail_format_variables
-
-
-def convert_YYYYMMDD_to_DDMMYYYY_date(date):
-    return ".".join(date.split("-")[::-1])
 
 
 def get_intro_first_line_and_remaining_text(basename):

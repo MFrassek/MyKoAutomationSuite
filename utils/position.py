@@ -56,6 +56,14 @@ class Position(DatabaseEntry):
             "'end_date' does not match data format YYYY-MM-DD"
         self._end_date = end_date
 
+    @property
+    def start_date_ddmmyyyy(self):
+        return self.convert_YYYYMMDD_to_DDMMYYYY_date(self._start_date)
+
+    @property
+    def end_date_ddmmyyyy(self):
+        return self.convert_YYYYMMDD_to_DDMMYYYY_date(self._end_date)
+
     @classmethod
     def create_from_db_data_tuple(cls, data_tuple: tuple, title: str):
         position_id, held_by, region, start_date, end_date = data_tuple
