@@ -4,6 +4,8 @@ from helper import connect_to_db, disconnect_from_db
 
 
 class Position(DatabaseEntry):
+    all_titles_in_use = ["MYSec"]
+
     def __init__(
             self, title: str, region: str, held_by: str,
             start_date: str, end_date: str = "", position_id: str = None):
@@ -79,9 +81,8 @@ class Position(DatabaseEntry):
 
     @classmethod
     def create_all_held_positions(cls, held_by: str):
-        all_titles_in_use = ["MYSec"]
         positions = []
-        for title in all_titles_in_use:
+        for title in cls.all_titles_in_use:
             positions.extend(cls.create_all_fitting_data(
                 [["held_by", "=", held_by]], title=title))
         return positions
