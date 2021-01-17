@@ -2,6 +2,7 @@ import unittest
 import os
 from utils import mysec_map
 from bs4 import BeautifulSoup
+from _pytest.monkeypatch import MonkeyPatch
 
 
 class TestInitiation(unittest.TestCase):
@@ -12,15 +13,19 @@ class TestInitiation(unittest.TestCase):
         self.db_name = "tests/Test.db"
 
     def setUp(self):
-        mysec_map.Region.db_name = self.db_name
-        mysec_map.Position.db_name = self.db_name
+        self.monkeypatch = MonkeyPatch()
+        self.monkeypatch.setattr(
+            "mysec_map.Region.db_name", self.db_name)
+        self.monkeypatch.setattr(
+            "mysec_map.Position.db_name", self.db_name)
 
     def tearDown(self):
-        mysec_map.input = input
+        self.monkeypatch.undo()
 
     def test_make_looking_state_map(self):
         functionTemp = mysec_map.prompt_region_ids_for_looking_state_change
-        mysec_map.prompt_region_ids_for_looking_state_change = lambda: []
+        self.monkeypatch.setattr(
+            "builtins.input", lambda x: "")
         mysec_map.generate_looking_state_map(
             self.data_path, f"{self.data_path}/test_map.png")
         self.assertTrue(
@@ -46,10 +51,12 @@ class TestInitiation(unittest.TestCase):
         self.assertEqual(len(soup.svg.attrs), 0)
 
     def test_prompt(self):
-        mysec_map.input = lambda x: ""
+        self.monkeypatch.setattr(
+            "builtins.input", lambda x: "")
         self.assertEqual(
             mysec_map.prompt_region_ids_for_looking_state_change(), [])
-        mysec_map.input = lambda x: "1010, 2020"
+        self.monkeypatch.setattr(
+            "builtins.input", lambda x: "1010, 2020")
         self.assertEqual(
             mysec_map.prompt_region_ids_for_looking_state_change(),
             [1010, 2020])

@@ -13,10 +13,12 @@ class TestInitiation(unittest.TestCase):
         self.db_name = "tests/Test_add.db"
 
     def setUp(self):
-        volunteer_add.Position.db_name = self.db_name
-        volunteer_add.Volunteer.db_name = self.db_name
-        init_db.init_db(self.data_path, self.db_name)
         self.monkeypatch = MonkeyPatch()
+        self.monkeypatch.setattr(
+            "volunteer_add.Position.db_name", self.db_name)
+        self.monkeypatch.setattr(
+            "volunteer_add.Volunteer.db_name", self.db_name)
+        init_db.init_db(self.data_path, self.db_name)
 
     def tearDown(self):
         self.monkeypatch.undo()

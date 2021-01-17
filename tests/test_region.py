@@ -1,6 +1,8 @@
 import unittest
 import os
-from utils.region import Region
+from utils import region
+from region import Region
+from _pytest.monkeypatch import MonkeyPatch
 
 
 class TestInitiation(unittest.TestCase):
@@ -11,10 +13,12 @@ class TestInitiation(unittest.TestCase):
         self.db_name = "tests/Test.db"
 
     def setUp(self):
-        Region.db_name = self.db_name
+        self.monkeypatch = MonkeyPatch()
+        self.monkeypatch.setattr(
+            "region.Region.db_name", self.db_name)
 
     def tearDown(self):
-        pass
+        self.monkeypatch.undo()
 
     def test_region_accessibility(self):
         reg = Region(
