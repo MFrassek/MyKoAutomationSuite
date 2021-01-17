@@ -52,7 +52,7 @@ class Position(DatabaseEntry):
     def end_date(self, end_date: str):
         assert isinstance(end_date, str), \
             "'end_date' can only be set to type string."
-        assert re.match("\\d{4}-\\d{2}-\\d{2}", end_date), \
+        assert end_date == "" or re.match("\\d{4}-\\d{2}-\\d{2}", end_date), \
             "'end_date' does not match data format YYYY-MM-DD"
         self._end_date = end_date
 
