@@ -78,6 +78,23 @@ class UserInteraction():
     def post_about_update_start():
         print("\nPrompting for new values of all mutable attributes:")
 
+    @staticmethod
+    def post_volunteer_details(volunteer):
+        print(f"Name: {volunteer.name}")
+        print(f"Gender: {volunteer.gender}")
+        print(f"Bith date: {volunteer.birth_date}")
+        print("Positions:")
+        for position in volunteer.positions:
+            print(f"\t{position}")
+
+    @staticmethod
+    def post_position_details(position):
+        print(f"Title: {position.title}")
+        print(f"Held by: {position.held_by}")
+        print(f"Region: {position.region_name}")
+        print(f"Start date: {position.start_date}")
+        print(f"End date: {position.end_date}")
+
 
 def string_follows_input_pattern(string, data_type):
     data_type_patterns = {
