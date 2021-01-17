@@ -1,5 +1,4 @@
 import unittest
-import os
 from utils import userPrompt
 from utils.userPrompt import UserPrompt
 from _pytest.monkeypatch import MonkeyPatch
@@ -8,9 +7,6 @@ from _pytest.monkeypatch import MonkeyPatch
 class TestUserPrompt(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestUserPrompt, self).__init__(*args, **kwargs)
-        self.data_path = "{}/test_data".format(
-            os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "tests/Test.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()

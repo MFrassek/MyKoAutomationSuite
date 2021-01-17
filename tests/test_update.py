@@ -11,15 +11,15 @@ class TestUpdate(unittest.TestCase):
         super(TestUpdate, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "tests/Test_update.db"
+        self.db_name = "tests/Test.db"
 
     def setUp(self):
-        init_db.init_db(self.data_path, self.db_name)
         self.monkeypatch = MonkeyPatch()
         generator = (ele for ele in ["Münster", "2020-01-01", "", ""])
         self.monkeypatch.setattr(
             "volunteer_update_position.Position.db_name", self.db_name)
         self.monkeypatch.setattr("builtins.input", lambda x: next(generator))
+        init_db.init_db(self.data_path, self.db_name)
         volunteer_add.add_new_position("MYSec", "Test Person")
 
     def tearDown(self):

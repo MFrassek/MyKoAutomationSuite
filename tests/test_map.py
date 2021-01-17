@@ -3,6 +3,7 @@ import os
 from utils import mysec_map
 from bs4 import BeautifulSoup
 from _pytest.monkeypatch import MonkeyPatch
+from utils import init_db
 
 
 class TestMap(unittest.TestCase):
@@ -18,6 +19,10 @@ class TestMap(unittest.TestCase):
             "mysec_map.Region.db_name", self.db_name)
         self.monkeypatch.setattr(
             "mysec_map.Position.db_name", self.db_name)
+        init_db.init_db(self.data_path, self.db_name)
+        mysec_map.Region(2050, "Münster", "muenster", "moment", 1).add_to_db()
+        mysec_map.Position("MYSec", "Münster", "Test P", "2020-01-01", "")\
+            .add_to_db()
 
     def tearDown(self):
         self.monkeypatch.undo()

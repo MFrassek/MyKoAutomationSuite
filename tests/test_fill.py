@@ -2,6 +2,7 @@ import unittest
 import os
 from utils import fill_db
 from utils import helper
+from utils import init_db
 
 
 class TestDbFill(unittest.TestCase):
@@ -9,9 +10,10 @@ class TestDbFill(unittest.TestCase):
         super(TestDbFill, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "tests/Test_init.db"
+        self.db_name = "tests/Test.db"
 
     def setUp(self):
+        init_db.init_db(self.data_path, self.db_name)
         self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):

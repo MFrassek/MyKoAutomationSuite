@@ -3,6 +3,7 @@ import os
 from utils import region
 from region import Region
 from _pytest.monkeypatch import MonkeyPatch
+from utils import init_db
 
 
 class TestRegion(unittest.TestCase):
@@ -16,6 +17,13 @@ class TestRegion(unittest.TestCase):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "region.Region.db_name", self.db_name)
+        init_db.init_db(self.data_path, self.db_name)
+        Region(1020, "Kiel", "kiel", "minsh", 1).add_to_db()
+        Region(1030, "Hamburg", "hamburg", "hamlet", 1).add_to_db()
+        Region(1040, "Nordwest", "nordwest", "bremensie", 1).add_to_db()
+        Region(2050, "Münster", "muenster", "moment", 1).add_to_db()
+        Region(8005, "Aschaffenburg", "aschaffenburg", "fragment", 1)\
+            .add_to_db()
 
     def tearDown(self):
         self.monkeypatch.undo()
@@ -62,9 +70,9 @@ class TestRegion(unittest.TestCase):
             hash(Region(2, "A", "B", "C", True)))
 
     def test_region_factory_methods(self):
-        self.assertEqual(len(Region.create_all()), 40)
+        self.assertEqual(len(Region.create_all()), 5)
         self.assertEqual(len(Region.create_all_fitting_data(
-            [["region_id", ">", "4000"]])), 27)
+            [["region_id", ">", "4000"]])), 1)
         self.assertEqual(Region.create_by_name("Münster").id, 2050)
         self.assertEqual(Region.create_by_id("8005").name, "Aschaffenburg")
 
@@ -81,7 +89,4 @@ class TestRegion(unittest.TestCase):
         reg.update_in_db()
         reg = Region.create_by_name("Hamburg")
         new_looking_state = reg.looking_state
-        print(str(original_looking_state) + " " + str(new_looking_state))
-        reg.looking_state = original_looking_state
-        reg.update_in_db()
         self.assertNotEqual(original_looking_state, new_looking_state)

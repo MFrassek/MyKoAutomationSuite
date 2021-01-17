@@ -10,7 +10,7 @@ class TestAdd(unittest.TestCase):
         super(TestAdd, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "tests/Test_add.db"
+        self.db_name = "tests/Test.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
