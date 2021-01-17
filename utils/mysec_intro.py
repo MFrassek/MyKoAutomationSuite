@@ -43,7 +43,7 @@ def make_format_variable_dicts(
         "Vorname": volunteer.first_name,
         "Amtsantritt": position.start_date_ddmmyyyy,
         "Mailadresse": region.mysec_mail_address,
-        "MYSecAbgelöst": input("Name of former MYSec: "),
+        "MYSecAbgelöst": UserInteraction.get_former_mysec_name(),
         "AlleVeranstalter": input("All organizers: "),
         "VorstellungStart": intro_first_line,
         "VorstellungText": intro_remaining_text,

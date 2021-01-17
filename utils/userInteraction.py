@@ -58,6 +58,13 @@ class UserInteraction():
                 return position_id
 
     @staticmethod
+    def get_former_mysec_name():
+        while True:
+            mysec_name = input("Name of former MYSec [a-üA-Ü ,-]:\n")
+            if string_follows_input_pattern(mysec_name, "name"):
+                return mysec_name
+
+    @staticmethod
     def specify_command():
         return [input(
             "Specify 'keyword name' 'comparator' 'argument'\n").split(" ")]
