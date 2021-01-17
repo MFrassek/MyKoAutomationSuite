@@ -57,6 +57,21 @@ class UserPrompt():
             if string_follows_input_pattern(position_id, "id"):
                 return position_id
 
+    @staticmethod
+    def specify_command():
+        return [input(
+            "Specify 'keyword name' 'comparator' 'argument'\n").split(" ")]
+
+    @staticmethod
+    def select_from_options(options: super(list)):
+        if len(options) == 1:
+            return options[0]
+        else:
+            for i, option in enumerate(options):
+                print(str(i) + ": " + str(option))
+            selected_index = int(input("Select number:\n"))
+        return options[selected_index]
+
 
 def string_follows_input_pattern(string, data_type):
     data_type_patterns = {
