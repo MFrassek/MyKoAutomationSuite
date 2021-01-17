@@ -5,13 +5,13 @@ from helper import get_relative_path_to_script
 from person import Volunteer
 from position import Position
 from region import Region
-from userPrompt import UserPrompt
+from userInteraction import UserInteraction
 
 
 def get_target_volunteer():
     volunteers = Volunteer.create_all_fitting_data(
-        UserPrompt.specify_command())
-    return UserPrompt.select_from_options(volunteers)
+        UserInteraction.specify_command())
+    return UserInteraction.select_from_options(volunteers)
 
 
 def get_target_region(position: Position):
@@ -20,7 +20,7 @@ def get_target_region(position: Position):
 
 def make_mysec_intro():
     volunteer = get_target_volunteer()
-    position = UserPrompt.select_from_options(volunteer.positions)
+    position = UserInteraction.select_from_options(volunteer.positions)
     region = get_target_region(position)
     intro_format_variables, mail_format_variables = \
         make_format_variable_dicts(volunteer, position, region)

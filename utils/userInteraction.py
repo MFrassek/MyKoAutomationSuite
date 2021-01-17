@@ -1,7 +1,7 @@
 import re
 
 
-class UserPrompt():
+class UserInteraction():
     @staticmethod
     def get_volunteer_name():
         while True:

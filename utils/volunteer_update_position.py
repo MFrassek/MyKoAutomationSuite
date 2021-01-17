@@ -1,12 +1,13 @@
-from userPrompt import UserPrompt
+from userInteraction import UserInteraction
 from position import Position
 
 
 def update_position():
-    position = UserPrompt.select_from_options(
-        Position.create_all_held_positions(UserPrompt.get_volunteer_name()))
-    UserPrompt.inform_about_update_start()
-    position.end_date = UserPrompt.get_end_date()
+    position = UserInteraction.select_from_options(
+        Position.create_all_held_positions(
+            UserInteraction.get_volunteer_name()))
+    UserInteraction.inform_about_update_start()
+    position.end_date = UserInteraction.get_end_date()
     position.update_in_db()
 
 
