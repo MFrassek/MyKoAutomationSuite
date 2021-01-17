@@ -33,6 +33,10 @@ class Person(DatabaseEntry):
     def first_name(self):
         return self._name.split(" ")[0]
 
+    @property
+    def base_name(self):
+        return self._name.replace(" ", "_")
+
 
 class Volunteer(Person):
     def __init__(

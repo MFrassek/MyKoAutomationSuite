@@ -35,9 +35,8 @@ def make_mysec_intro():
 def make_format_variable_dicts(
         volunteer: Volunteer, position: Position, region: Region):
     mysecAddress = f"mysec-{region.mail_name}@mensa.de"
-    basename = volunteer.name.replace(" ", "_")
     intro_first_line, intro_remaining_text = \
-        get_intro_first_line_and_remaining_text(basename)
+        get_intro_first_line_and_remaining_text(volunteer.base_name)
     intro_format_variables = {
         "Geschlecht": volunteer.gender,
         "Gebiet": position.region,
@@ -49,7 +48,7 @@ def make_format_variable_dicts(
         "AlleVeranstalter": input("All organizers: "),
         "VorstellungStart": intro_first_line,
         "VorstellungText": intro_remaining_text,
-        "BildPfad": get_path_to_picture(basename)}
+        "BildPfad": get_path_to_picture(volunteer.base_name)}
     mail_format_variables = {
         "Gebiet": position.region,
         "Name": volunteer.name,
