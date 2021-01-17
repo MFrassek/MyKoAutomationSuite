@@ -2,10 +2,9 @@ weekends.txt
 **/participants/*
 **/intros/*
 MY-Ko.db
-Test_init.db
+Test.db
 to-do.txt
 MYSec_map.png
-tests/utils
 **/__pycache__/
 *.pdf
 *.png
