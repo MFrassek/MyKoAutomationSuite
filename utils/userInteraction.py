@@ -95,6 +95,14 @@ class UserInteraction():
         print(f"Start date: {position.start_date}")
         print(f"End date: {position.end_date}")
 
+    @staticmethod
+    def post_region_details(region):
+        print(f"Id: {region.id}")
+        print(f"Region name: {region.name}")
+        print(f"Mail name: {region.mail_name}")
+        print(f"Magazine name: {region.magazine_name}")
+        print(f"Looking state: {region.looking_state}")
+
 
 def string_follows_input_pattern(string, data_type):
     data_type_patterns = {
