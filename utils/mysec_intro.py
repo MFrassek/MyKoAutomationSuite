@@ -22,21 +22,22 @@ def make_mysec_intro():
     volunteer = get_target_volunteer()
     position = UserInteraction.select_from_options(volunteer.positions)
     region = get_target_region(position)
-    intro_format_variables, mail_format_variables = \
-        make_format_variable_dicts(volunteer, position, region)
-    basename = volunteer.name.replace(" ", "_")
-    generate_tex_file_from_template(basename, intro_format_variables)
-    generate_pdf_from_tex_file(basename)
-    generate_pdf_from_tex_file(basename)
-    remove_byproduct_files(basename)
-    print(generate_mail_text_from_template(basename, mail_format_variables))
+    generate_tex_file_from_template(
+        volunteer.base_name,
+        make_file_format_variables(volunteer, position, region))
+    generate_pdf_from_tex_file(volunteer.base_name)
+    generate_pdf_from_tex_file(volunteer.base_name)
+    remove_byproduct_files(volunteer.base_name)
+    print(generate_mail_text_from_template(
+        volunteer.base_name,
+        make_mail_format_variables(volunteer, position, region)))
 
 
-def make_format_variable_dicts(
+def make_file_format_variables(
         volunteer: Volunteer, position: Position, region: Region):
     intro_first_line, intro_remaining_text = \
         get_intro_first_line_and_remaining_text(volunteer.base_name)
-    intro_format_variables = {
+    file_format_variables = {
         "Geschlecht": volunteer.gender,
         "Gebiet": position.region,
         "Name": volunteer.name,
@@ -48,13 +49,18 @@ def make_format_variable_dicts(
         "VorstellungStart": intro_first_line,
         "VorstellungText": intro_remaining_text,
         "BildPfad": get_path_to_picture(volunteer.base_name)}
+    return file_format_variables
+
+
+def make_mail_format_variables(
+        volunteer: Volunteer, position: Position, region: Region):
     mail_format_variables = {
         "Gebiet": position.region,
         "Name": volunteer.name,
         "Vorname": volunteer.first_name,
         "Pronomen": volunteer.pronoun,
         "Mailadresse": region.mysec_mail_address}
-    return intro_format_variables, mail_format_variables
+    return mail_format_variables
 
 
 def get_intro_first_line_and_remaining_text(basename):
