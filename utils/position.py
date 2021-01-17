@@ -77,6 +77,15 @@ class Position(DatabaseEntry):
         disconnect_from_db(conn)
         return result
 
+    @classmethod
+    def create_all_held_positions(cls, held_by: str):
+        all_titles_in_use = ["MYSec"]
+        positions = []
+        for title in all_titles_in_use:
+            positions.extend(cls.create_all_fitting_data(
+                [["held_by", "=", held_by]], title=title))
+        return positions
+
     def get_insertion_command(self):
         if self._position_id:
             return f"""INSERT INTO {

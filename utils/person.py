@@ -31,7 +31,7 @@ class Volunteer(Person):
             self, name: str, gender: str, birth_date: str):
         super(Volunteer, self).__init__(
             name=name, gender=gender, birth_date=birth_date)
-        self._positions = self.get_held_positions()
+        self._positions = tuple(Position.create_all_held_positions(self._name))
 
     def __repr__(self):
         return "Volunteer " + super().__repr__() + "\n\t" \
@@ -40,14 +40,6 @@ class Volunteer(Person):
     @property
     def positions(self):
         return self._positions
-
-    def get_held_positions(self):
-        all_titles_in_use = ["MYSec"]
-        positions = []
-        for title in all_titles_in_use:
-            positions.extend(Position.create_all_fitting_data(
-                [["held_by", "=", self._name]], title=title))
-        return tuple(positions)
 
     @classmethod
     def create_from_db_data_tuple(cls, data_tuple: tuple):
