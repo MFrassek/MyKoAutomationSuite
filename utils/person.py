@@ -29,6 +29,10 @@ class Person(DatabaseEntry):
     def pronoun(self):
         return get_pronoun_from_gender(self._gender)
 
+    @property
+    def first_name(self):
+        return self._name.split(" ")[0]
+
 
 class Volunteer(Person):
     def __init__(

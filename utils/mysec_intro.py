@@ -34,7 +34,6 @@ def make_mysec_intro():
 
 def make_format_variable_dicts(
         volunteer: Volunteer, position: Position, region: Region):
-    firstName = volunteer.name.split(" ")[0]
     mysecAddress = f"mysec-{region.mail_name}@mensa.de"
     basename = volunteer.name.replace(" ", "_")
     intro_first_line, intro_remaining_text = \
@@ -43,7 +42,7 @@ def make_format_variable_dicts(
         "Geschlecht": volunteer.gender,
         "Gebiet": position.region,
         "Name": volunteer.name,
-        "Vorname": firstName,
+        "Vorname": volunteer.first_name,
         "Amtsantritt": convert_YYYYMMDD_to_DDMMYYYY_date(position.start_date),
         "Mailadresse": mysecAddress,
         "MYSecAbgelöst": input("Name of former MYSec: "),
@@ -54,7 +53,7 @@ def make_format_variable_dicts(
     mail_format_variables = {
         "Gebiet": position.region,
         "Name": volunteer.name,
-        "Vorname": firstName,
+        "Vorname": volunteer.first_name,
         "Pronomen": volunteer.pronoun,
         "Mailadresse": mysecAddress}
     return intro_format_variables, mail_format_variables
