@@ -75,7 +75,7 @@ class UserInteraction():
         return options[selected_index]
 
     @staticmethod
-    def inform_about_update_start():
+    def post_about_update_start():
         print("\nPrompting for new values of all mutable attributes:")
 
 
