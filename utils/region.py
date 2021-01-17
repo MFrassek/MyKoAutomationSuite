@@ -50,6 +50,11 @@ class Region(DatabaseEntry):
             "'looking_state' must be either 0 or 1"
         self._looking_state = looking_state
 
+    @property
+    def mysec_mail_address(self):
+        return f"mysec-{self._mail_name}@mensa.de"
+
+
     @classmethod
     def create_from_db_data_tuple(cls, data_tuple: tuple):
         return cls(*data_tuple)
