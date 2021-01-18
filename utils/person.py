@@ -13,6 +13,17 @@ class Person(DatabaseEntry):
         return f"{self._name}, gender: {self._gender}, " \
             + f"born: {self._birth_date}"
 
+    def __hash__(self):
+        return hash(self._name) ^ hash(self._gender) ^ hash(self._birth_date)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.name == other.name \
+                and self.gender == other.gender \
+                and self.birth_date == other.birth_date
+        else:
+            return False
+
     @property
     def name(self):
         return self._name
