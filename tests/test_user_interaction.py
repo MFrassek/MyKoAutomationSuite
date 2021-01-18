@@ -2,6 +2,9 @@ import unittest
 from utils import userInteraction
 from utils.userInteraction import UserInteraction
 from _pytest.monkeypatch import MonkeyPatch
+from utils.person import Volunteer
+from utils.position import Position
+from utils.region import Region
 
 
 class TestUserInteraction(unittest.TestCase):
@@ -61,3 +64,33 @@ class TestUserInteraction(unittest.TestCase):
         self.monkeypatch.setattr("builtins.input", lambda x: next(generator))
         position_id = UserInteraction.get_position_id()
         self.assertEqual(position_id, "1")
+
+    def test_post_volunteer(self):
+        printed_statements = []
+        self.monkeypatch.setattr(
+            "builtins.print", lambda x: printed_statements.append(x))
+        UserInteraction.post_volunteer_details(
+            Volunteer("M M", "m", "1999-09-09"))
+        self.assertEqual(
+            printed_statements,
+            ["Name: M M", "Gender: m", "Birth date: 1999-09-09", "Positions:"])
+
+    def test_post_position(self):
+        printed_statements = []
+        self.monkeypatch.setattr(
+            "builtins.print", lambda x: printed_statements.append(x))
+        UserInteraction.post_position_details(
+            Position("MYSec", "Sachsen", "M Q", "2019-03-30"))
+        self.assertEqual(
+            printed_statements,
+            ["Title: MYSec", "Held by: M Q", "Region: Sachsen", "Start date: 2019-03-30", "End date: "])
+
+    def test_post_region(self):
+        printed_statements = []
+        self.monkeypatch.setattr(
+            "builtins.print", lambda x: printed_statements.append(x))
+        UserInteraction.post_region_details(
+            Region("1000", "Test", "test", "Testana", 1))
+        self.assertEqual(
+            printed_statements,
+            ["Id: 1000", "Region name: Test", "Mail name: test", "Magazine name: Testana", "Looking state: 1"])
