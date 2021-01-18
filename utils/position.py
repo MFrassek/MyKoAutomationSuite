@@ -24,6 +24,20 @@ class Position(DatabaseEntry):
             return f"{self._title} {self._region}: Held by {self._held_by}" \
                 + f" since {self._start_date}"
 
+    def __hash__(self):
+        return hash(self._title) ^ hash(self._held_by) ^ hash(self._region) \
+            ^ hash(self._start_date) ^ hash(self._end_date)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            return self.title == other.title \
+                and self.held_by == other.held_by \
+                and self.region == other.region \
+                and self.start_date == other.start_date \
+                and self.end_date == other.end_date
+        else:
+            return False
+
     @property
     def title(self):
         return self._title
