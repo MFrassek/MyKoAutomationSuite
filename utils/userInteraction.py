@@ -89,7 +89,7 @@ class UserInteraction():
     def post_volunteer_details(volunteer):
         print(f"Name: {volunteer.name}")
         print(f"Gender: {volunteer.gender}")
-        print(f"Bith date: {volunteer.birth_date}")
+        print(f"Birth date: {volunteer.birth_date}")
         print("Positions:")
         for position in volunteer.positions:
             print(f"\t{position}")
