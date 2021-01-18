@@ -98,7 +98,7 @@ class UserInteraction():
     def post_position_details(position):
         print(f"Title: {position.title}")
         print(f"Held by: {position.held_by}")
-        print(f"Region: {position.region_name}")
+        print(f"Region: {position.region}")
         print(f"Start date: {position.start_date}")
         print(f"End date: {position.end_date}")
 
