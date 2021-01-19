@@ -1,18 +1,19 @@
 from helper import connect_to_db, disconnect_from_db, \
     get_relative_path_to_script
 import csv
+from regionPopulator import RegionPopulator
 
 
 def fill_db(data_path, db_name):
     conn, c = connect_to_db(db_name)
     populate_all_tables(data_path, c)
     disconnect_from_db(conn)
+    RegionPopulator().populate_table()
 
 
 def populate_all_tables(data_path, c):
     populate_table_weekends(data_path, c)
     populate_table_participants_and_table_weekend_participant(data_path, c)
-    populate_table_regions(data_path, c)
 
 
 def populate_table_weekends(data_path, c):
@@ -85,23 +86,6 @@ def add_entry_to_table_weekend_participant(c, participant_info, weekend_id):
             VALUES ('{}', '{}')""".format(
                 weekend_id,
                 extract_participant_name_from_csv_row(participant_info)))
-
-
-def populate_table_regions(data_path, c):
-    for region_info in read_info_regions(data_path):
-        add_entry_to_table_region(c, region_info)
-
-
-def read_info_regions(data_path):
-    with open("{}/LocSecRegions.txt".format(data_path), "r")\
-            as all_region_file:
-        result = all_region_file.readlines()
-    return result
-
-
-def add_entry_to_table_region(c, region_info):
-    c.execute(
-        "INSERT INTO regions VALUES ({}, True)".format(region_info))
 
 
 if __name__ == '__main__':
