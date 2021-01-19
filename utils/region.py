@@ -90,8 +90,8 @@ class Region(DatabaseEntry):
         return cls.create_all_fitting_data([["region", "=", name]])[0]
 
     @classmethod
-    def create_by_id(cls, id_: str):
-        return cls.create_all_fitting_data([["region_id", "=", id_]])[0]
+    def create_by_id(cls, id_: int):
+        return cls.create_all_fitting_data([["region_id", "=", str(id_)]])[0]
 
     def update_in_db(self):
         conn, c = connect_to_db(self.__class__.db_name)
