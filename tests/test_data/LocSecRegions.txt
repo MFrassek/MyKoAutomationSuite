@@ -5,7 +5,7 @@
 2010	Hannover	hannover	muh-q
 2015	Braunschweig	braunschweig	muh-q
 2020	Göttingen, Kassel	goettingen-kassel	muh-q
-2030	OWL	owl	INAKTIV
+2030	Ostwestfalen-Lippe	owl	INAKTIV
 2050	Münster	muenster	moment
 3010	Berlin und Brandenburg	berlin	milljoeh
 3020	Sachsen	sachsen	zwingergeister
