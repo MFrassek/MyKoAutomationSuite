@@ -18,11 +18,11 @@ class TestRegion(unittest.TestCase):
         self.monkeypatch.setattr(
             "region.Region.db_name", self.db_name)
         init_db.init_db(self.data_path, self.db_name)
-        Region(1020, "Kiel", "kiel", "minsh", 1).add_to_db()
-        Region(1030, "Hamburg", "hamburg", "hamlet", 1).add_to_db()
-        Region(1040, "Nordwest", "nordwest", "bremensie", 1).add_to_db()
-        Region(2050, "Münster", "muenster", "moment", 1).add_to_db()
-        Region(8005, "Aschaffenburg", "aschaffenburg", "fragment", 1)\
+        Region(1020, "Kiel", "kiel", "minsh", 3, 1, 1).add_to_db()
+        Region(1030, "Hamburg", "hamburg", "hamlet", 5, 2, 1).add_to_db()
+        Region(1040, "Nordwest", "nordwest", "bremensie", 10, 1, 1).add_to_db()
+        Region(2050, "Münster", "muenster", "moment", 0, 0, 1).add_to_db()
+        Region(8005, "Aschaffenburg", "aschaffenburg", "fragment", 1, 1, 1)\
             .add_to_db()
 
     def tearDown(self):
@@ -31,17 +31,19 @@ class TestRegion(unittest.TestCase):
     def test_region_accessibility(self):
         reg = Region(
             id_=1, name="Münster", mail_name="ms",
-            magazine_name="mo", looking_state=True)
+            magazine_name="mo", m_count=5, my_count=3, looking_state=True)
         self.assertEqual(reg.id, 1)
         self.assertEqual(reg.name, "Münster")
         self.assertEqual(reg.mail_name, "ms")
         self.assertEqual(reg.magazine_name, "mo")
+        self.assertEqual(reg.m_count, 5)
+        self.assertEqual(reg.my_count, 3)
         self.assertEqual(reg.looking_state, 1)
 
     def test_region_mutability(self):
         reg = Region(
             id_=1, name="Münster", mail_name="ms",
-            magazine_name="mo", looking_state=True)
+            magazine_name="mo", m_count=5, my_count=3, looking_state=True)
         reg.looking_state = 0
         self.assertEqual(reg.looking_state, 0)
         with self.assertRaises(AttributeError):
@@ -52,22 +54,26 @@ class TestRegion(unittest.TestCase):
             reg.mail_name = "New"
         with self.assertRaises(AttributeError):
             reg.magazine_name = "New"
+        with self.assertRaises(AttributeError):
+            reg.m_count = 7
+        with self.assertRaises(AttributeError):
+            reg.my_count = 1
 
     def test_region_equal(self):
         self.assertEqual(
-            Region(1, "A", "B", "C", True),
-            Region(1, "D", "E", "F", False))
+            Region(1, "A", "B", "C", 1, 1, True),
+            Region(1, "D", "E", "F", 2, 3, False))
         self.assertNotEqual(
-            Region(1, "A", "B", "C", True),
-            Region(2, "A", "B", "C", True))
+            Region(1, "A", "B", "C", 1, 1, True),
+            Region(2, "A", "B", "C", 1, 1, True))
 
     def test_region_hash(self):
         self.assertEqual(
-            hash(Region(1, "A", "B", "C", True)),
-            hash(Region(1, "D", "E", "F", False)))
+            hash(Region(1, "A", "B", "C", 1, 1, True)),
+            hash(Region(1, "D", "E", "F", 2, 3, False)))
         self.assertNotEqual(
-            hash(Region(1, "A", "B", "C", True)),
-            hash(Region(2, "A", "B", "C", True)))
+            hash(Region(1, "A", "B", "C", 1, 1, True)),
+            hash(Region(2, "A", "B", "C", 1, 1, True)))
 
     def test_region_factory_methods(self):
         self.assertEqual(len(Region.create_all()), 5)
@@ -79,8 +85,8 @@ class TestRegion(unittest.TestCase):
     def test_get_details_fitting_data(self):
         self.assertEqual(
             Region.get_details_fitting_data([["region_id", "<=", "1030"]]),
-            [(1020, "Kiel", "kiel", "minsh", 1),
-             (1030, "Hamburg", "hamburg", "hamlet", 1)])
+            [(1020, "Kiel", "kiel", "minsh", 3, 1, 1),
+             (1030, "Hamburg", "hamburg", "hamlet", 5, 2, 1)])
 
     def test_update_db(self):
         reg = Region.create_by_name("Hamburg")

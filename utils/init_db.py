@@ -63,6 +63,8 @@ def create_table_regions(c):
             regionName text PRIMARY KEY NOT NULL,
             regionMailName text NOT NULL,
             magazineName text NOT NULL,
+            mCount integer NOT NULL,
+            myCount integer NOT NULL,
             looking boolean NOT NULL);""")
 
 

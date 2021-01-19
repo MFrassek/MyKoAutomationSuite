@@ -39,7 +39,9 @@ class DatabaseEntry(abc.ABC):
             "start_date": "startDate",
             "end_date": "endDate",
             "position_id": "positionId",
-            "region_id": "regionId"}
+            "region_id": "regionId",
+            "m_count": "mCount",
+            "my_count": "myCount"}
         return argument_name_to_column_name[argument_name]
 
     @staticmethod
