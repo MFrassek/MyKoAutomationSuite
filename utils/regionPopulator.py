@@ -24,7 +24,10 @@ class RegionPopulator():
                 encoding='latin1', newline="") as M_region_file:
             home_regions = csv.reader(M_region_file)
             flattened_home_regions = [y for x in home_regions for y in x]
-        return collections.Counter(flattened_home_regions)
+            patched_home_regions = \
+                ["Ruhrgebiet" if x.startswith("Ruhrgebiet") else x
+                 for x in flattened_home_regions]
+        return collections.Counter(patched_home_regions)
 
     def populate_table(self):
         for region in self._region_data:
