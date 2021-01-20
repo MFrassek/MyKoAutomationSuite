@@ -28,6 +28,13 @@ def generate_m_count_map(data_path, output_path):
         output_path)
 
 
+def generate_my_count_map(data_path, output_path):
+    generate_mysec_map(
+        data_path,
+        change_fill_color_all_regions_based_on_my_count,
+        output_path)
+
+
 def generate_mysec_map(data_path, coloring_function, output_path):
     soup = get_wellformed_soup_from_svg_file(data_path)
     coloring_function(soup)
@@ -75,6 +82,14 @@ def change_fill_color_all_regions_based_on_m_count(soup):
                 region.m_count / max_m_count))
 
 
+def change_fill_color_all_regions_based_on_my_count(soup):
+    max_my_count = get_max_my_count_for_all_regions()
+    for region in Region.create_all():
+        change_fill_color_of_path(
+            soup, region.name, get_region_count_fraction_color(
+                region.my_count / max_my_count))
+
+
 def print_current_looking_state_of_regions():
     for region in Region.create_all():
         print(f"{region.id}\t{region.looking_state}\t{region.name}")
@@ -118,6 +133,13 @@ def get_max_m_count_for_all_regions():
     return region_with_max_m_count.m_count
 
 
+def get_max_my_count_for_all_regions():
+    all_regions = Region.create_all()
+    region_with_max_my_count = functools.reduce(
+        lambda a, b: a if a.my_count > b.my_count else b, all_regions)
+    return region_with_max_my_count.my_count
+
+
 def change_fill_color_of_path(soup, id, fill_color):
     region_path_tag = soup("path", {"id": id})[0]
     region_style_attribute = region_path_tag["style"]
@@ -152,3 +174,4 @@ if __name__ == '__main__':
     generate_mysec_presence_map(data_path, "MYSec_presence_map.png")
     generate_looking_state_map(data_path, "MYSec_map.png")
     generate_m_count_map(data_path, "M_density_map.png")
+    generate_my_count_map(data_path, "MY_density_map.png")
