@@ -5,22 +5,32 @@ from region import Region
 
 
 class RegionPopulator():
-    def __init__(self):
-        self._data_path = get_relative_path_to_script() + "/data"
-        self._region_data = self.get_region_data_from_file()
-        self._M_counter = self.get_region_counter_from_file("Ms_in_regions.csv")
-        self._MY_counter = self.get_region_counter_from_file("MYs_in_regions.csv")
+    data_path = get_relative_path_to_script() + "/data"
 
-    def get_region_data_from_file(self):
-        with open(f"{self._data_path}/LocSecRegions.txt", "r") \
+    @classmethod
+    def populate_table(cls):
+        region_data = cls.get_region_data_from_file()
+        m_counter = cls.get_region_counter_from_file("Ms_in_regions.csv")
+        my_counter = cls.get_region_counter_from_file("MYs_in_regions.csv")
+        for region in region_data:
+            region_name = region[1]
+            reg = Region(
+                *region, m_counter[region_name],
+                my_counter[region_name], True)
+            reg.add_to_db()
+
+    @classmethod
+    def get_region_data_from_file(cls):
+        with open(f"{cls.data_path}/LocSecRegions.txt", "r") \
                 as all_region_file:
             result = [line[:-1].split("\t") for line
                       in all_region_file.readlines()]
         return result
 
-    def get_region_counter_from_file(self, file_name):
+    @classmethod
+    def get_region_counter_from_file(cls, file_name):
         with open(
-                f"{self._data_path}/{file_name}", "r",
+                f"{cls.data_path}/{file_name}", "r",
                 encoding='latin1', newline="") as M_region_file:
             home_regions = csv.reader(M_region_file)
             flattened_home_regions = [y for x in home_regions for y in x]
@@ -28,11 +38,3 @@ class RegionPopulator():
                 ["Ruhrgebiet" if x.startswith("Ruhrgebiet") else x
                  for x in flattened_home_regions]
         return collections.Counter(patched_home_regions)
-
-    def populate_table(self):
-        for region in self._region_data:
-            region_name = region[1]
-            reg = Region(
-                *region, self._M_counter[region_name],
-                self._MY_counter[region_name], True)
-            reg.add_to_db()
