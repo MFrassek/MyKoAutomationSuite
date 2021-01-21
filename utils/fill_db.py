@@ -3,6 +3,7 @@ from helper import connect_to_db, disconnect_from_db, \
 import csv
 from regionPopulator import RegionPopulator
 from volunteerPopulator import VolunteerPopulator
+from positionPopulator import PositionPopulator
 
 
 def fill_db(data_path, db_name):
@@ -11,6 +12,7 @@ def fill_db(data_path, db_name):
     disconnect_from_db(conn)
     RegionPopulator.populate_table()
     VolunteerPopulator.populate_table()
+    PositionPopulator.populate_table()
 
 
 def populate_all_tables(data_path, c):
