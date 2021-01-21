@@ -9,18 +9,19 @@ class RegionPopulator():
 
     @classmethod
     def populate_table(cls):
-        region_data = cls.get_region_data_from_file()
+        region_data = cls.get_data_from_file()
         m_counter = cls.get_region_counter_from_file("Ms_in_regions.csv")
         my_counter = cls.get_region_counter_from_file("MYs_in_regions.csv")
         for region in region_data:
             region_name = region[1]
-            reg = Region(
-                *region, m_counter[region_name],
-                my_counter[region_name], True)
-            reg.add_to_db()
+            Region(
+                id_=region[0], name=region[1], mail_name=region[2],
+                magazine_name=region[3], m_count=m_counter[region_name],
+                my_count=my_counter[region_name], looking_state=True
+                ).add_to_db()
 
     @classmethod
-    def get_region_data_from_file(cls):
+    def get_data_from_file(cls):
         with open(f"{cls.data_path}/LocSecRegions.txt", "r") \
                 as all_region_file:
             result = [line[:-1].split("\t") for line

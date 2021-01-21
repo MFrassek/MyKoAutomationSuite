@@ -7,14 +7,14 @@ class VolunteerPopulator():
 
     @classmethod
     def populate_table(cls):
-        volunteer_data = cls.get_volunteer_data_from_file()
+        volunteer_data = cls.get_data_from_file()
         for volunteer in volunteer_data:
-            vol = Volunteer(
-                *volunteer)
-            vol.add_to_db()
+            Volunteer(
+                name=volunteer[0], gender=volunteer[1],
+                birth_date=volunteer[2]).add_to_db()
 
     @classmethod
-    def get_volunteer_data_from_file(cls):
+    def get_data_from_file(cls):
         with open(f"{cls.data_path}/Volunteers.txt", "r") as volunteer_file:
             result = [line[:-1].split("\t") for line
                       in volunteer_file.readlines()]
