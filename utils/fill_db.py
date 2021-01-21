@@ -2,13 +2,15 @@ from helper import connect_to_db, disconnect_from_db, \
     get_relative_path_to_script
 import csv
 from regionPopulator import RegionPopulator
+from volunteerPopulator import VolunteerPopulator
 
 
 def fill_db(data_path, db_name):
     conn, c = connect_to_db(db_name)
     populate_all_tables(data_path, c)
     disconnect_from_db(conn)
-    RegionPopulator().populate_table()
+    RegionPopulator.populate_table()
+    VolunteerPopulator.populate_table()
 
 
 def populate_all_tables(data_path, c):
