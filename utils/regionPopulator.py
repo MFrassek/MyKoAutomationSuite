@@ -1,12 +1,10 @@
-from helper import get_relative_path_to_script
 import csv
 import collections
+from tablePopulator import TablePopulator
 from region import Region
 
 
-class RegionPopulator():
-    data_path = get_relative_path_to_script() + "/data"
-
+class RegionPopulator(TablePopulator):
     @classmethod
     def populate_table(cls):
         region_data = cls.get_data_from_file()

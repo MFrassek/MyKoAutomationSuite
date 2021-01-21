@@ -1,10 +1,8 @@
-from helper import get_relative_path_to_script
+from tablePopulator import TablePopulator
 from person import Volunteer
 
 
-class VolunteerPopulator():
-    data_path = get_relative_path_to_script() + "/data"
-
+class VolunteerPopulator(TablePopulator):
     @classmethod
     def populate_table(cls):
         volunteer_data = cls.get_data_from_file()

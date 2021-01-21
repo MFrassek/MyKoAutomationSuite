@@ -1,10 +1,8 @@
-from helper import get_relative_path_to_script
+from tablePopulator import TablePopulator
 from position import Position
 
 
-class PositionPopulator():
-    data_path = get_relative_path_to_script() + "/data"
-
+class PositionPopulator(TablePopulator):
     @classmethod
     def populate_table(cls):
         position_data = cls.get_data_from_file()
