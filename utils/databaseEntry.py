@@ -41,7 +41,10 @@ class DatabaseEntry(abc.ABC):
             "position_id": "positionId",
             "region_id": "regionId",
             "m_count": "mCount",
-            "my_count": "myCount"}
+            "my_count": "myCount",
+            "weekend_id": "weekendId",
+            "weekend_name": "weekendName",
+            "weekend_location": "weekendLocation"}
         return argument_name_to_column_name[argument_name]
 
     @staticmethod
