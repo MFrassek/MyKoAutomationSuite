@@ -20,8 +20,8 @@ class TestDbInitiation(unittest.TestCase):
 
     def test_weekend_file_exists(self):
         self.assertTrue(
-            os.path.exists("{}/weekends.txt".format(self.data_path)),
-            "weekends.txt does not exist at expected location")
+            os.path.exists("{}/Weekends.txt".format(self.data_path)),
+            "Weekends.txt does not exist at expected location")
 
     def test_connects_to_db(self):
         self.assertIsInstance(self.conn, sqlite3.Connection)
