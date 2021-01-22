@@ -32,8 +32,8 @@ def create_table_weekends(c):
     c.execute(
         """CREATE TABLE weekends (
             weekendId integer PRIMARY KEY NOT NULL,
-            name text NOT NULL,
-            location text NOT NULL,
+            weekendName text NOT NULL,
+            weekendLocation text NOT NULL,
             startDate date NOT NULL,
             endDate date NOT NULL,
             regionName text NOT NULL);""")

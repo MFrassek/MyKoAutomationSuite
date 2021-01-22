@@ -53,7 +53,7 @@ class TestDbFill(unittest.TestCase):
         fill_db.add_entry_to_table_weekends(
             self.c, "20, 'Name5', 'Place5', '2020-01-10',\
             '2020-01-14', 'Münster'")
-        self.c.execute("""SELECT COUNT(location)
+        self.c.execute("""SELECT COUNT(weekendLocation)
             FROM weekends
-            WHERE location == 'Place5'""")
+            WHERE weekendLocation == 'Place5'""")
         self.assertEqual(self.c.fetchall(), [(1,)])

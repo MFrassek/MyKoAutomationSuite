@@ -56,7 +56,7 @@ def populate_table_participants_and_table_weekend_participant(
 
 def get_weekend_file_names_and_ids(c):
     c.execute(
-        "SELECT startDate || '_' ||name || '.csv', weekendId from weekends")
+        "SELECT startDate || '_' || weekendName || '.csv', weekendId from weekends")
     return c.fetchall()
 
 
