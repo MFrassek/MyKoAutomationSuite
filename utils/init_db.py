@@ -42,7 +42,7 @@ def create_table_weekends(c):
 def create_table_participants(c):
     c.execute(
         """CREATE TABLE participants (
-            participantName text PRIMARY KEY NOT NULL,
+            personName text PRIMARY KEY NOT NULL,
             membershipNr integer DEFAULT 0,
             status text NOT NULL,
             gender text NOT NULL,
@@ -53,7 +53,7 @@ def create_table_weekend_participant(c):
     c.execute(
         """CREATE TABLE weekend_participant (
             weekendId integer NOT NULL,
-            participantName text NOT NULL);""")
+            personName text NOT NULL);""")
 
 
 def create_table_regions(c):
@@ -71,7 +71,7 @@ def create_table_regions(c):
 def create_table_volunteers(c):
     c.execute(
         """CREATE TABLE volunteers(
-            volunteerName text PRIMARY KEY NOT NULL,
+            personName text PRIMARY KEY NOT NULL,
             gender text NOT NULL,
             birthDate date NOT NULL);""")
 
@@ -80,7 +80,7 @@ def create_table_mysecs(c):
     c.execute(
         """CREATE TABLE mysecs(
             positionId integer PRIMARY KEY NOT NULL,
-            volunteerName text NOT NULL,
+            personName text NOT NULL,
             regionName text NOT NULL,
             startDate date NOT NULL,
             endDate date);""")

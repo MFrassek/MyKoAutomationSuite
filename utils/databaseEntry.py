@@ -31,10 +31,10 @@ class DatabaseEntry(abc.ABC):
     def argument_name_to_column_name(argument_name: str):
         argument_name_to_column_name = {
             "": "''",
-            "name": "volunteerName",
+            "name": "personName",
             "birth_date": "birthDate",
             "gender": "gender",
-            "held_by": "volunteerName",
+            "held_by": "personName",
             "region": "regionName",
             "start_date": "startDate",
             "end_date": "endDate",

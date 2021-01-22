@@ -88,7 +88,45 @@ class Volunteer(Person):
 
     def get_insertion_command(self):
         return f"""INSERT INTO volunteers (
-                volunteerName, gender, birthDate)
+                personName, gender, birthDate)
+            VALUES (
+                '{self._name}', '{self._gender}', '{self._birth_date}');"""
+
+
+class Participant(Person):
+    def __init__(
+            self, name: str, gender: str, birth_date: str):
+        super(Participant, self).__init__(
+            name=name, gender=gender, birth_date=birth_date)
+
+    def __repr__(self):
+        return "Participant " + super().__repr__()
+
+    @classmethod
+    def create_from_db_data_tuple(cls, data_tuple: tuple):
+        name, birth_date, gender = data_tuple
+        return cls(name, birth_date, gender)
+
+    @classmethod
+    def get_details_fitting_data(cls, commands: list):
+        assert len(commands) > 0, \
+            "At least one specifying command must be given"
+        conn, c = connect_to_db(cls.db_name)
+        c.execute(
+            """SELECT *
+            FROM participants
+            WHERE """
+            + " AND ".join(
+             [cls.argument_name_to_column_name(command[0])
+              + f" {command[1]} '{' '.join(command[2:])}'"
+              for command in commands]))
+        result = c.fetchall()
+        disconnect_from_db(conn)
+        return result
+
+    def get_insertion_command(self):
+        return f"""INSERT INTO participants (
+                personName, gender, birthDate)
             VALUES (
                 '{self._name}', '{self._gender}', '{self._birth_date}');"""
 

@@ -113,7 +113,7 @@ class Position(DatabaseEntry):
         if self._position_id:
             return f"""INSERT INTO {
                 self.__class__.title_to_table_name(self._title)}(
-                    positionId, volunteerName,
+                    positionId, personName,
                     regionName, startDate, endDate)
                 VALUES (
                     {self._position_id}, '{self._held_by}',
@@ -122,7 +122,7 @@ class Position(DatabaseEntry):
         else:
             return f"""INSERT INTO {
                 self.__class__.title_to_table_name(self._title)}(
-                    volunteerName,
+                    personName,
                     regionName, startDate, endDate)
                 VALUES (
                     '{self._held_by}', '{self._region}', '{self._start_date}',
