@@ -43,8 +43,6 @@ def create_table_participants(c):
     c.execute(
         """CREATE TABLE participants (
             personName text PRIMARY KEY NOT NULL,
-            membershipNr integer DEFAULT 0,
-            status text NOT NULL,
             gender text NOT NULL,
             birthDate date NOT NULL);""")
 
