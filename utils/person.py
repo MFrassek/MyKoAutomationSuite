@@ -53,8 +53,27 @@ class Person(DatabaseEntry):
         name, birth_date, gender = data_tuple
         return cls(name, birth_date, gender)
 
+    @classmethod
+    def get_details_fitting_data(cls, commands: list):
+        assert len(commands) > 0, \
+            "At least one specifying command must be given"
+        conn, c = connect_to_db(cls.db_name)
+        c.execute(
+            f"""SELECT *
+            FROM {cls.table_name}
+            WHERE """
+            + " AND ".join(
+             [cls.argument_name_to_column_name(command[0])
+              + f" {command[1]} '{' '.join(command[2:])}'"
+              for command in commands]))
+        result = c.fetchall()
+        disconnect_from_db(conn)
+        return result
+
 
 class Volunteer(Person):
+    table_name = "volunteers"
+
     def __init__(
             self, name: str, gender: str, birth_date: str):
         super(Volunteer, self).__init__(
@@ -69,23 +88,6 @@ class Volunteer(Person):
     def positions(self):
         return self._positions
 
-    @classmethod
-    def get_details_fitting_data(cls, commands: list):
-        assert len(commands) > 0, \
-            "At least one specifying command must be given"
-        conn, c = connect_to_db(cls.db_name)
-        c.execute(
-            """SELECT *
-            FROM volunteers
-            WHERE """
-            + " AND ".join(
-             [cls.argument_name_to_column_name(command[0])
-              + f" {command[1]} '{' '.join(command[2:])}'"
-              for command in commands]))
-        result = c.fetchall()
-        disconnect_from_db(conn)
-        return result
-
     def get_insertion_command(self):
         return f"""INSERT INTO volunteers (
                 personName, gender, birthDate)
@@ -94,6 +96,8 @@ class Volunteer(Person):
 
 
 class Participant(Person):
+    table_name = "participants"
+
     def __init__(
             self, name: str, gender: str, birth_date: str):
         super(Participant, self).__init__(
@@ -102,22 +106,6 @@ class Participant(Person):
     def __repr__(self):
         return "Participant " + super().__repr__()
 
-    @classmethod
-    def get_details_fitting_data(cls, commands: list):
-        assert len(commands) > 0, \
-            "At least one specifying command must be given"
-        conn, c = connect_to_db(cls.db_name)
-        c.execute(
-            """SELECT *
-            FROM participants
-            WHERE """
-            + " AND ".join(
-             [cls.argument_name_to_column_name(command[0])
-              + f" {command[1]} '{' '.join(command[2:])}'"
-              for command in commands]))
-        result = c.fetchall()
-        disconnect_from_db(conn)
-        return result
 
     def get_insertion_command(self):
         return f"""INSERT INTO participants (
