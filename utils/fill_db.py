@@ -44,7 +44,7 @@ def get_weekend_file_names_and_ids(c):
 def add_entry_to_table_participants(c, participant_info):
     c.execute(
         """INSERT OR REPLACE INTO participants
-            VALUES ('{}', '{}', '{}', '{}', '{}')""".format(
+            VALUES ('{}', '{}', '{}')""".format(
                 *extract_full_participant_info_from_csv_row(participant_info)))
 
 
