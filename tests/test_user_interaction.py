@@ -1,18 +1,30 @@
 import unittest
+import os
 from utils import userInteraction
 from utils.userInteraction import UserInteraction
 from _pytest.monkeypatch import MonkeyPatch
 from utils.person import Volunteer
 from utils.position import Position
 from utils.region import Region
+from utils import init_db
 
 
 class TestUserInteraction(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestUserInteraction, self).__init__(*args, **kwargs)
+        self.data_path = "{}/test_data".format(
+            os.path.dirname(os.path.abspath(__file__)))
+        self.db_name = "tests/Test.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
+        self.monkeypatch.setattr(
+            "person.Person.db_name", self.db_name)
+        self.monkeypatch.setattr(
+            "region.Region.db_name", self.db_name)
+        self.monkeypatch.setattr(
+            "position.Position.db_name", self.db_name)
+        init_db.init_db(self.data_path, self.db_name)
 
     def tearDown(self):
         self.monkeypatch.undo()
