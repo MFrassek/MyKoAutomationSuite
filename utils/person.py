@@ -70,6 +70,12 @@ class Person(DatabaseEntry):
         disconnect_from_db(conn)
         return result
 
+    def get_insertion_command(self):
+        return f"""INSERT INTO {self.__class__.table_name} (
+                personName, gender, birthDate)
+            VALUES (
+                '{self._name}', '{self._gender}', '{self._birth_date}');"""
+
 
 class Volunteer(Person):
     table_name = "volunteers"
@@ -88,12 +94,6 @@ class Volunteer(Person):
     def positions(self):
         return self._positions
 
-    def get_insertion_command(self):
-        return f"""INSERT INTO volunteers (
-                personName, gender, birthDate)
-            VALUES (
-                '{self._name}', '{self._gender}', '{self._birth_date}');"""
-
 
 class Participant(Person):
     table_name = "participants"
@@ -105,13 +105,6 @@ class Participant(Person):
 
     def __repr__(self):
         return "Participant " + super().__repr__()
-
-
-    def get_insertion_command(self):
-        return f"""INSERT INTO participants (
-                personName, gender, birthDate)
-            VALUES (
-                '{self._name}', '{self._gender}', '{self._birth_date}');"""
 
 
 def get_pronoun_from_gender(gender):
