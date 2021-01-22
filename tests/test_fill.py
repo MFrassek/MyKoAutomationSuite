@@ -37,8 +37,8 @@ class TestDbFill(unittest.TestCase):
                      "05.04.1989", "31", "", "", "", "", "", "", "",
                      "Albertlane 5", "10000", "Alberta", "", "Frau", 0, "Ja",
                      "", "", "", "049", "", "Frankfurt"])
-        self.c.execute("""SELECT COUNT(participantName) FROM participants
-            WHERE participantName == 'Zoe Zoes'""")
+        self.c.execute("""SELECT COUNT(personName) FROM participants
+            WHERE personName == 'Zoe Zoes'""")
         self.assertEqual(self.c.fetchall(), [(1,)])
         fill_db.add_entry_to_table_weekend_participant(
             self.c, ["0000000009", "Wohnhaft in Deutschland", "10.01.2018", "",
@@ -46,14 +46,7 @@ class TestDbFill(unittest.TestCase):
                      "05.04.1989", "31", "", "", "", "", "", "", "",
                      "Albertlane 5", "10000", "Alberta", "", "Frau", 0, "Ja",
                      "", "", "", "049", "", "Frankfurt"], 10)
-        self.c.execute("""SELECT COUNT(participantName)
+        self.c.execute("""SELECT COUNT(personName)
             FROM weekend_participant
-            WHERE participantName == 'Zoe Zoes'""")
-        self.assertEqual(self.c.fetchall(), [(1,)])
-        fill_db.add_entry_to_table_weekends(
-            self.c, "20, 'Name5', 'Place5', '2020-01-10',\
-            '2020-01-14', 'Münster'")
-        self.c.execute("""SELECT COUNT(weekendLocation)
-            FROM weekends
-            WHERE weekendLocation == 'Place5'""")
+            WHERE personName == 'Zoe Zoes'""")
         self.assertEqual(self.c.fetchall(), [(1,)])
