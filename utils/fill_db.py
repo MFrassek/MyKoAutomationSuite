@@ -4,6 +4,7 @@ import csv
 from regionPopulator import RegionPopulator
 from volunteerPopulator import VolunteerPopulator
 from positionPopulator import PositionPopulator
+from weekendPopulator import WeekendPopulator
 
 
 def fill_db(data_path, db_name):
@@ -13,31 +14,11 @@ def fill_db(data_path, db_name):
     RegionPopulator.populate_table()
     VolunteerPopulator.populate_table()
     PositionPopulator.populate_table()
+    WeekendPopulator.populate_table()
 
 
 def populate_all_tables(data_path, c):
-    populate_table_weekends(data_path, c)
     populate_table_participants_and_table_weekend_participant(data_path, c)
-
-
-def populate_table_weekends(data_path, c):
-    for weekend_base_info in read_base_info_weekends(
-            data_path):
-        add_entry_to_table_weekends(c, weekend_base_info)
-
-
-def read_base_info_weekends(data_path):
-    with open("{}/weekends.txt".format(
-            data_path),
-            "r") as all_weekend_file:
-        all_weekend_file.readline()
-        result = all_weekend_file.readlines()
-    return result
-
-
-def add_entry_to_table_weekends(c, weekend_base_info):
-    c.execute(
-        "INSERT INTO weekends VALUES ({})".format(weekend_base_info))
 
 
 def populate_table_participants_and_table_weekend_participant(
