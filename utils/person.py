@@ -48,6 +48,11 @@ class Person(DatabaseEntry):
     def base_name(self):
         return self._name.replace(" ", "_")
 
+    @classmethod
+    def create_from_db_data_tuple(cls, data_tuple: tuple):
+        name, birth_date, gender = data_tuple
+        return cls(name, birth_date, gender)
+
 
 class Volunteer(Person):
     def __init__(
@@ -63,11 +68,6 @@ class Volunteer(Person):
     @property
     def positions(self):
         return self._positions
-
-    @classmethod
-    def create_from_db_data_tuple(cls, data_tuple: tuple):
-        name, birth_date, gender = data_tuple
-        return cls(name, birth_date, gender)
 
     @classmethod
     def get_details_fitting_data(cls, commands: list):
@@ -101,11 +101,6 @@ class Participant(Person):
 
     def __repr__(self):
         return "Participant " + super().__repr__()
-
-    @classmethod
-    def create_from_db_data_tuple(cls, data_tuple: tuple):
-        name, birth_date, gender = data_tuple
-        return cls(name, birth_date, gender)
 
     @classmethod
     def get_details_fitting_data(cls, commands: list):
