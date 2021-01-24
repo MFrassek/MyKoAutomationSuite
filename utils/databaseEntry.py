@@ -20,13 +20,13 @@ class DatabaseEntry(abc.ABC):
         pass
 
     @classmethod
-    def get_details_fitting_data(cls, commands: list):
+    def get_details_fitting_data(cls, commands: list, **kwargs):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
         conn, c = connect_to_db(cls.db_name)
         c.execute(
             f"""SELECT *
-            FROM {cls.table_name}
+            FROM {cls.get_table_name(**kwargs)}
             WHERE """
             + " AND ".join(
              [cls.argument_name_to_column_name(command[0])
@@ -35,6 +35,10 @@ class DatabaseEntry(abc.ABC):
         result = c.fetchall()
         disconnect_from_db(conn)
         return result
+
+    @classmethod
+    def get_table_name(cls, **kwargs):
+        return cls.table_name
 
     @classmethod
     def create_all(cls, **kwargs):
