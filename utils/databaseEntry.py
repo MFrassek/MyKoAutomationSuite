@@ -1,5 +1,5 @@
 import abc
-from helper import connect_to_db, disconnect_from_db
+from databaseConnection import DatabaseConnection
 from sqlite3 import IntegrityError
 import sys
 
@@ -23,8 +23,8 @@ class DatabaseEntry(abc.ABC):
     def get_details_fitting_data(cls, commands: list, **kwargs):
         assert len(commands) > 0, \
             "At least one specifying command must be given"
-        conn, c = connect_to_db(cls.db_name)
-        c.execute(
+        db_conn = DatabaseConnection()
+        return db_conn.query(
             f"""SELECT *
             FROM {cls.get_table_name(**kwargs)}
             WHERE """
@@ -32,9 +32,6 @@ class DatabaseEntry(abc.ABC):
              [cls.argument_name_to_column_name(command[0])
               + f" {command[1]} '{' '.join(command[2:])}'"
               for command in commands]))
-        result = c.fetchall()
-        disconnect_from_db(conn)
-        return result
 
     @classmethod
     def get_table_name(cls, **kwargs):
@@ -73,17 +70,15 @@ class DatabaseEntry(abc.ABC):
         return title_to_table_name[title]
 
     def add_to_db(self):
-        conn, c = connect_to_db(self.__class__.db_name)
+        db_conn = DatabaseConnection()
         try:
-            c.execute(self.get_insertion_command())
+            db_conn.change(self.get_insertion_command())
         except IntegrityError:
             print(f"{sys.exc_info()[0].__name__}: {sys.exc_info()[1]}")
-        disconnect_from_db(conn)
 
     def update_in_db(self):
-        conn, c = connect_to_db(self.__class__.db_name)
-        c.execute(self.get_update_command())
-        disconnect_from_db(conn)
+        db_conn = DatabaseConnection()
+        db_conn.change(self.get_update_command())
 
     @abc.abstractmethod
     def get_insertion_command():
