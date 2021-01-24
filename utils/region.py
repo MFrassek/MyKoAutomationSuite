@@ -1,5 +1,4 @@
 from databaseEntry import DatabaseEntry
-from helper import connect_to_db, disconnect_from_db
 
 
 class Region(DatabaseEntry):

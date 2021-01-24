@@ -1,6 +1,5 @@
 from databaseEntry import DatabaseEntry
 from position import Position
-from helper import connect_to_db, disconnect_from_db
 
 
 class Person(DatabaseEntry):
