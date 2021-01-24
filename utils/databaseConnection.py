@@ -29,3 +29,7 @@ class DatabaseConnection():
 
     def execute(self, command):
         self._c.execute(command)
+
+    def query(self, command):
+        self._c.execute(command)
+        return self._c.fetchall()
