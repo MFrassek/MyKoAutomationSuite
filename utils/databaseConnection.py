@@ -24,7 +24,7 @@ class DatabaseConnection():
             del cls._instance._conn
             cls._instance = None
 
-    def execute(self, command):
+    def change(self, command):
         self._c.execute(command)
         self._conn.commit()
 
