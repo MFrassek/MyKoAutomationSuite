@@ -5,8 +5,6 @@ import sys
 
 
 class DatabaseEntry(abc.ABC):
-    db_name = "MY-Ko.db"
-
     @classmethod
     def create_all_fitting_data(cls, commands: list, **kwargs):
         entries = [
