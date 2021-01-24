@@ -16,11 +16,13 @@ class DatabaseConnection():
         self._conn = sqlite3.connect(self.__class__.db_name)
         self._c = self._conn.cursor()
 
-    def close(self):
-        self._conn.close()
-        del self._c
-        del self._conn
-        self.__class__._instance = None
+    @classmethod
+    def close(cls):
+        if cls._instance is not None:
+            cls._instance._conn.close()
+            del cls._instance._c
+            del cls._instance._conn
+            cls._instance = None
 
     def commit(self):
         self._conn.commit()
