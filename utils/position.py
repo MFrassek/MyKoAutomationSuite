@@ -85,21 +85,8 @@ class Position(DatabaseEntry):
             title, region, held_by, start_date, end_date, position_id)
 
     @classmethod
-    def get_details_fitting_data(cls, commands: list, title: str):
-        assert len(commands) > 0, \
-            "At least one specifying key word argument must be given"
-        conn, c = connect_to_db(cls.db_name)
-        c.execute(
-            f"""SELECT *
-            FROM {cls.title_to_table_name(title)}
-            WHERE """
-            + " AND ".join(
-                [cls.argument_name_to_column_name(command[0])
-                 + f" {command[1]} '{' '.join(command[2:])}'"
-                 for command in commands]))
-        result = c.fetchall()
-        disconnect_from_db(conn)
-        return result
+    def get_table_name(cls, title):
+        return cls.title_to_table_name(title)
 
     @classmethod
     def create_all_held_positions(cls, held_by: str):
