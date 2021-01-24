@@ -53,23 +53,6 @@ class Person(DatabaseEntry):
         name, birth_date, gender = data_tuple
         return cls(name, birth_date, gender)
 
-    @classmethod
-    def get_details_fitting_data(cls, commands: list):
-        assert len(commands) > 0, \
-            "At least one specifying command must be given"
-        conn, c = connect_to_db(cls.db_name)
-        c.execute(
-            f"""SELECT *
-            FROM {cls.table_name}
-            WHERE """
-            + " AND ".join(
-             [cls.argument_name_to_column_name(command[0])
-              + f" {command[1]} '{' '.join(command[2:])}'"
-              for command in commands]))
-        result = c.fetchall()
-        disconnect_from_db(conn)
-        return result
-
     def get_insertion_command(self):
         return f"""INSERT INTO {self.__class__.table_name} (
                 personName, gender, birthDate)
