@@ -3,6 +3,8 @@ from helper import connect_to_db, disconnect_from_db
 
 
 class Weekend(DatabaseEntry):
+    table_name = "weekends"
+
     def __init__(
             self, id_: int, name: str, location: str, start_date: str,
             end_date: str, region_name: str):
@@ -53,23 +55,6 @@ class Weekend(DatabaseEntry):
     @classmethod
     def create_from_db_data_tuple(cls, data_tuple: tuple):
         return cls(*data_tuple)
-
-    @classmethod
-    def get_details_fitting_data(cls, commands: list):
-        assert len(commands) > 0, \
-            "At least one specifying command must be given"
-        conn, c = connect_to_db(cls.db_name)
-        c.execute(
-            """SELECT *
-            FROM weekends
-            WHERE """
-            + " AND ".join(
-             [cls.argument_name_to_column_name(command[0])
-              + f" {command[1]} '{' '.join(command[2:])}'"
-              for command in commands]))
-        result = c.fetchall()
-        disconnect_from_db(conn)
-        return result
 
     @classmethod
     def create_by_name(cls, name: str):
