@@ -1,5 +1,6 @@
 import unittest
 import os
+import databaseConnection
 from utils import volunteer_add
 from utils import init_db
 from _pytest.monkeypatch import MonkeyPatch
@@ -15,13 +16,12 @@ class TestAdd(unittest.TestCase):
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
-            "volunteer_add.Position.db_name", self.db_name)
-        self.monkeypatch.setattr(
-            "volunteer_add.Volunteer.db_name", self.db_name)
+            "databaseConnection.DatabaseConnection.db_name", self.db_name)
         init_db.init_db(self.data_path, self.db_name)
 
     def tearDown(self):
         self.monkeypatch.undo()
+        databaseConnection.DatabaseConnection.close()
 
     def test_add_volunteer(self):
         generator = (ele for ele in ["1995-03-03", "d"])

@@ -1,9 +1,8 @@
 import unittest
 import os
-from utils import person
-from person import Volunteer
-from utils import position
-from position import Position
+import databaseConnection
+from utils.person import Volunteer
+from utils.position import Position
 from _pytest.monkeypatch import MonkeyPatch
 from utils import init_db
 
@@ -18,15 +17,14 @@ class TestVolunteer(unittest.TestCase):
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
-            "position.Position.db_name", self.db_name)
-        self.monkeypatch.setattr(
-            "person.Volunteer.db_name", self.db_name)
+            "databaseConnection.DatabaseConnection.db_name", self.db_name)
         init_db.init_db(self.data_path, self.db_name)
         Position("MYSec", "Kiel", "Test Person", "2020-04-04", "").add_to_db()
         Volunteer("Test Person", "u", "1994-07-05").add_to_db()
 
     def tearDown(self):
         self.monkeypatch.undo()
+        databaseConnection.DatabaseConnection.close()
 
     def test_volunteer_accessibility(self):
         vol = Volunteer(

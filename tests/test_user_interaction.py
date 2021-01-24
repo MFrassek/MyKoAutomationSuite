@@ -1,6 +1,6 @@
 import unittest
 import os
-from utils import userInteraction
+import databaseConnection
 from utils.userInteraction import UserInteraction
 from _pytest.monkeypatch import MonkeyPatch
 from utils.person import Volunteer
@@ -19,15 +19,12 @@ class TestUserInteraction(unittest.TestCase):
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
-            "person.Person.db_name", self.db_name)
-        self.monkeypatch.setattr(
-            "region.Region.db_name", self.db_name)
-        self.monkeypatch.setattr(
-            "position.Position.db_name", self.db_name)
+            "databaseConnection.DatabaseConnection.db_name", self.db_name)
         init_db.init_db(self.data_path, self.db_name)
 
     def tearDown(self):
         self.monkeypatch.undo()
+        databaseConnection.DatabaseConnection.close()
 
     def test_prompting_volunteer_name(self):
         generator = (ele for ele in ["1NotVolunteerName", "Frank Test", ""])

@@ -1,5 +1,6 @@
 import unittest
 import os
+import databaseConnection
 from utils import mysec_map
 from bs4 import BeautifulSoup
 from _pytest.monkeypatch import MonkeyPatch
@@ -16,9 +17,7 @@ class TestMap(unittest.TestCase):
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
-            "mysec_map.Region.db_name", self.db_name)
-        self.monkeypatch.setattr(
-            "mysec_map.Position.db_name", self.db_name)
+            "databaseConnection.DatabaseConnection.db_name", self.db_name)
         init_db.init_db(self.data_path, self.db_name)
         mysec_map.Region(
             2050, "Münster", "muenster", "moment", 5, 3, 1).add_to_db()
@@ -27,6 +26,7 @@ class TestMap(unittest.TestCase):
 
     def tearDown(self):
         self.monkeypatch.undo()
+        databaseConnection.DatabaseConnection.close()
 
     def test_make_looking_state_map(self):
         functionTemp = mysec_map.prompt_region_ids_for_looking_state_change

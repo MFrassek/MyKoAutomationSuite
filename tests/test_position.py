@@ -1,7 +1,7 @@
 import unittest
 import os
-from utils import position
-from position import Position
+import databaseConnection
+from utils.position import Position
 from _pytest.monkeypatch import MonkeyPatch
 from utils import init_db
 
@@ -16,13 +16,14 @@ class TestPosition(unittest.TestCase):
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
-            "position.Position.db_name", self.db_name)
+            "databaseConnection.DatabaseConnection.db_name", self.db_name)
         init_db.init_db(self.data_path, self.db_name)
         Position("MYSec", "Hamburg", "Test Person", "2020-03-02").add_to_db()
         Position("MYSec", "München", "Second Person", "2021-01-02").add_to_db()
 
     def tearDown(self):
         self.monkeypatch.undo()
+        databaseConnection.DatabaseConnection.close()
 
     def test_position_accessibility(self):
         pos = Position(
