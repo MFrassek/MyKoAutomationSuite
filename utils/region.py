@@ -78,13 +78,6 @@ class Region(DatabaseEntry):
     def create_by_id(cls, id_: int):
         return cls.create_all_fitting_data([["region_id", "=", str(id_)]])[0]
 
-    def update_in_db(self):
-        conn, c = connect_to_db(self.__class__.db_name)
-        c.execute(f"""UPDATE regions
-            SET looking = '{self._looking_state}'
-            WHERE regionName = '{self._name}';""")
-        disconnect_from_db(conn)
-
     def get_insertion_command(self):
         return f"""INSERT INTO regions (
                 regionId, regionName, regionMailName,
@@ -93,3 +86,8 @@ class Region(DatabaseEntry):
                 '{self._id}', '{self._name}', '{self._mail_name}',
                 '{self._magazine_name}', '{self._m_count}',
                 '{self._my_count}', '{self._looking_state}');"""
+
+    def get_update_command(self):
+        return f"""UPDATE regions
+            SET looking = '{self._looking_state}'
+            WHERE regionName = '{self._name}';"""

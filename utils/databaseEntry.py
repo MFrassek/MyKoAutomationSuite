@@ -80,9 +80,17 @@ class DatabaseEntry(abc.ABC):
             print(f"{sys.exc_info()[0].__name__}: {sys.exc_info()[1]}")
         disconnect_from_db(conn)
 
+    def update_in_db(self):
+        conn, c = connect_to_db(self.__class__.db_name)
+        c.execute(self.get_update_command())
+        disconnect_from_db(conn)
+
     @abc.abstractmethod
     def get_insertion_command():
         pass
+
+    def get_update_command():
+        raise NotImplementedError
 
     def convert_YYYYMMDD_to_DDMMYYYY_date(self, date):
         return ".".join(date.split("-")[::-1])
