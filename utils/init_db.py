@@ -1,35 +1,35 @@
-from helper import connect_to_db, disconnect_from_db,\
-    get_relative_path_to_script
+from helper import get_relative_path_to_script
+from databaseConnection import DatabaseConnection
 
 
-def init_db(data_path, db_name):
-    conn, c = connect_to_db(db_name)
-    drop_old_tables(c)
-    create_all_tables(c)
-    disconnect_from_db(conn)
+def init_db(data_path):
+    drop_old_tables()
+    create_all_tables()
+    DatabaseConnection.close()
 
 
-def drop_old_tables(c):
-    for table in get_all_existing_table_names(c):
-        c.execute("DROP TABLE IF EXISTS {}".format(table))
+def drop_old_tables():
+    for table in get_all_existing_table_names():
+        DatabaseConnection().change("DROP TABLE IF EXISTS {}".format(table))
 
 
-def get_all_existing_table_names(c):
-    c.execute("SELECT name FROM sqlite_master WHERE type='table';")
-    return [table_tuple[0] for table_tuple in c.fetchall()]
+def get_all_existing_table_names():
+    return [table_tuple[0] for table_tuple
+            in DatabaseConnection().query(
+            "SELECT name FROM sqlite_master WHERE type='table';")]
 
 
-def create_all_tables(c):
-    create_table_weekends(c)
-    create_table_participants(c)
-    create_table_weekend_participant(c)
-    create_table_regions(c)
-    create_table_volunteers(c)
-    create_table_mysecs(c)
+def create_all_tables():
+    create_table_weekends()
+    create_table_participants()
+    create_table_weekend_participant()
+    create_table_regions()
+    create_table_volunteers()
+    create_table_mysecs()
 
 
-def create_table_weekends(c):
-    c.execute(
+def create_table_weekends():
+    DatabaseConnection().change(
         """CREATE TABLE weekends (
             weekendId integer PRIMARY KEY NOT NULL,
             weekendName text NOT NULL,
@@ -39,23 +39,23 @@ def create_table_weekends(c):
             regionName text NOT NULL);""")
 
 
-def create_table_participants(c):
-    c.execute(
+def create_table_participants():
+    DatabaseConnection().change(
         """CREATE TABLE participants (
             personName text PRIMARY KEY NOT NULL,
             gender text NOT NULL,
             birthDate date NOT NULL);""")
 
 
-def create_table_weekend_participant(c):
-    c.execute(
+def create_table_weekend_participant():
+    DatabaseConnection().change(
         """CREATE TABLE weekend_participant (
             weekendId integer NOT NULL,
             personName text NOT NULL);""")
 
 
-def create_table_regions(c):
-    c.execute(
+def create_table_regions():
+    DatabaseConnection().change(
         """CREATE TABLE regions (
             regionId integer NOT NULL,
             regionName text PRIMARY KEY NOT NULL,
@@ -66,16 +66,16 @@ def create_table_regions(c):
             looking boolean NOT NULL);""")
 
 
-def create_table_volunteers(c):
-    c.execute(
+def create_table_volunteers():
+    DatabaseConnection().change(
         """CREATE TABLE volunteers(
             personName text PRIMARY KEY NOT NULL,
             gender text NOT NULL,
             birthDate date NOT NULL);""")
 
 
-def create_table_mysecs(c):
-    c.execute(
+def create_table_mysecs():
+    DatabaseConnection().change(
         """CREATE TABLE mysecs(
             positionId integer PRIMARY KEY NOT NULL,
             personName text NOT NULL,
@@ -86,4 +86,4 @@ def create_table_mysecs(c):
 
 if __name__ == '__main__':
     data_path = "{}/data".format(get_relative_path_to_script())
-    init_db(data_path, "MY-Ko.db")
+    init_db(data_path)

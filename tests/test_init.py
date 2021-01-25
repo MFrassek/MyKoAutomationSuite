@@ -1,8 +1,8 @@
 import unittest
 import os
 from utils import init_db
-import sqlite3
-from utils import helper
+import databaseConnection
+from _pytest.monkeypatch import MonkeyPatch
 
 
 class TestDbInitiation(unittest.TestCase):
@@ -13,28 +13,26 @@ class TestDbInitiation(unittest.TestCase):
         self.db_name = "tests/Test.db"
 
     def setUp(self):
-        self.conn, self.c = helper.connect_to_db(self.db_name)
+        self.monkeypatch = MonkeyPatch()
+        self.monkeypatch.setattr(
+            "databaseConnection.DatabaseConnection.db_name", self.db_name)
 
     def tearDown(self):
-        helper.uncommited_disconnect_from_db(self.conn)
+        self.monkeypatch.undo()
+        databaseConnection.DatabaseConnection.close()
 
     def test_weekend_file_exists(self):
         self.assertTrue(
             os.path.exists("{}/Weekends.txt".format(self.data_path)),
             "Weekends.txt does not exist at expected location")
 
-    def test_connects_to_db(self):
-        self.assertIsInstance(self.conn, sqlite3.Connection)
-        self.assertIsInstance(self.c, sqlite3.Cursor)
-
     def test_initilization_components_successful(self):
-        init_db.drop_old_tables(self.c)
-        self.c.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        self.assertEqual(self.c.fetchall(), [])
-        init_db.create_all_tables(self.c)
-        self.c.execute("SELECT name FROM sqlite_master WHERE type='table';")
-        self.assertEqual(
-            self.c.fetchall(),
+        init_db.drop_old_tables()
+        self.assertEqual(databaseConnection.DatabaseConnection().query(
+            "SELECT name FROM sqlite_master WHERE type='table';"), [])
+        init_db.create_all_tables()
+        self.assertEqual(databaseConnection.DatabaseConnection().query(
+            "SELECT name FROM sqlite_master WHERE type='table';"),
             [('weekends',), ('participants',), ('weekend_participant',),
              ('regions',), ('volunteers',), ('mysecs',)])
 
