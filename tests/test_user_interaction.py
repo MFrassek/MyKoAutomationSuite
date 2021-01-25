@@ -20,7 +20,7 @@ class TestUserInteraction(unittest.TestCase):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db(self.data_path, self.db_name)
+        init_db.init_db(self.data_path)
 
     def tearDown(self):
         self.monkeypatch.undo()

@@ -13,7 +13,7 @@ class TestDbFill(unittest.TestCase):
         self.db_name = "tests/Test.db"
 
     def setUp(self):
-        init_db.init_db(self.data_path, self.db_name)
+        init_db.init_db(self.data_path)
         self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):

@@ -18,7 +18,7 @@ class TestVolunteer(unittest.TestCase):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db(self.data_path, self.db_name)
+        init_db.init_db(self.data_path)
         Position("MYSec", "Kiel", "Test Person", "2020-04-04", "").add_to_db()
         Volunteer("Test Person", "u", "1994-07-05").add_to_db()
 

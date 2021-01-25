@@ -20,7 +20,7 @@ class TestUpdate(unittest.TestCase):
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
         self.monkeypatch.setattr("builtins.input", lambda x: next(generator))
-        init_db.init_db(self.data_path, self.db_name)
+        init_db.init_db(self.data_path)
         volunteer_add.add_new_position("MYSec", "Test Person")
 
     def tearDown(self):

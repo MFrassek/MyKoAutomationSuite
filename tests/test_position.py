@@ -17,7 +17,7 @@ class TestPosition(unittest.TestCase):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db(self.data_path, self.db_name)
+        init_db.init_db(self.data_path)
         Position("MYSec", "Hamburg", "Test Person", "2020-03-02").add_to_db()
         Position("MYSec", "München", "Second Person", "2021-01-02").add_to_db()
 

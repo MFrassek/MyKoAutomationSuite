@@ -17,7 +17,7 @@ class TestRegion(unittest.TestCase):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db(self.data_path, self.db_name)
+        init_db.init_db(self.data_path)
         Region(1020, "Kiel", "kiel", "minsh", 3, 1, 1).add_to_db()
         Region(1030, "Hamburg", "hamburg", "hamlet", 5, 2, 1).add_to_db()
         Region(1040, "Nordwest", "nordwest", "bremensie", 10, 1, 1).add_to_db()
