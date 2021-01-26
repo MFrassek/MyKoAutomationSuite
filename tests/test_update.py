@@ -1,5 +1,4 @@
 import unittest
-import os
 import databaseConnection
 from utils import volunteer_update_position
 from utils import volunteer_add
@@ -10,8 +9,6 @@ from _pytest.monkeypatch import MonkeyPatch
 class TestUpdate(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestUpdate, self).__init__(*args, **kwargs)
-        self.data_path = "{}/test_data".format(
-            os.path.dirname(os.path.abspath(__file__)))
         self.db_name = "tests/Test.db"
 
     def setUp(self):
@@ -20,7 +17,7 @@ class TestUpdate(unittest.TestCase):
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
         self.monkeypatch.setattr("builtins.input", lambda x: next(generator))
-        init_db.init_db(self.data_path)
+        init_db.init_db()
         volunteer_add.add_new_position("MYSec", "Test Person")
 
     def tearDown(self):

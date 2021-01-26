@@ -1,5 +1,4 @@
 import unittest
-import os
 import databaseConnection
 from utils.region import Region
 from _pytest.monkeypatch import MonkeyPatch
@@ -9,15 +8,13 @@ from utils import init_db
 class TestRegion(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestRegion, self).__init__(*args, **kwargs)
-        self.data_path = "{}/test_data".format(
-            os.path.dirname(os.path.abspath(__file__)))
         self.db_name = "tests/Test.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db(self.data_path)
+        init_db.init_db()
         Region(1020, "Kiel", "kiel", "minsh", 3, 1, 1).add_to_db()
         Region(1030, "Hamburg", "hamburg", "hamlet", 5, 2, 1).add_to_db()
         Region(1040, "Nordwest", "nordwest", "bremensie", 10, 1, 1).add_to_db()

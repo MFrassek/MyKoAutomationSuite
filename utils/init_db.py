@@ -1,8 +1,7 @@
-from helper import get_relative_path_to_script
 from databaseConnection import DatabaseConnection
 
 
-def init_db(data_path):
+def init_db():
     drop_old_tables()
     create_all_tables()
     DatabaseConnection.close()
@@ -85,5 +84,4 @@ def create_table_mysecs():
 
 
 if __name__ == '__main__':
-    data_path = "{}/data".format(get_relative_path_to_script())
-    init_db(data_path)
+    init_db()

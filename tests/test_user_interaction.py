@@ -1,5 +1,4 @@
 import unittest
-import os
 import databaseConnection
 from utils.userInteraction import UserInteraction
 from _pytest.monkeypatch import MonkeyPatch
@@ -12,15 +11,13 @@ from utils import init_db
 class TestUserInteraction(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestUserInteraction, self).__init__(*args, **kwargs)
-        self.data_path = "{}/test_data".format(
-            os.path.dirname(os.path.abspath(__file__)))
         self.db_name = "tests/Test.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db(self.data_path)
+        init_db.init_db()
 
     def tearDown(self):
         self.monkeypatch.undo()

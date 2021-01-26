@@ -18,7 +18,7 @@ class TestMap(unittest.TestCase):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db(self.data_path)
+        init_db.init_db()
         mysec_map.Region(
             2050, "Münster", "muenster", "moment", 5, 3, 1).add_to_db()
         mysec_map.Position("MYSec", "Münster", "Test P", "2020-01-01", "")\

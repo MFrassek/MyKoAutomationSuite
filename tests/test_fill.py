@@ -19,7 +19,7 @@ class TestDbFill(unittest.TestCase):
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
         self.monkeypatch.setattr(
             "tablePopulator.TablePopulator.data_path", self.data_path)
-        init_db.init_db(self.data_path)
+        init_db.init_db()
 
     def tearDown(self):
         self.monkeypatch.undo()
