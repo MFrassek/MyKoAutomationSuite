@@ -118,3 +118,6 @@ class Position(DatabaseEntry):
         return f"""UPDATE {self.__class__.title_to_table_name(self._title)}
             SET endDate = '{self._end_date}'
             WHERE positionId = '{self._position_id}';"""
+
+    def is_active(self):
+        return not self._end_date
