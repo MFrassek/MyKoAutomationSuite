@@ -47,6 +47,10 @@ class Person(DatabaseEntry):
     def base_name(self):
         return self._name.replace(" ", "_")
 
+    @property
+    def birth_date_ddmmyyyy(self):
+        return self.convert_YYYYMMDD_to_DDMMYYYY_date(self._birth_date)
+
     @classmethod
     def create_from_db_data_tuple(cls, data_tuple: tuple):
         name, birth_date, gender = data_tuple
