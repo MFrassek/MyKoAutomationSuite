@@ -53,7 +53,7 @@ class Person(DatabaseEntry):
         return cls(name, birth_date, gender)
 
     def get_insertion_command(self):
-        return f"""INSERT INTO {self.__class__.table_name} (
+        return f"""INSERT OR REPLACE INTO {self.__class__.table_name} (
                 personName, gender, birthDate)
             VALUES (
                 '{self._name}', '{self._gender}', '{self._birth_date}');"""
