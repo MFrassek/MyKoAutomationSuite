@@ -9,7 +9,7 @@ def print_coming_birthdays():
         birthday = datetime.strptime(volunteer.birth_date, "%Y-%m-%d")\
             .replace(year=today.year)
         days_until_birthday = (birthday - today).days
-        if 0 <= days_until_birthday <= 21:
+        if volunteer.is_active() and 0 <= days_until_birthday <= 21:
             print(f"{volunteer.name}'s birthday is in {days_until_birthday} days")
 
 
