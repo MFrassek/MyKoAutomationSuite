@@ -1,8 +1,9 @@
 import unittest
 import os
 from utils import fill_db
-from utils import helper
 from utils import init_db
+import databaseConnection
+from _pytest.monkeypatch import MonkeyPatch
 
 
 class TestDbFill(unittest.TestCase):
@@ -13,40 +14,28 @@ class TestDbFill(unittest.TestCase):
         self.db_name = "tests/Test.db"
 
     def setUp(self):
+        self.monkeypatch = MonkeyPatch()
+        self.monkeypatch.setattr(
+            "databaseConnection.DatabaseConnection.db_name", self.db_name)
+        self.monkeypatch.setattr(
+            "tablePopulator.TablePopulator.data_path", self.data_path)
         init_db.init_db(self.data_path)
-        self.conn, self.c = helper.connect_to_db(self.db_name)
 
     def tearDown(self):
-        helper.uncommited_disconnect_from_db(self.conn)
+        self.monkeypatch.undo()
+        databaseConnection.DatabaseConnection.close()
 
     def test_populate_tables(self):
-        fill_db.populate_all_tables(self.data_path, self.c)
-        self.c.execute("SELECT COUNT(*) FROM weekends")
-        self.assertEqual(self.c.fetchall(), [(2,)])
-        self.c.execute("SELECT COUNT(*) FROM participants")
-        self.assertEqual(self.c.fetchall(), [(5,)])
-        self.c.execute("SELECT COUNT(*) FROM weekend_participant")
-        self.assertEqual(self.c.fetchall(), [(8,)])
-        self.c.execute("SELECT COUNT(*) FROM regions")
-        self.assertEqual(self.c.fetchall(), [(40,)])
-
-    def test_adding_entry(self):
-        fill_db.add_entry_to_table_participants(
-            self.c, ["0000000009", "Wohnhaft in Deutschland", "10.01.2018", "",
-                     "Zoe", "", "Zoes", "Zoes, Zoe", "Zoe Zoes", "f",
-                     "05.04.1989", "31", "", "", "", "", "", "", "",
-                     "Albertlane 5", "10000", "Alberta", "", "Frau", 0, "Ja",
-                     "", "", "", "049", "", "Frankfurt"])
-        self.c.execute("""SELECT COUNT(personName) FROM participants
-            WHERE personName == 'Zoe Zoes'""")
-        self.assertEqual(self.c.fetchall(), [(1,)])
-        fill_db.add_entry_to_table_weekend_participant(
-            self.c, ["0000000009", "Wohnhaft in Deutschland", "10.01.2018", "",
-                     "Zoe", "", "Zoes", "Zoes, Zoe", "Zoe Zoes", "f",
-                     "05.04.1989", "31", "", "", "", "", "", "", "",
-                     "Albertlane 5", "10000", "Alberta", "", "Frau", 0, "Ja",
-                     "", "", "", "049", "", "Frankfurt"], 10)
-        self.c.execute("""SELECT COUNT(personName)
-            FROM weekend_participant
-            WHERE personName == 'Zoe Zoes'""")
-        self.assertEqual(self.c.fetchall(), [(1,)])
+        fill_db.fill_db()
+        self.assertEqual(
+            databaseConnection.DatabaseConnection().query(
+                "SELECT COUNT(*) FROM weekends"), [(2,)])
+        self.assertEqual(
+            databaseConnection.DatabaseConnection().query(
+                "SELECT COUNT(*) FROM participants"), [(5,)])
+        self.assertEqual(
+            databaseConnection.DatabaseConnection().query(
+                "SELECT COUNT(*) FROM weekend_participant"), [(8,)])
+        self.assertEqual(
+            databaseConnection.DatabaseConnection().query(
+                "SELECT COUNT(*) FROM regions"), [(40,)])
