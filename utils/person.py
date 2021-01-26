@@ -80,6 +80,9 @@ class Volunteer(Person):
     def positions(self):
         return self._positions
 
+    def is_active(self):
+        return any(position.is_active() for position in self.positions)
+
 
 class Participant(Person):
     table_name = "participants"
