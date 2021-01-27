@@ -1,7 +1,6 @@
 import unittest
 import os
 from utils import fill_db
-from utils import init_db
 import databaseConnection
 from _pytest.monkeypatch import MonkeyPatch
 
@@ -11,7 +10,7 @@ class TestDbFill(unittest.TestCase):
         super(TestDbFill, self).__init__(*args, **kwargs)
         self.data_path = "{}/test_data".format(
             os.path.dirname(os.path.abspath(__file__)))
-        self.db_name = "tests/Test.db"
+        self.db_name = "tests/TestEmpty.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
@@ -19,11 +18,12 @@ class TestDbFill(unittest.TestCase):
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
         self.monkeypatch.setattr(
             "tablePopulator.TablePopulator.data_path", self.data_path)
-        init_db.init_db()
+        self.monkeypatch.setattr(
+            "databaseConnection.DatabaseConnection.commit", lambda x: None)
 
     def tearDown(self):
-        self.monkeypatch.undo()
         databaseConnection.DatabaseConnection.close()
+        self.monkeypatch.undo()
 
     def test_populate_tables(self):
         fill_db.fill_db()
