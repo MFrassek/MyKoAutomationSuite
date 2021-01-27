@@ -1,28 +1,24 @@
 import unittest
-import databaseConnection
 from utils import volunteer_update_position
-from utils import volunteer_add
-from utils import init_db
+import databaseConnection
 from _pytest.monkeypatch import MonkeyPatch
 
 
 class TestUpdate(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestUpdate, self).__init__(*args, **kwargs)
-        self.db_name = "tests/Test.db"
+        self.db_name = "tests/TestFilled.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
-        generator = (ele for ele in ["Münster", "2020-01-01", "", ""])
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        self.monkeypatch.setattr("builtins.input", lambda x: next(generator))
-        init_db.init_db()
-        volunteer_add.add_new_position("MYSec", "Test Person")
+        self.monkeypatch.setattr(
+            "databaseConnection.DatabaseConnection.commit", lambda x: None)
 
     def tearDown(self):
-        self.monkeypatch.undo()
         databaseConnection.DatabaseConnection.close()
+        self.monkeypatch.undo()
 
     def test_update_position(self):
         generator = (ele for ele in ["Test Person", "2021-01-17"])

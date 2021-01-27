@@ -1,30 +1,24 @@
 import unittest
-import databaseConnection
 from utils.region import Region
+import databaseConnection
 from _pytest.monkeypatch import MonkeyPatch
-from utils import init_db
 
 
 class TestRegion(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestRegion, self).__init__(*args, **kwargs)
-        self.db_name = "tests/Test.db"
+        self.db_name = "tests/TestFilled.db"
 
     def setUp(self):
         self.monkeypatch = MonkeyPatch()
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
-        init_db.init_db()
-        Region(1020, "Kiel", "kiel", "minsh", 3, 1, 1).add_to_db()
-        Region(1030, "Hamburg", "hamburg", "hamlet", 5, 2, 1).add_to_db()
-        Region(1040, "Nordwest", "nordwest", "bremensie", 10, 1, 1).add_to_db()
-        Region(2050, "Münster", "muenster", "moment", 0, 0, 1).add_to_db()
-        Region(8005, "Aschaffenburg", "aschaffenburg", "fragment", 1, 1, 1)\
-            .add_to_db()
+        self.monkeypatch.setattr(
+            "databaseConnection.DatabaseConnection.commit", lambda x: None)
 
     def tearDown(self):
-        self.monkeypatch.undo()
         databaseConnection.DatabaseConnection.close()
+        self.monkeypatch.undo()
 
     def test_region_accessibility(self):
         reg = Region(
