@@ -19,11 +19,15 @@ class DatabaseConnection():
     @classmethod
     def close(cls):
         if cls._instance is not None:
-            cls._instance._conn.commit()
+            cls._instance.commit()
             cls._instance._conn.close()
             del cls._instance._c
             del cls._instance._conn
             cls._instance = None
+
+    def commit(self):
+        print("AAAA")
+        self._conn.commit()
 
     def change(self, command):
         self._c.execute(command)
