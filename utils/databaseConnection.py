@@ -19,6 +19,7 @@ class DatabaseConnection():
     @classmethod
     def close(cls):
         if cls._instance is not None:
+            cls._instance._conn.commit()
             cls._instance._conn.close()
             del cls._instance._c
             del cls._instance._conn
@@ -26,7 +27,6 @@ class DatabaseConnection():
 
     def change(self, command):
         self._c.execute(command)
-        self._conn.commit()
 
     def query(self, command):
         self._c.execute(command)

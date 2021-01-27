@@ -1,4 +1,5 @@
 from userInteraction import UserInteraction
+from databaseConnection import DatabaseConnection
 from person import Volunteer
 from position import Position
 
@@ -28,3 +29,4 @@ def add_new_position(title, volunteer_name):
 
 if __name__ == '__main__':
     add_new_volunteer_and_positions()
+    DatabaseConnection.close()

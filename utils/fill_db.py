@@ -4,6 +4,7 @@ from positionPopulator import PositionPopulator
 from weekendPopulator import WeekendPopulator
 from participantPopulator import ParticipantPopulator
 from weekendParticipationPopulator import WeekendParticipationPopulator
+from databaseConnection import DatabaseConnection
 
 
 def fill_db():
@@ -17,3 +18,4 @@ def fill_db():
 
 if __name__ == '__main__':
     fill_db()
+    DatabaseConnection.close()

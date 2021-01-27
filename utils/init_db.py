@@ -4,7 +4,6 @@ from databaseConnection import DatabaseConnection
 def init_db():
     drop_old_tables()
     create_all_tables()
-    DatabaseConnection.close()
 
 
 def drop_old_tables():
@@ -85,3 +84,4 @@ def create_table_mysecs():
 
 if __name__ == '__main__':
     init_db()
+    DatabaseConnection.close()
