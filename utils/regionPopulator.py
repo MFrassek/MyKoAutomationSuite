@@ -56,3 +56,23 @@ class RegionPopulator(TablePopulator):
                 int(zip_): int(inhabitants)
                 for (zip_, inhabitants) in csv.reader(inhabitants_region_file)}
         return zip_to_inhabitants
+
+    @classmethod
+    def get_region_non_m_count(cls):
+        region_zip_codes = cls.get_region_zip_codes()
+        zip_to_inhabitants = cls.get_zip_to_non_m_inhabitants()
+        region_to_inhabitants = {}
+        for region_zip_spec in region_zip_codes:
+            region_non_m_count = 0
+            for zip_range in region_zip_spec[1:]:
+                zip_range = list(map(int, zip_range.split(",")))
+                if len(zip_range) == 1:
+                    if zip_range[0] in zip_to_inhabitants:
+                        region_non_m_count += \
+                            zip_to_inhabitants[zip_range[0]]
+                else:
+                    for zip_, inhabitants in zip_to_inhabitants.items():
+                        if zip_range[0] <= zip_ <= zip_range[1]:
+                            region_non_m_count += inhabitants
+            region_to_inhabitants[region_zip_spec[0]] = region_non_m_count
+        return region_to_inhabitants
