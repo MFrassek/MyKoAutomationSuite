@@ -70,6 +70,14 @@ class Region(DatabaseEntry):
     def mysec_mail_address(self):
         return f"mysec-{self._mail_name}@mensa.de"
 
+    @property
+    def m_frequency(self):
+        return self._m_count / self._non_m_count
+
+    @property
+    def my_frequency(self):
+        return self._my_count / self._non_m_count
+
     @classmethod
     def create_from_db_data_tuple(cls, data_tuple: tuple):
         return cls(*data_tuple)
