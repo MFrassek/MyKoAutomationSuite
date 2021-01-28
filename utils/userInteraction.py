@@ -110,6 +110,7 @@ class UserInteraction():
         print(f"Magazine name: {region.magazine_name}")
         print(f"M Count: {region.m_count}")
         print(f"MY Count: {region.my_count}")
+        print(f"Non-M Count: {region.non_m_count}")
         print(f"Looking state: {region.looking_state}")
 
 

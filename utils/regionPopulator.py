@@ -10,12 +10,14 @@ class RegionPopulator(TablePopulator):
         region_data = cls.get_data_from_file()
         m_counter = cls.get_region_counter_from_file("Ms_in_regions.csv")
         my_counter = cls.get_region_counter_from_file("MYs_in_regions.csv")
+        non_m_counter = cls.get_region_non_m_count()
         for region in region_data:
             region_name = region[1]
             Region(
                 id_=region[0], name=region[1], mail_name=region[2],
                 magazine_name=region[3], m_count=m_counter[region_name],
-                my_count=my_counter[region_name], looking_state=True
+                my_count=my_counter[region_name],
+                non_m_count=non_m_counter[region_name], looking_state=True
                 ).add_to_db()
 
     @classmethod

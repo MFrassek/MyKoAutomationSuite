@@ -96,9 +96,9 @@ class TestUserInteraction(unittest.TestCase):
         self.monkeypatch.setattr(
             "builtins.print", lambda x: printed_statements.append(x))
         UserInteraction.post_region_details(
-            Region("1000", "Test", "test", "Testana", 1, 1, 1))
+            Region("1000", "Test", "test", "Testana", 1, 1, 1, 1))
         self.assertEqual(
             printed_statements,
             ["Id: 1000", "Region name: Test", "Mail name: test",
              "Magazine name: Testana", "M Count: 1", "MY Count: 1",
-             "Looking state: 1"])
+             "Non-M Count: 1", "Looking state: 1"])

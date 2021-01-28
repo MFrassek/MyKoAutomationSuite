@@ -6,13 +6,14 @@ class Region(DatabaseEntry):
 
     def __init__(
             self, id_: int, name: str, mail_name: str, magazine_name: str,
-            m_count: int, my_count: int, looking_state: int):
+            m_count: int, my_count: int, non_m_count: int, looking_state: int):
         self._id = id_
         self._name = name
         self._mail_name = mail_name
         self._magazine_name = magazine_name
         self._m_count = m_count
         self._my_count = my_count
+        self._non_m_count = non_m_count
         self._looking_state = int(looking_state)
 
     def __repr__(self):
@@ -52,6 +53,10 @@ class Region(DatabaseEntry):
         return self._my_count
 
     @property
+    def non_m_count(self):
+        return self._non_m_count
+
+    @property
     def looking_state(self):
         return self._looking_state
 
@@ -80,11 +85,12 @@ class Region(DatabaseEntry):
     def get_insertion_command(self):
         return f"""INSERT INTO regions (
                 regionId, regionName, regionMailName,
-                magazineName, mCount, myCount, looking)
+                magazineName, mCount, myCount, nonMCount, looking)
             VALUES (
                 '{self._id}', '{self._name}', '{self._mail_name}',
                 '{self._magazine_name}', '{self._m_count}',
-                '{self._my_count}', '{self._looking_state}');"""
+                '{self._my_count}', '{self._non_m_count}',
+                '{self._looking_state}');"""
 
     def get_update_command(self):
         return f"""UPDATE regions

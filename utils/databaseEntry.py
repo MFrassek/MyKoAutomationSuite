@@ -54,6 +54,7 @@ class DatabaseEntry(abc.ABC):
             "region_id": "regionId",
             "m_count": "mCount",
             "my_count": "myCount",
+            "non_m_count": "nonMCount",
             "weekend_id": "weekendId",
             "weekend_name": "weekendName",
             "weekend_location": "weekendLocation"}

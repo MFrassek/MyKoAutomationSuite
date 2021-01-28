@@ -61,6 +61,7 @@ def create_table_regions():
             magazineName text NOT NULL,
             mCount integer NOT NULL,
             myCount integer NOT NULL,
+            nonMCount integer NOT NULL,
             looking boolean NOT NULL);""")
 
 
