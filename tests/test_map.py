@@ -68,6 +68,14 @@ class TestMap(unittest.TestCase):
             "test_Map.png does not exist at expected location")
         os.remove(f"{self.data_path}/test_map.png")
 
+    def test_make_my_frequency_map(self):
+        mysec_map.generate_my_frequency_map(
+            self.data_path, f"{self.data_path}/test_map.png")
+        self.assertTrue(
+            os.path.exists(f"{self.data_path}/test_map.png"),
+            "test_Map.png does not exist at expected location")
+        os.remove(f"{self.data_path}/test_map.png")
+
     def test_remove_malformed_attribute(self):
         soup = BeautifulSoup("""
             <?xml version="1.0" encoding="UTF-8" standalone="no"?>
