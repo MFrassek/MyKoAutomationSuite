@@ -39,6 +39,15 @@ class RegionPopulator(TablePopulator):
         return collections.Counter(patched_home_regions)
 
     @classmethod
+    def get_region_zip_codes(cls):
+        with open(
+                f"{cls.data_path}/RegionZipCodes.txt", "r") \
+                as region_zip_code_file:
+            region_zip_codes = [line[:-1].split("\t") for line
+                                in region_zip_code_file.readlines()]
+        return region_zip_codes
+
+    @classmethod
     def get_zip_to_non_m_inhabitants(cls):
         with open(
                 f"{cls.data_path}/ZipToInhabitants.csv", "r",
