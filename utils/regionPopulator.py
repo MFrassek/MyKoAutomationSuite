@@ -37,3 +37,13 @@ class RegionPopulator(TablePopulator):
                 ["Ruhrgebiet" if x.startswith("Ruhrgebiet") else x
                  for x in flattened_home_regions]
         return collections.Counter(patched_home_regions)
+
+    @classmethod
+    def get_zip_to_non_m_inhabitants(cls):
+        with open(
+                f"{cls.data_path}/ZipToInhabitants.csv", "r",
+                encoding='latin1', newline="") as inhabitants_region_file:
+            zip_to_inhabitants = {
+                int(zip_): int(inhabitants)
+                for (zip_, inhabitants) in csv.reader(inhabitants_region_file)}
+        return zip_to_inhabitants
