@@ -41,13 +41,15 @@ class RegionPopulator(TablePopulator):
         return collections.Counter(patched_home_regions)
 
     @classmethod
-    def get_region_zip_codes(cls):
+    def get_region_to_zip_ranges(cls):
         with open(
                 f"{cls.data_path}/RegionZipCodes.txt", "r") \
                 as region_zip_code_file:
-            region_zip_codes = [line[:-1].split("\t") for line
+            region_zip_specs = [line[:-1].split("\t") for line
                                 in region_zip_code_file.readlines()]
-        return region_zip_codes
+            region_to_zip_ranges = {zip_spec[0]: zip_spec[1:]
+                                    for zip_spec in region_zip_specs}
+        return region_to_zip_ranges
 
     @classmethod
     def get_zip_to_non_m_inhabitants(cls):
@@ -61,12 +63,12 @@ class RegionPopulator(TablePopulator):
 
     @classmethod
     def get_region_non_m_count(cls):
-        region_zip_codes = cls.get_region_zip_codes()
+        region_to_zip_ranges = cls.get_region_to_zip_ranges()
         zip_to_inhabitants = cls.get_zip_to_non_m_inhabitants()
         region_to_inhabitants = {}
-        for region_zip_spec in region_zip_codes:
+        for region_name, zip_ranges in region_to_zip_ranges.items():
             region_non_m_count = 0
-            for zip_range in region_zip_spec[1:]:
+            for zip_range in zip_ranges:
                 zip_range = list(map(int, zip_range.split(",")))
                 if len(zip_range) == 1:
                     if zip_range[0] in zip_to_inhabitants:
@@ -76,5 +78,5 @@ class RegionPopulator(TablePopulator):
                     for zip_, inhabitants in zip_to_inhabitants.items():
                         if zip_range[0] <= zip_ <= zip_range[1]:
                             region_non_m_count += inhabitants
-            region_to_inhabitants[region_zip_spec[0]] = region_non_m_count
+            region_to_inhabitants[region_name] = region_non_m_count
         return region_to_inhabitants
