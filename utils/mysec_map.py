@@ -35,6 +35,13 @@ def generate_my_count_map(data_path, output_path):
         output_path)
 
 
+def generate_m_frequency_map(data_path, output_path):
+    generate_map(
+        data_path,
+        change_fill_color_all_regions_based_on_m_frequency,
+        output_path)
+
+
 def generate_map(data_path, coloring_function, output_path):
     soup = get_wellformed_soup_from_svg_file(data_path)
     coloring_function(soup)
@@ -90,6 +97,14 @@ def change_fill_color_all_regions_based_on_my_count(soup):
                 region.my_count / max_my_count))
 
 
+def change_fill_color_all_regions_based_on_m_frequency(soup):
+    max_m_frequency = get_max_m_frequency_for_all_regions()
+    for region in Region.create_all():
+        change_fill_color_of_path(
+            soup, region.name, get_region_count_fraction_color(
+                region.m_frequency / max_m_frequency))
+
+
 def print_current_looking_state_of_regions():
     for region in Region.create_all():
         print(f"{region.id}\t{region.looking_state}\t{region.name}")
@@ -140,6 +155,13 @@ def get_max_my_count_for_all_regions():
     return region_with_max_my_count.my_count
 
 
+def get_max_m_frequency_for_all_regions():
+    all_regions = Region.create_all()
+    region_with_max_m_frequency = functools.reduce(
+        lambda a, b: a if a.m_frequency > b.m_frequency else b, all_regions)
+    return region_with_max_m_frequency.m_frequency
+
+
 def change_fill_color_of_path(soup, id, fill_color):
     region_path_tag = soup("path", {"id": id})[0]
     region_style_attribute = region_path_tag["style"]
@@ -175,3 +197,4 @@ if __name__ == '__main__':
     generate_looking_state_map(data_path, "MYSec_map.png")
     generate_m_count_map(data_path, "M_density_map.png")
     generate_my_count_map(data_path, "MY_density_map.png")
+    generate_m_frequency_map(data_path, "M_frequency_map.png")
