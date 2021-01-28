@@ -71,6 +71,10 @@ class Region(DatabaseEntry):
         return f"mysec-{self._mail_name}@mensa.de"
 
     @property
+    def my_per_m_frequency(self):
+        return self._my_count / self._m_count
+
+    @property
     def m_frequency(self):
         return self._m_count / self._non_m_count
 
