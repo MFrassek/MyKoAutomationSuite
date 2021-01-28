@@ -35,6 +35,13 @@ def generate_my_count_map(data_path, output_path):
         output_path)
 
 
+def generate_my_per_m_frequency_map(data_path, output_path):
+    generate_map(
+        data_path,
+        change_fill_color_all_regions_based_on_my_per_m_frequency,
+        output_path)
+
+
 def generate_m_frequency_map(data_path, output_path):
     generate_map(
         data_path,
@@ -104,6 +111,14 @@ def change_fill_color_all_regions_based_on_my_count(soup):
                 region.my_count / max_my_count))
 
 
+def change_fill_color_all_regions_based_on_my_per_m_frequency(soup):
+    max_my_per_m_frequency = get_max_my_per_m_frequency_for_all_regions()
+    for region in Region.create_all():
+        change_fill_color_of_path(
+            soup, region.name, get_region_count_fraction_color(
+                region.my_per_m_frequency / max_my_per_m_frequency))
+
+
 def change_fill_color_all_regions_based_on_m_frequency(soup):
     max_m_frequency = get_max_m_frequency_for_all_regions()
     for region in Region.create_all():
@@ -170,6 +185,14 @@ def get_max_my_count_for_all_regions():
     return region_with_max_my_count.my_count
 
 
+def get_max_my_per_m_frequency_for_all_regions():
+    all_regions = Region.create_all()
+    region_with_max_my_per_m_frequency = functools.reduce(
+        lambda a, b: a if a.my_per_m_frequency
+        > b.my_per_m_frequency else b, all_regions)
+    return region_with_max_my_per_m_frequency.my_per_m_frequency
+
+
 def get_max_m_frequency_for_all_regions():
     all_regions = Region.create_all()
     region_with_max_m_frequency = functools.reduce(
@@ -219,5 +242,6 @@ if __name__ == '__main__':
     generate_looking_state_map(data_path, "MYSec_map.png")
     generate_m_count_map(data_path, "M_density_map.png")
     generate_my_count_map(data_path, "MY_density_map.png")
+    generate_my_per_m_frequency_map(data_path, "MY_per_M_frequency_map.png")
     generate_m_frequency_map(data_path, "M_frequency_map.png")
     generate_my_frequency_map(data_path, "MY_frequency_map.png")

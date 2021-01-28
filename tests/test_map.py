@@ -60,6 +60,14 @@ class TestMap(unittest.TestCase):
             "test_Map.png does not exist at expected location")
         os.remove(f"{self.data_path}/test_map.png")
 
+    def test_make_my_per_m_frequency_map(self):
+        mysec_map.generate_my_per_m_frequency_map(
+            self.data_path, f"{self.data_path}/test_map.png")
+        self.assertTrue(
+            os.path.exists(f"{self.data_path}/test_map.png"),
+            "test_Map.png does not exist at expected location")
+        os.remove(f"{self.data_path}/test_map.png")
+
     def test_make_m_frequency_map(self):
         mysec_map.generate_m_frequency_map(
             self.data_path, f"{self.data_path}/test_map.png")
