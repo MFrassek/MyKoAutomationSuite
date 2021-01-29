@@ -35,7 +35,11 @@ def get_target_region(position: Position):
 
 def generate_tex_file_from_template(basename, intro_format_variables):
     data_path = f"{get_relative_path_to_script()}/data"
-    with open(f"{data_path}/IntroTemplate.txt", "r") as template:
+    if intro_format_variables["BildPfad"]:
+        template_file_name = "IntroTemplate.txt"
+    else:
+        template_file_name = "IntroTemplateWithoutPic.txt"
+    with open(f"{data_path}/{template_file_name}", "r") as template:
         raw_intro = "".join(template.readlines())
     with open(f"{basename}.tex", "w") as tex_file:
         tex_file.write(raw_intro % intro_format_variables)
