@@ -56,6 +56,10 @@ class Person(DatabaseEntry):
         name, birth_date, gender = data_tuple
         return cls(name, birth_date, gender)
 
+    @classmethod
+    def create_by_name(cls, name: str):
+        return cls.create_all_fitting_data([["name", "=", name]])[0]
+
     def get_insertion_command(self):
         return f"""INSERT OR REPLACE INTO {self.__class__.table_name} (
                 personName, gender, birthDate)
