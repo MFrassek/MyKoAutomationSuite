@@ -11,7 +11,10 @@ class DatabaseEntry(abc.ABC):
             cls.create_from_db_data_tuple(data_tuple, **kwargs)
             for data_tuple
             in cls.get_details_fitting_data(commands, **kwargs)]
-        return entries
+        if entries:
+            return entries
+        else:
+            return [None]
 
     @abc.abstractmethod
     def create_from_db_data_tuple():
