@@ -2,74 +2,63 @@ from cairosvg import svg2png
 from bs4 import BeautifulSoup
 import re
 import functools
-from helper import get_relative_path_to_script
 from region import Region
 from position import Position
 
 
-def generate_looking_state_map(data_path, output_path):
+def generate_looking_state_map(output_path):
     generate_map(
-        data_path,
-        change_fill_color_of_all_regions_based_on_looking_state,
-        output_path)
+        change_fill_color_of_all_regions_based_on_looking_state, output_path)
 
 
-def generate_mysec_presence_map(data_path, output_path):
+def generate_mysec_presence_map(output_path):
     generate_map(
-        data_path,
         change_fill_color_of_all_regions_based_on_presence_of_mysec,
         output_path)
 
 
-def generate_m_count_map(data_path, output_path):
+def generate_m_count_map(output_path):
     generate_map(
-        data_path,
-        change_fill_color_all_regions_based_on_m_count,
-        output_path)
+        change_fill_color_all_regions_based_on_m_count, output_path)
 
 
-def generate_my_count_map(data_path, output_path):
+def generate_my_count_map(output_path):
     generate_map(
-        data_path,
-        change_fill_color_all_regions_based_on_my_count,
-        output_path)
+        change_fill_color_all_regions_based_on_my_count, output_path)
 
 
-def generate_my_per_m_frequency_map(data_path, output_path):
+def generate_my_per_m_frequency_map(output_path):
     generate_map(
-        data_path,
-        change_fill_color_all_regions_based_on_my_per_m_frequency,
-        output_path)
+        change_fill_color_all_regions_based_on_my_per_m_frequency, output_path)
 
 
-def generate_m_frequency_map(data_path, output_path):
+def generate_m_frequency_map(output_path):
     generate_map(
-        data_path,
-        change_fill_color_all_regions_based_on_m_frequency,
-        output_path)
+        change_fill_color_all_regions_based_on_m_frequency, output_path)
 
 
-def generate_my_frequency_map(data_path, output_path):
+def generate_my_frequency_map(output_path):
     generate_map(
-        data_path,
-        change_fill_color_all_regions_based_on_my_frequency,
-        output_path)
+        change_fill_color_all_regions_based_on_my_frequency, output_path)
 
 
-def generate_map(data_path, coloring_function, output_path):
-    soup = get_wellformed_soup_from_svg_file(data_path)
+def generate_map(coloring_function, output_path):
+    soup = get_wellformed_soup_from_svg_file()
     coloring_function(soup)
     make_png_from_soup(soup, output_path)
 
 
-def get_wellformed_soup_from_svg_file(data_path):
-    soup = read_soup_from_svg_file(data_path)
+def get_wellformed_soup_from_svg_file():
+    soup = read_soup_from_svg_file()
     remove_malformed_attribute_from_soup(soup)
     return soup
 
 
-def read_soup_from_svg_file(data_path):
-    with open("{}/LocSecRegions.svg".format(data_path), "r") as template:
+base_path = "."
+
+
+def read_soup_from_svg_file():
+    with open(f"{base_path}/data/LocSecRegions.svg", "r") as template:
         raw_code = "".join(template.readlines())
     return BeautifulSoup(raw_code, 'xml')
 
@@ -263,11 +252,10 @@ def make_png_from_soup(soup, output_path):
 
 
 if __name__ == '__main__':
-    data_path = "{}/data".format(get_relative_path_to_script())
-    generate_mysec_presence_map(data_path, "MYSec_presence_map.png")
-    generate_looking_state_map(data_path, "MYSec_map.png")
-    generate_m_count_map(data_path, "M_density_map.png")
-    generate_my_count_map(data_path, "MY_density_map.png")
-    generate_my_per_m_frequency_map(data_path, "MY_per_M_frequency_map.png")
-    generate_m_frequency_map(data_path, "M_frequency_map.png")
-    generate_my_frequency_map(data_path, "MY_frequency_map.png")
+    generate_mysec_presence_map("MYSec_presence_map.png")
+    generate_looking_state_map("MYSec_map.png")
+    generate_m_count_map("M_density_map.png")
+    generate_my_count_map("MY_density_map.png")
+    generate_my_per_m_frequency_map("MY_per_M_frequency_map.png")
+    generate_m_frequency_map("M_frequency_map.png")
+    generate_my_frequency_map("MY_frequency_map.png")

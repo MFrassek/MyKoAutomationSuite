@@ -1,5 +1,4 @@
 import unittest
-import os
 from utils import fill_db
 import databaseConnection
 from _pytest.monkeypatch import MonkeyPatch
@@ -8,8 +7,7 @@ from _pytest.monkeypatch import MonkeyPatch
 class TestDbFill(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestDbFill, self).__init__(*args, **kwargs)
-        self.data_path = "{}/test_data".format(
-            os.path.dirname(os.path.abspath(__file__)))
+        self.data_path = "./tests/data"
         self.db_name = "tests/TestEmpty.db"
 
     def setUp(self):

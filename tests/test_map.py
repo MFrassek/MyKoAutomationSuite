@@ -9,8 +9,8 @@ from _pytest.monkeypatch import MonkeyPatch
 class TestMap(unittest.TestCase):
     def __init__(self, *args, **kwargs):
         super(TestMap, self).__init__(*args, **kwargs)
-        self.data_path = "{}/test_data".format(
-            os.path.dirname(os.path.abspath(__file__)))
+        self.base_path = "./tests"
+        mysec_map.base_path = self.base_path
         self.db_name = "tests/TestFilled.db"
 
     def setUp(self):
@@ -25,64 +25,57 @@ class TestMap(unittest.TestCase):
         self.monkeypatch.undo()
 
     def test_make_looking_state_map(self):
-        functionTemp = mysec_map.prompt_region_ids_for_looking_state_change
         self.monkeypatch.setattr(
             "builtins.input", lambda x: "")
-        mysec_map.generate_looking_state_map(
-            self.data_path, f"{self.data_path}/test_map.png")
+        mysec_map.generate_looking_state_map(f"{self.base_path}/test_map.png")
         self.assertTrue(
-            os.path.exists(f"{self.data_path}/test_map.png"),
+            os.path.exists(f"{self.base_path}/test_map.png"),
             "test_Map.png does not exist at expected location")
-        os.remove(f"{self.data_path}/test_map.png")
-        mysec_map.prompt_region_ids_for_looking_state_change = functionTemp
+        os.remove(f"{self.base_path}/test_map.png")
 
     def test_make_mysec_presence_map(self):
         mysec_map.generate_mysec_presence_map(
-            self.data_path, f"{self.data_path}/test_map.png")
+            f"{self.base_path}/test_map.png")
         self.assertTrue(
-            os.path.exists(f"{self.data_path}/test_map.png"),
+            os.path.exists(f"{self.base_path}/test_map.png"),
             "test_Map.png does not exist at expected location")
-        os.remove(f"{self.data_path}/test_map.png")
+        os.remove(f"{self.base_path}/test_map.png")
 
     def test_make_m_count_map(self):
-        mysec_map.generate_m_count_map(
-            self.data_path, f"{self.data_path}/test_map.png")
+        mysec_map.generate_m_count_map(f"{self.base_path}/test_map.png")
         self.assertTrue(
-            os.path.exists(f"{self.data_path}/test_map.png"),
+            os.path.exists(f"{self.base_path}/test_map.png"),
             "test_Map.png does not exist at expected location")
-        os.remove(f"{self.data_path}/test_map.png")
+        os.remove(f"{self.base_path}/test_map.png")
 
     def test_make_my_count_map(self):
-        mysec_map.generate_my_count_map(
-            self.data_path, f"{self.data_path}/test_map.png")
+        mysec_map.generate_my_count_map(f"{self.base_path}/test_map.png")
         self.assertTrue(
-            os.path.exists(f"{self.data_path}/test_map.png"),
+            os.path.exists(f"{self.base_path}/test_map.png"),
             "test_Map.png does not exist at expected location")
-        os.remove(f"{self.data_path}/test_map.png")
+        os.remove(f"{self.base_path}/test_map.png")
 
     def test_make_my_per_m_frequency_map(self):
         mysec_map.generate_my_per_m_frequency_map(
-            self.data_path, f"{self.data_path}/test_map.png")
+            f"{self.base_path}/test_map.png")
         self.assertTrue(
-            os.path.exists(f"{self.data_path}/test_map.png"),
+            os.path.exists(f"{self.base_path}/test_map.png"),
             "test_Map.png does not exist at expected location")
-        os.remove(f"{self.data_path}/test_map.png")
+        os.remove(f"{self.base_path}/test_map.png")
 
     def test_make_m_frequency_map(self):
-        mysec_map.generate_m_frequency_map(
-            self.data_path, f"{self.data_path}/test_map.png")
+        mysec_map.generate_m_frequency_map(f"{self.base_path}/test_map.png")
         self.assertTrue(
-            os.path.exists(f"{self.data_path}/test_map.png"),
+            os.path.exists(f"{self.base_path}/test_map.png"),
             "test_Map.png does not exist at expected location")
-        os.remove(f"{self.data_path}/test_map.png")
+        os.remove(f"{self.base_path}/test_map.png")
 
     def test_make_my_frequency_map(self):
-        mysec_map.generate_my_frequency_map(
-            self.data_path, f"{self.data_path}/test_map.png")
+        mysec_map.generate_my_frequency_map(f"{self.base_path}/test_map.png")
         self.assertTrue(
-            os.path.exists(f"{self.data_path}/test_map.png"),
+            os.path.exists(f"{self.base_path}/test_map.png"),
             "test_Map.png does not exist at expected location")
-        os.remove(f"{self.data_path}/test_map.png")
+        os.remove(f"{self.base_path}/test_map.png")
 
     def test_remove_malformed_attribute(self):
         soup = BeautifulSoup("""

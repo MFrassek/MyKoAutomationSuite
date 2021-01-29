@@ -1,7 +1,6 @@
 import os
 import subprocess
 import re
-from helper import get_relative_path_to_script
 from person import Volunteer
 from position import Position
 from region import Region
@@ -34,12 +33,11 @@ def get_target_region(position: Position):
 
 
 def generate_tex_file_from_template(basename, intro_format_variables):
-    data_path = f"{get_relative_path_to_script()}/data"
     if intro_format_variables["BildPfad"]:
         template_file_name = "IntroTemplate.txt"
     else:
         template_file_name = "IntroTemplateWithoutPic.txt"
-    with open(f"{data_path}/{template_file_name}", "r") as template:
+    with open(f"./data/{template_file_name}", "r") as template:
         raw_intro = "".join(template.readlines())
     with open(f"{basename}.tex", "w") as tex_file:
         tex_file.write(raw_intro % intro_format_variables)
@@ -59,8 +57,7 @@ def remove_byproduct_files(basename):
 
 
 def generate_mail_text_from_template(basename, mail_format_variables):
-    data_path = f"{get_relative_path_to_script()}/data"
-    with open(f"{data_path}/IntroMailTemplate.txt", "r") as template:
+    with open("./data/IntroMailTemplate.txt", "r") as template:
         raw_mail = "".join(template.readlines())
     return raw_mail % mail_format_variables
 
@@ -96,8 +93,7 @@ def make_mail_format_variables(
 
 
 def get_intro_first_line_and_remaining_text(basename):
-    data_path = f"{get_relative_path_to_script()}/data"
-    with open(f"{data_path}/intros/texts/{basename}.txt", "r")\
+    with open(f"./data/intros/texts/{basename}.txt", "r")\
             as intro_text:
         intro_first_line = intro_text.readline()
         intro_remaining_text = re.sub(
@@ -106,11 +102,10 @@ def get_intro_first_line_and_remaining_text(basename):
 
 
 def get_path_to_picture(basename):
-    data_path = f"{get_relative_path_to_script()}/data"
     picture_options = list(filter(lambda x: x.startswith(basename),
-                           (os.listdir(f'{data_path}/intros/pictures'))))
+                           (os.listdir("./data/intros/pictures"))))
     if len(picture_options):
-        return f"""{data_path}/intros/pictures/{picture_options[0]}"""
+        return f"""./data/intros/pictures/{picture_options[0]}"""
     else:
         return ""
 
