@@ -141,9 +141,6 @@ das Ihr hier findet:
 \fontsize{14}{16}\selectfont
 %(VorstellungStart)s\\
 
-\begin{wrapfigure}{R}{0pt}
-\raisebox{0pt}[\dimexpr\height-0.82\baselineskip\relax]{\includegraphics[height=164pt]{%(BildPfad)s}}
-\end{wrapfigure}
 %(VorstellungText)s
 
 \end{document}
