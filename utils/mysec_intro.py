@@ -103,9 +103,12 @@ def get_intro_first_line_and_remaining_text(basename):
 
 def get_path_to_picture(basename):
     data_path = f"{get_relative_path_to_script()}/data"
-    return f"""{data_path}/intros/pictures/{list(filter(
-        lambda x: x.startswith(basename),
-        (os.listdir(f'{data_path}/intros/pictures'))))[0]}"""
+    picture_options = list(filter(lambda x: x.startswith(basename),
+                           (os.listdir(f'{data_path}/intros/pictures'))))
+    if len(picture_options):
+        return f"""{data_path}/intros/pictures/{picture_options[0]}"""
+    else:
+        return ""
 
 
 def raise_error_if_returncode_is_not_zero(proc, basename):
