@@ -8,150 +8,67 @@
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   sodipodi:docname="LocSecRegions.svg"
-   inkscape:version="1.0 (1.0+r73+1)"
-   id="svg1807"
+   width="1499.9995"
+   height="2030.6135"
+   viewBox="0 0 1499.9997 2030.6135"
    version="1.1"
-   viewBox="0 0 124.23889 168.18916"
-   height="168.18916mm"
-   width="124.23888mm">
+   id="svg1807"
+   inkscape:version="1.0 (1.0+r73+1)"
+   sodipodi:docname="LocSecRegions (copy).svg">
   <defs
      id="defs1801">
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1746.4907)"
-       id="pattern10598"
-       xlink:href="#pattern10575"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1090.2407)"
-       id="pattern10575"
-       xlink:href="#pattern10560"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1690.2407)"
-       id="pattern10560"
-       xlink:href="#Strips1_1-191"
-       inkscape:collect="always" />
-    <pattern
-       inkscape:isstock="true"
-       inkscape:stockid="Stripes 1:1"
-       id="Strips1_1-191"
-       patternTransform="translate(0,0) scale(10,10)"
-       height="1"
-       width="2"
-       patternUnits="userSpaceOnUse"
+    <linearGradient
+       id="linearGradient1"
        inkscape:collect="always">
-      <rect
-         id="rect9557"
-         height="2"
-         width="1"
-         y="-0.5"
-         x="0"
-         style="fill:#00cc14;stroke:none;opacity:1" />
-    </pattern>
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1333.9907)"
-       id="pattern1590"
-       xlink:href="#pattern10598"
+      <stop
+         id="stop1"
+         offset="0"
+         style="stop-color:#000000;stop-opacity:1" />
+      <stop
+         id="stop2"
+         offset="1"
+         style="stop-color:#ffffff;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient
+       gradientUnits="userSpaceOnUse"
+       y2="1920"
+       x2="0"
+       y1="1395"
+       x1="0"
+       id="legendGradient"
+       xlink:href="#linearGradient1"
        inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1746.4907)"
-       id="pattern1592"
-       xlink:href="#pattern10575"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1090.2407)"
-       id="pattern1594"
-       xlink:href="#pattern10560"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1690.2407)"
-       id="pattern1596"
-       xlink:href="#Strips1_1-191"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1333.9907)"
-       id="pattern1603"
-       xlink:href="#pattern10598"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1746.4907)"
-       id="pattern1605"
-       xlink:href="#pattern10575"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1090.2407)"
-       id="pattern1607"
-       xlink:href="#pattern10560"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1690.2407)"
-       id="pattern1609"
-       xlink:href="#Strips1_1-191"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1333.9907)"
-       id="pattern1616"
-       xlink:href="#pattern10598"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1746.4907)"
-       id="pattern1618"
-       xlink:href="#pattern10575"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1090.2407)"
-       id="pattern1620"
-       xlink:href="#pattern10560"
-       inkscape:collect="always" />
-    <pattern
-       patternTransform="matrix(2.1395248,1.1664179,-0.82195188,1.5076812,-22.454951,1690.2407)"
-       id="pattern1622"
-       xlink:href="#Strips1_1-191"
-       inkscape:collect="always" />
-    <clipPath
-       id="p73bad1f9c3">
-      <rect
-         id="rect24721"
-         y="75.384529"
-         x="72"
-         width="357.12"
-         height="430.99094" />
-    </clipPath>
-    <clipPath
-       id="clipPath9552">
-      <rect
-         id="rect9550"
-         y="75.384529"
-         x="72"
-         width="357.12"
-         height="430.99094" />
-    </clipPath>
   </defs>
   <sodipodi:namedview
-     inkscape:document-rotation="0"
-     inkscape:window-maximized="1"
-     inkscape:window-y="27"
-     inkscape:window-x="72"
-     inkscape:window-height="1016"
-     inkscape:window-width="1848"
-     showgrid="false"
-     inkscape:current-layer="layer1"
-     inkscape:document-units="mm"
-     inkscape:cy="373.65511"
-     inkscape:cx="268.52492"
-     inkscape:zoom="0.9899495"
-     inkscape:pageshadow="2"
-     inkscape:pageopacity="0.0"
-     borderopacity="1.0"
-     bordercolor="#666666"
-     pagecolor="#ffffff"
-     id="base"
-     fit-margin-top="0"
-     fit-margin-left="0"
-     fit-margin-right="0"
+     inkscape:cy="1700.5371"
+     inkscape:cx="-240.90406"
+     inkscape:zoom="0.21668328"
+     inkscape:snap-global="false"
      fit-margin-bottom="0"
-     inkscape:snap-global="false" />
+     fit-margin-right="0"
+     fit-margin-left="0"
+     fit-margin-top="0"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1848"
+     inkscape:window-height="1016"
+     inkscape:window-x="72"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1"
+     inkscape:document-rotation="0">
+    <inkscape:grid
+       id="grid1074"
+       type="xygrid"
+       originx="-2.7691698e-05"
+       originy="-9.7440686e-05" />
+  </sodipodi:namedview>
   <metadata
      id="metadata1804">
     <rdf:RDF>
@@ -165,209 +82,228 @@
     </rdf:RDF>
   </metadata>
   <g
-     transform="translate(0.1954487,1.9147892)"
-     id="layer1"
+     inkscape:label="Layer 1"
      inkscape:groupmode="layer"
-     inkscape:label="Layer 1">
+     id="layer1">
     <path
-       sodipodi:nodetypes="cccc"
-       d="m 34.384635,-1.8295839 c -4.404238,7.3315068 13.798012,9.746181 4.32321,18.8825399 1.120956,21.140836 38.644052,-0.40322 17.734865,-5.738775 C 55.565383,-4.2767571 37.87956,8.9497947 34.384635,-1.8295839 Z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 447.0585,50.316252 C 366.76241,199.51784 618.35636,419.63611 724.85821,261.60427 771.98489,101.22752 571.97753,28.15251 447.0585,50.316252 Z m -0.71928,-0.04074 0.66705,0.0387 -0.6672,-0.0387 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Kiel" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 17.540451,71.517517 c -18.5678138,3.509226 2.387395,19.635997 4.627372,4.813577 -0.812745,-2.158675 -2.743711,-3.641286 -4.627372,-4.813577 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 214.13371,886.58192 c -144.536952,15.5458 121.60027,162.85558 17.40349,15.52835 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Ruhrgebiet" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 29.778264,135.44256 c -8.819766,6.6648 -11.236575,32.07109 5.448361,22.85636 14.467597,-9.65543 -3.959395,-11.85363 -5.448361,-22.85636 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 361.88643,1658.3784 c -173.98835,36.7517 -56.26093,374.0063 95.26074,241.2904 54.29306,-85.9538 -48.53218,-176.8067 -95.26074,-241.2904 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Freiburg" />
     <path
        sodipodi:nodetypes="ccc"
-       d="m 54.204347,145.65791 c -8.709967,1.35572 -23.136394,12.7478 -7.651358,12.78712 9.014338,7.76241 15.838421,-7.38282 7.651358,-12.78712 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 656.79381,1781.7132 c -204.49005,-59.5705 -61.22057,334.3588 43.92958,119.0072 15.80042,-43.4029 -0.49451,-98.4009 -43.92958,-119.0072 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Bodensee" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="m 58.147527,130.02097 c -4.015156,7.53266 -13.299219,17.90761 -0.03401,19.17879 -3.147292,5.95731 -1.699051,20.71285 6.315667,11.60681 7.757794,-3.87078 6.461026,-18.05274 8.859409,-23.57832 -3.802034,-4.45583 -9.887786,-5.41834 -15.141067,-7.20728 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 704.40164,1592.9209 c -142.37164,82.3644 -64.90766,411.0072 113.13293,328.4108 128.786,-90.0617 62.07622,-363.0655 -113.13293,-328.4108 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Schwaben" />
     <path
        sodipodi:nodetypes="ccc"
-       d="m 34.709547,125.80981 c -10.256349,6.97687 3.265683,19.09912 6.473203,5.96046 0.735203,-3.67037 -3.117573,-6.40137 -6.473203,-5.96046 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 421.42411,1542.0778 c -138.95843,76.252 190.16018,130.6425 33.93229,11.8504 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Karlsruhe" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 29.334651,98.727244 c 3.194449,9.087876 -21.9436182,16.317586 -6.934797,19.356896 11.051285,-0.1352 18.294122,-10.8028 6.934797,-19.356896 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 356.53049,1215.0974 c -128.94943,63.3411 -18.05775,336.159 64.87274,135.1042 15.33218,-52.5851 -8.01359,-119.6006 -64.87274,-135.1042 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Mainz, Wiesbaden" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 39.575871,84.260371 c -11.819235,3.837097 -9.975939,26.617169 3.692688,15.23353 2.620623,-5.096835 -0.566798,-11.160802 -3.692688,-15.23353 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 480.17748,1040.4322 c -192.21505,-26.3736 5.98001,314.8653 49.86191,102.5303 3.88632,-39.7531 -13.3002,-83.2223 -49.86191,-102.5303 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Marburg, Gießen" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 57.355486,98.572921 c -10.515131,3.259369 -15.51943,26.977319 -0.238765,23.099479 7.753131,-4.46926 11.141905,-20.1858 0.238765,-23.099479 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 694.83898,1213.2341 c -179.90361,-8.5986 -115.06703,346.4997 48.01002,237.028 75.33489,-63.5892 45.16673,-206.9212 -48.01002,-237.028 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Würzburg" />
     <path
-       sodipodi:nodetypes="cccccccccc"
-       d="m 63.882132,72.762953 c -0.253677,8.400187 -9.27321,17.467629 -5.412952,23.091468 1.198065,14.007239 19.817334,5.842319 26.848064,2.19211 C 86.179813,84.564755 67.957421,85.018829 63.882132,72.762953 Z m -5.376119,19.063485 -0.03799,0.01597 z m -0.08513,0.147278 -0.07032,0.01159 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="cccc"
+       d="M 773.63819,901.61869 C 496.85057,1541.1543 1293.4485,1014.8876 807.34985,950.2041 L 786.50879,929.96623 Z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Thüringen" />
     <path
-       sodipodi:nodetypes="ccccc"
-       d="M 77.7435,44.536158 C 69.480072,47.320227 64.460881,52.358664 69.724115,60.10812 58.205094,71.338449 71.714956,90.434025 85.341855,87.40199 81.898454,77.333789 93.05453,77.035092 97.175524,71.407553 80.106286,68.31394 91.771665,48.824394 77.7435,44.536158 Z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 940.99284,560.82351 C 748.37651,648.1009 733.03255,983.24948 941.38929,1060.7378 1088.5105,1085.7026 1152.597,888.94627 1081.1385,782.72309 1050.3858,704.57699 1030.7827,588.72112 940.99284,560.82351 Z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Sachsen-Anhalt" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="M 67.971805,53.669507 C 55.116731,50.834441 55.75197,82.705332 67.11812,66.427145 c 3.154275,-3.51955 3.798876,-8.871227 0.853685,-12.757638 z m -8.154441,3.838862 -0.02653,0.0292 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 823.01467,671.0947 c -185.11173,-62.93817 -28.78673,310.34842 22.42363,85.48051 4.42026,-29.4791 1.38081,-64.08768 -22.42363,-85.48051 z m -98.71816,45.46448 -0.1032,0.54259 z m 0.2658,0.8838 -0.32031,0.35265 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Braunschweig" />
     <path
-       sodipodi:nodetypes="cccccccccccccc"
-       d="m 49.901922,66.652633 c -2.034729,7.741782 -5.822563,13.05759 -11.652541,16.597141 3.767035,9.968341 9.829378,10.062409 16.939582,3.873718 11.83228,-1.539377 8.601781,-20.709609 -3.850666,-18.393614 z m 0.142655,22.056125 -3.35e-4,0.04559 z m 8.031397,0.544554 -0.017,0.01829 z m -11.541009,4.116241 -0.01726,0.02589 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="cccccc"
+       d="M 604.84866,827.84587 C 569.0728,928.51071 423.63844,1157.91 651.6646,1099.439 808.50502,1051.0262 766.80077,825.07021 604.84866,827.84587 Z m 1.72234,266.29373 -0.003,0.5505 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Göttingen, Kassel" />
     <path
-       sodipodi:nodetypes="cccc"
-       d="M 30.109409,45.083217 C 23.30985,46.450507 6.0580302,52.157204 16.154535,60.638024 4.2395327,75.797589 39.020965,75.613599 34.502084,59.021699 42.747389,51.401663 33.35315,51.48196 30.109409,45.083217 Z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 365.88451,567.42848 C 226.43313,577.34001 76.141141,800.97929 235.16024,885.75769 412.0203,943.81902 542.71293,645.65122 365.88451,567.42848 Z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Münster" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="M 41.742525,53.354132 C 30.453068,57.642178 26.913644,77.608817 41.861391,79.653875 54.084213,76.633658 42.175634,61.01034 41.742525,53.354132 Z m 0.149069,0.715411 0.128112,0.04102 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 506.33651,667.28694 c -166.21355,-1.75429 -146.77632,335.99816 23.97428,263.95843 81.13436,-69.89378 8.06599,-188.00416 -23.97428,-263.95843 z m 1.79976,8.63762 1.52534,0.88849 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Ostwestfalen-Lippe" />
     <path
-       sodipodi:nodetypes="ccccc"
-       d="m 67.411229,39.86724 c -8.06991,3.992416 -19.273657,0.06773 -22.428938,13.246291 -10.581043,10.571771 15.996483,25.258656 14.538656,7.250676 2.433399,-7.977746 12.273576,-11.38213 15.372339,-16.008852 -2.04941,-2.283872 -5.308484,-2.403238 -7.482057,-4.488115 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 816.2466,504.45357 C 665.7545,438.6094 451.39953,679.01786 594.16142,794.68981 725.40017,855.79212 947.02723,595.91392 816.2466,504.45357 Z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Hannover" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="m 109.76748,35.724177 c -8.90786,10.037516 -32.994297,-4.351244 -25.114086,14.229052 0.534193,11.066229 4.745916,20.321922 16.608186,22.332177 3.45378,11.603738 24.04017,4.496648 18.05783,-8.054709 -2.79348,-7.455299 -7.14108,-21.719926 -6.73312,-24.467386 -1.74632,-0.762954 -1.2293,-3.081286 -2.81881,-4.039134 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 1327.6331,454.43237 c -120.0828,33.68615 -355.78386,51.25644 -310.2831,231.36759 40.8377,126.37591 156.6909,269.80525 302.2147,254.44695 175.2648,-30.46042 125.4254,-238.60348 58.6821,-346.84029 -20.7683,-44.7195 -41.2234,-90.26903 -50.6137,-138.97425 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Berlin und Brandenburg" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="m 98.738839,70.133644 c -3.291549,7.60606 -21.060796,7.344589 -11.886292,19.065759 -2.796618,7.261086 -6.139139,21.395737 6.045155,12.631307 10.497568,-2.113855 19.271218,-15.539671 28.894928,-9.973098 9.06064,-14.28472 -11.96669,-15.593582 -19.6267,-16.576092 1.49518,-2.812563 -0.44186,-4.979952 -3.427091,-5.147876 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 1194.4792,869.87384 c -167.6907,25.26138 -274.43485,362.50736 -40.6038,355.28556 123.6376,-18.0928 333.1933,-83.6778 282.7265,-246.19209 -53.512,-89.63168 -212.5077,11.90901 -242.1227,-109.09347 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Sachsen" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="M 12.901291,67.784795 C 1.2240223,66.082222 -0.38856611,84.526992 9.1953702,80.475777 5.0165874,75.053011 21.886564,72.45957 12.901291,67.784795 Z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 158.12298,841.51509 c -150.017949,-42.92007 22.43204,227.56631 26.79886,39.8709 0.78712,-16.42135 -6.59891,-39.03055 -26.79886,-39.8709 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Niederrhein" />
     <path
-       sodipodi:nodetypes="ccccccccc"
-       d="M 89.78632,11.705055 C 83.067705,22.942886 56.868979,23.212957 68.657536,40.47548 c 5.861581,5.331241 18.461335,9.998413 14.988213,-2.048688 10.874828,5.214879 19.846551,-2.098458 31.083701,-1.232485 1.25717,-13.050312 -22.41309,-25.054153 -24.21355,-23.53099 2.726353,-0.03684 3.411317,-2.477299 -0.72958,-1.958262 z m 23.60583,17.697993 -0.21483,-0.107965 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 999.02606,250.67083 C 827.47408,202.19816 730.81597,547.19091 930.97068,542.68949 1056.735,517.71095 1216.9418,536.27604 1311.587,439.63225 1426.5301,259.10508 1116.8856,152.38052 999.02606,250.67083 Z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Mecklenburg-Vorpommern" />
     <path
-       sodipodi:nodetypes="cccc"
-       d="M 70.723737,13.652736 C 59.205003,19.12506 51.613911,32.525232 40.652459,26.763098 42.231762,33.827174 56.43646,48.437993 66.065684,40.7051 65.288215,30.882573 67.345191,22.907158 70.723737,13.652736 Z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 824.41456,194.31768 C 765.47984,298.3822 477.06173,340.37652 613.528,494.61 780.63244,594.7961 953.74037,315.57755 824.41456,194.31768 Z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Hamburg" />
     <path
-       sodipodi:nodetypes="cccccccc"
-       d="M 37.889444,25.25361 C 33.424217,29.601146 37.616966,37.151207 30.057868,33.422194 19.812988,15.447797 8.827409,50.459819 24.318495,46.414245 33.507533,50.17495 50.695178,59.670214 50.628929,41.169056 49.958123,32.188805 39.502016,33.59264 37.889444,25.25361 Z m 13.356891,20.571075 -0.03323,0.0046 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 459.81648,328.01651 C 380.1207,421.17649 74.191207,468.20418 294.25059,620.12473 402.79125,706.20968 662.53902,644.30312 577.28611,472.56358 555.92346,409.34451 491.84574,382.64361 459.81648,328.01651 Z m -32.26879,131.09212 -0.78681,2.57926 z m 193.53268,117.27186 -0.40119,0.0555 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Nordwest" />
     <path
-       sodipodi:nodetypes="ccccccc"
-       d="m 29.067216,69.322054 c -3.267004,4.318679 -14.525749,2.383278 -4.459332,9.040967 4.490473,8.482728 19.607569,10.327155 11.246721,-1.872508 -1.452561,-3.015796 -3.848692,-5.557983 -6.787389,-7.168459 z m 3.124674,14.602524 -0.02331,0.0098 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 353.30165,860.07507 C 183.59551,884.6598 460.34517,1097.08 402.161,913.53012 393.78267,890.42036 376.90048,868.73431 353.30165,860.07507 Z m 37.7256,176.30293 -0.2814,0.1185 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Hamm, Arnsberg" />
     <path
-       sodipodi:nodetypes="cc"
-       d="m 26.656733,77.788638 c -17.2094988,1.509459 6.293152,20.059512 0,0 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 324.19875,962.29604 c -135.17889,2.6329 79.59639,141.71676 0,0 z m -88.90655,73.27526 -0.18249,0.7528 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Hagen" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 16.91793,81.079828 c -8.662249,-2.42928 -19.8265691,8.173205 -5.277998,7.494964 4.201286,0.172618 12.475655,-3.288809 5.277998,-7.494964 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 206.6177,1002.032 c -155.354803,-54.34308 15.43893,235.5494 35.39476,37.7364 1.55519,-18.6324 -12.63325,-44.12729 -35.39476,-37.7364 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Düsseldorf" />
     <path
-       sodipodi:nodetypes="cccc"
-       d="m 33.762694,83.086694 c -5.06496,6.343907 -26.7664414,0.302366 -22.239835,10.311291 6.559026,-1.911937 11.340416,-1.172403 14.130676,3.954261 5.258143,-1.337493 11.956557,-8.862505 8.109159,-14.265552 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 409.99229,1026.2618 c -152.28076,-73.6158 -237.54766,232.555 -41.77003,138.7534 48.40082,-24.3786 82.59132,-91.7982 41.77003,-138.7534 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Köln" />
     <path
-       sodipodi:nodetypes="cccc"
-       d="M 20.546333,90.378289 C 7.8573274,93.231284 -2.2368997,108.79978 9.5316109,119.0472 16.981467,116.96765 30.307233,106.24004 28.722511,96.726103 22.140976,100.61037 21.707243,95.334624 20.546333,90.378289 Z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="M 250.4251,1114.2967 C 66.065299,1073.9345 -11.541424,1437.8952 201.18511,1419.336 346.42113,1390.4936 356.43502,1196.0659 250.4251,1114.2967 Z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Rhein-Mosel" />
     <path
-       sodipodi:nodetypes="ccccccccc"
-       d="m 15.463097,118.12931 c -16.6185754,-0.88496 4.417989,19.40562 5.70977,5.51992 -0.910834,-2.61881 -3.199944,-4.52573 -5.70977,-5.51992 z m 4.880722,6.52463 -0.01674,0.003 z m 1.34704,2.86857 0.12029,0.12288 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="cc"
+       d="m 189.05282,1449.3474 c -111.891536,50.2719 123.82884,81.1611 0,0 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Saarland" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 55.602644,86.635202 c -12.878286,-0.209047 -13.841359,23.805778 -0.34503,14.664628 6.064305,-4.990986 2.970256,-9.816083 0.34503,-14.664628 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 673.6761,1069.1046 c -218.20602,-51.7062 -16.67916,348.9393 45.00605,105.0139 -3.85476,-38.903 -28.21225,-71.009 -45.00605,-105.0139 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Fulda" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="m 44.064777,98.78208 c -11.866912,-0.359041 -11.286917,18.63331 0.318186,10.04812 7.148127,-1.60918 3.779304,-7.19255 -0.318186,-10.04812 z m -8.820656,3.2339 -0.01687,0.003 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="ccc"
+       d="m 534.3741,1215.7595 c -144.0601,-5.469 94.96856,176.8579 14.91263,17.414 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Frankfurt" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 45.228016,107.33717 c -8.558089,3.93131 4.606383,16.94288 2.713898,3.72977 0.09791,-1.65031 -0.972993,-3.4555 -2.713898,-3.72977 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 548.41845,1319.049 c -116.01212,41.4828 129.81129,129.5917 0,0 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Aschaffenburg" />
     <path
-       sodipodi:nodetypes="ccccc"
-       d="m 35.079405,116.03999 c -7.611455,10.39509 12.211279,10.92172 8.066446,4.27488 -3.326533,0.65547 -5.857327,-2.33602 -8.066446,-4.27488 z m 2.83774,2.36698 c 0.817559,0.23751 -0.762662,0.4193 0,0 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="cc"
+       d="m 425.88956,1424.1222 c -60.42252,115.9418 139.56455,0.8528 0,0 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Rhein-Neckar" />
     <path
-       sodipodi:nodetypes="ccccccc"
-       d="m 47.857253,117.51306 c -10.358803,6.04702 -4.836176,16.22979 -13.946382,22.97482 1.87794,15.90435 21.069462,7.12169 21.327003,-5.68329 9.350443,-11.04151 -4.027199,-9.76701 -7.380621,-17.29153 z m 7.71832,12.83116 -0.09881,0.0924 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="ccc"
+       d="m 580.16243,1441.9073 c -104.29435,69.5162 -215.061,306.0699 -46.14325,355.7084 181.21156,-6.8749 190.64234,-287.2798 46.14325,-355.7084 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Stuttgart" />
     <path
-       sodipodi:nodetypes="ccccccccc"
-       d="m 72.702016,130.18084 c -2.364181,6.39407 4.304194,13.3378 -2.569539,18.07222 -4.536625,9.22937 0.827093,20.09124 10.982473,11.20746 7.392955,-5.20432 19.09004,7.54461 13.901751,-5.89443 -0.189416,-9.5674 -6.315057,-21.35317 -16.355394,-17.84594 -1.789468,-1.9037 -2.633324,-5.92712 -5.959291,-5.53931 z m -2.883021,16.83025 0.009,0.0748 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="cccc"
+       d="M 984.23207,1943.5936 C 1193.831,1922.1289 1151.2517,1610.596 940.88706,1629.7183 l -32.29508,-14.1158 c -42.62289,97.2866 -63.81278,322.4639 75.64009,327.9911 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="München" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="m 98.628844,127.67953 c -14.345493,2.56958 -5.07096,28.73658 5.268836,13.7435 8.07388,-6.06209 -1.49203,-9.60037 -5.268836,-13.7435 z m -8.244073,10.52026 -0.0052,0.0162 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="ccc"
+       d="m 1193.1512,1564.6517 c -207.76983,23.9877 46.1539,362.9518 93.6602,123.3395 0.194,-55.3474 -39.381,-109.7178 -93.6602,-123.3395 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Passau" />
     <path
-       sodipodi:nodetypes="cccc"
-       d="m 83.413198,112.52793 c -9.687534,3.18035 7.456858,12.70573 -4.466044,16.75946 -4.979547,13.915 25.224416,5.67135 15.182799,-6.08529 -3.184581,-3.91546 -6.851895,-7.43791 -10.716755,-10.67417 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 1009.4457,1381.7195 c -93.82011,108.0485 71.8324,389.5327 134.6573,169.3706 -1.6072,-79.8127 -63.444,-142.7569 -134.6573,-169.3706 z m 26.1278,24.3665 -0.2811,0.7004 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Regensburg" />
     <path
-       sodipodi:nodetypes="ccccccccccc"
-       d="m 74.262878,99.453076 c -2.34319,6.208114 -12.128374,2.422474 -10.747629,11.884934 -10.873708,9.16307 -1.988523,29.2766 10.740415,20.20656 11.331788,0.14039 7.748656,-13.94863 6.575648,-16.91585 18.430674,-0.9318 0.112721,-12.58779 -6.568434,-15.175644 z m -0.993345,31.471834 -0.01777,0.0359 z m -3.540031,2.21053 0.05564,0.086 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="cccc"
+       d="m 898.9697,1223.8608 c -686.57389,606.2993 605.2682,160.7904 43.10566,13.512 l -21.70266,-6.7033 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Nürnberg" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 2.7797644,86.66423 c -8.2178913,9.039612 13.2309166,16.98159 5.638234,3.663015 C 6.944262,88.58926 4.9286743,87.371479 2.7797644,86.66423 Z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 35.921097,1069.4551 c -100.827058,95.6396 179.036993,66.7192 0,0 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Aachen" />
     <path
-       sodipodi:nodetypes="ccc"
-       d="m 33.043957,114.23316 c -9.664772,0.49875 -19.698377,8.44077 -8.153498,15.88136 9.392394,6.00637 13.365473,-10.42839 8.153498,-15.88136 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       d="m 401.31466,1402.3075 c -180.40993,-83.5417 -132.543,316.5291 10.28282,147.1259 22.58775,-46.4207 13.76553,-103.1719 -10.28282,-147.1259 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Pfalz" />
     <path
-       sodipodi:nodetypes="cccccc"
-       d="m 36.323817,109.94097 c -9.431266,9.14591 16.411485,12.6854 5.376009,1.57805 -1.772257,-0.62851 -3.883164,-0.18004 -5.376009,-1.57805 z m 4.281781,8.63943 0.14998,0.0946 z"
-       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:0.170372;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
+       sodipodi:nodetypes="cc"
+       d="m 440.91392,1350.4859 c -72.59786,105.8708 168.00019,20.093 0,0 z"
+       style="fill:#999999;fill-opacity:1;stroke:#000000;stroke-width:2.05698;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:20;stop-color:#000000"
        id="Darmstadt" />
+    <g
+       transform="translate(200)"
+       id="Legend">
+      <rect
+         style="fill:url(#legendGradient);stroke:#000000;stroke-width:3"
+         id="gradient"
+         width="75"
+         height="525"
+         x="1335"
+         y="1395" />
+      <path
+         d="m 1410,1395 h 21 z m 0,105 h 21 z m 0,105 h 21 z m 0,105 h 21 z m 0,105 h 21 z m 0,105 h 21 z"
+         style="stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4"
+         id="Ticks" />
+      <g
+         id="g1072">
+        <text
+           id="LegendLabels"
+           x="1437"
+           y="1410"
+           style="font-size:51px;line-height:2.06;font-family:'Cronos Pro';-inkscape-font-specification:'Cronos Pro';text-align:start;text-anchor:start;fill:#000000"
+           xml:space="preserve"><tspan
+             sodipodi:role="line"
+             id="tspan1027"
+             x="1437"
+             y="1410">1.0</tspan><tspan
+             y="1515.0599"
+             x="1437"
+             sodipodi:role="line"
+             id="tspan1031">0.8</tspan><tspan
+             y="1620.12"
+             x="1437"
+             sodipodi:role="line"
+             id="tspan1033">0.6</tspan><tspan
+             y="1725.1799"
+             x="1437"
+             sodipodi:role="line"
+             id="tspan1037">0.4</tspan><tspan
+             y="1830.24"
+             x="1437"
+             sodipodi:role="line"
+             id="tspan1041">0.2</tspan><tspan
+             y="1935.2999"
+             x="1437"
+             sodipodi:role="line"
+             id="tspan1043">0.0</tspan></text>
+      </g>
+    </g>
   </g>
 </svg>

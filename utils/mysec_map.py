@@ -101,6 +101,7 @@ def change_fill_color_all_regions_based_on_m_count(soup):
         change_fill_color_of_path(
             soup, region.name, get_region_count_fraction_color(
                 region.m_count / max_m_count))
+    prepare_legend(soup)
 
 
 def change_fill_color_all_regions_based_on_my_count(soup):
@@ -109,6 +110,7 @@ def change_fill_color_all_regions_based_on_my_count(soup):
         change_fill_color_of_path(
             soup, region.name, get_region_count_fraction_color(
                 region.my_count / max_my_count))
+    prepare_legend(soup)
 
 
 def change_fill_color_all_regions_based_on_my_per_m_frequency(soup):
@@ -117,6 +119,7 @@ def change_fill_color_all_regions_based_on_my_per_m_frequency(soup):
         change_fill_color_of_path(
             soup, region.name, get_region_count_fraction_color(
                 region.my_per_m_frequency / max_my_per_m_frequency))
+    prepare_legend(soup)
 
 
 def change_fill_color_all_regions_based_on_m_frequency(soup):
@@ -125,6 +128,7 @@ def change_fill_color_all_regions_based_on_m_frequency(soup):
         change_fill_color_of_path(
             soup, region.name, get_region_count_fraction_color(
                 region.m_frequency / max_m_frequency))
+    prepare_legend(soup)
 
 
 def change_fill_color_all_regions_based_on_my_frequency(soup):
@@ -133,6 +137,7 @@ def change_fill_color_all_regions_based_on_my_frequency(soup):
         change_fill_color_of_path(
             soup, region.name, get_region_count_fraction_color(
                 region.my_frequency / max_my_frequency))
+    prepare_legend(soup)
 
 
 def print_current_looking_state_of_regions():
@@ -207,12 +212,33 @@ def get_max_my_frequency_for_all_regions():
     return region_with_max_my_frequency.my_frequency
 
 
+def prepare_legend(soup):
+    change_fill_color_of_stop(
+        soup, "stop1", get_region_count_fraction_color(1))
+    change_fill_color_of_stop(
+        soup, "stop2", get_region_count_fraction_color(0))
+    move_legend_into_view(soup)
+
+
 def change_fill_color_of_path(soup, id, fill_color):
     region_path_tag = soup("path", {"id": id})[0]
     region_style_attribute = region_path_tag["style"]
     region_style_attribute = re.sub(
         "(?<=fill:#).{6}", fill_color, region_style_attribute)
     region_path_tag["style"] = region_style_attribute
+
+
+def change_fill_color_of_stop(soup, id, fill_color):
+    stop_tag = soup("stop", {"id": id})[0]
+    stop_style_attribute = stop_tag["style"]
+    stop_style_attribute = re.sub(
+        "(?<=stop-color:#).{6}", fill_color, stop_style_attribute)
+    stop_tag["style"] = stop_style_attribute
+
+
+def move_legend_into_view(soup):
+    legend_tag = soup("g", {"id": "Legend"})[0]
+    legend_tag["transform"] = ""
 
 
 def get_region_looking_color(lookingBool):
