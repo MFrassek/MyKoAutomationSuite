@@ -70,13 +70,8 @@ class RegionPopulator(TablePopulator):
             region_non_m_count = 0
             for zip_range in zip_ranges:
                 zip_range = list(map(int, zip_range.split(",")))
-                if len(zip_range) == 1:
-                    if zip_range[0] in zip_to_inhabitants:
-                        region_non_m_count += \
-                            zip_to_inhabitants[zip_range[0]]
-                else:
-                    for zip_, inhabitants in zip_to_inhabitants.items():
-                        if zip_range[0] <= zip_ <= zip_range[1]:
-                            region_non_m_count += inhabitants
+                for zip_, inhabitants in zip_to_inhabitants.items():
+                    if zip_range[0] <= zip_ <= zip_range[-1]:
+                        region_non_m_count += inhabitants
             region_to_inhabitants[region_name] = region_non_m_count
         return region_to_inhabitants
