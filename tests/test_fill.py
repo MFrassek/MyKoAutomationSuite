@@ -15,7 +15,7 @@ class TestDbFill(unittest.TestCase):
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.db_name", self.db_name)
         self.monkeypatch.setattr(
-            "tablePopulator.TablePopulator.data_path", self.data_path)
+            "rawDataAccessMixin.RawDataAccessMixin.data_path", self.data_path)
         self.monkeypatch.setattr(
             "databaseConnection.DatabaseConnection.commit", lambda x: None)
 

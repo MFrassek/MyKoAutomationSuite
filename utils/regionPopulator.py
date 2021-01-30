@@ -2,6 +2,7 @@ import csv
 import collections
 from tablePopulator import TablePopulator
 from region import Region
+from regionFinder import RegionFinder
 
 
 class RegionPopulator(TablePopulator):
@@ -41,17 +42,6 @@ class RegionPopulator(TablePopulator):
         return collections.Counter(patched_home_regions)
 
     @classmethod
-    def get_region_to_zip_ranges(cls):
-        with open(
-                f"{cls.data_path}/RegionZipCodes.txt", "r") \
-                as region_zip_code_file:
-            region_zip_specs = [line[:-1].split("\t") for line
-                                in region_zip_code_file.readlines()]
-            region_to_zip_ranges = {zip_spec[0]: zip_spec[1:]
-                                    for zip_spec in region_zip_specs}
-        return region_to_zip_ranges
-
-    @classmethod
     def get_zip_to_non_m_inhabitants(cls):
         with open(
                 f"{cls.data_path}/ZipToInhabitants.csv", "r",
@@ -63,28 +53,11 @@ class RegionPopulator(TablePopulator):
 
     @classmethod
     def get_region_non_m_count(cls):
-        region_to_zip_ranges = cls.get_region_to_zip_ranges()
         zip_to_inhabitants = cls.get_zip_to_non_m_inhabitants()
         region_to_inhabitants = {}
         for zip_code, inhabitants in zip_to_inhabitants.items():
-            region_name = cls.find_region_belonging_to_zip_code(
-                zip_code, region_to_zip_ranges)
+            region_name = \
+                RegionFinder.find_region_belonging_to_zip_code(zip_code)
             region_to_inhabitants[region_name] = \
                 region_to_inhabitants.setdefault(region_name, 0) + inhabitants
         return region_to_inhabitants
-
-    @classmethod
-    def find_region_belonging_to_zip_code(cls, zip_code, region_to_zip_ranges):
-        for region_name in region_to_zip_ranges.keys():
-            if cls.zip_belongs_to_region(
-                    zip_code, region_name, region_to_zip_ranges):
-                return region_name
-        return "None"
-
-    @classmethod
-    def zip_belongs_to_region(cls, zip_code, region_name, region_to_zip_ranges):
-        for zip_range in region_to_zip_ranges[region_name]:
-            zip_range = list(map(int, zip_range.split(",")))
-            if zip_range[0] <= zip_code <= zip_range[-1]:
-                return True
-        return False
