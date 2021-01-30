@@ -1,9 +1,8 @@
 import abc
+from rawDataAccessMixin import RawDataAccessMixin
 
 
-class TablePopulator(abc.ABC):
-    data_path = "./data"
-
+class TablePopulator(abc.ABC, RawDataAccessMixin):
     @abc.abstractmethod
     def populate_table():
         pass
