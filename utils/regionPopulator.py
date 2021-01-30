@@ -65,13 +65,12 @@ class RegionPopulator(TablePopulator):
     def get_region_non_m_count(cls):
         region_to_zip_ranges = cls.get_region_to_zip_ranges()
         zip_to_inhabitants = cls.get_zip_to_non_m_inhabitants()
-        region_to_inhabitants = {}
-        for region_name, zip_ranges in region_to_zip_ranges.items():
-            region_non_m_count = 0
-            for zip_range in zip_ranges:
-                zip_range = list(map(int, zip_range.split(",")))
-                for zip_, inhabitants in zip_to_inhabitants.items():
+        region_to_inhabitants = {
+            region: 0 for region in region_to_zip_ranges.keys()}
+        for zip_, inhabitants in zip_to_inhabitants.items():
+            for region_name, zip_ranges in region_to_zip_ranges.items():
+                for zip_range in zip_ranges:
+                    zip_range = list(map(int, zip_range.split(",")))
                     if zip_range[0] <= zip_ <= zip_range[-1]:
-                        region_non_m_count += inhabitants
-            region_to_inhabitants[region_name] = region_non_m_count
+                        region_to_inhabitants[region_name] += inhabitants
         return region_to_inhabitants
