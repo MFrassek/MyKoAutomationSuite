@@ -67,13 +67,19 @@ class RegionPopulator(TablePopulator):
         zip_to_inhabitants = cls.get_zip_to_non_m_inhabitants()
         region_to_inhabitants = {
             region: 0 for region in region_to_zip_ranges.keys()}
-        for zip_, inhabitants in zip_to_inhabitants.items():
-            for region_name in region_to_zip_ranges.keys():
-                if cls.zip_belongs_to_region(
-                        zip_, region_name, region_to_zip_ranges):
-                    region_to_inhabitants[region_name] += inhabitants
-                    break
+        for zip_code, inhabitants in zip_to_inhabitants.items():
+            region_to_inhabitants[
+                cls.find_region_belonging_to_zip_code(
+                    zip_code, region_to_zip_ranges)] += inhabitants
         return region_to_inhabitants
+
+    @classmethod
+    def find_region_belonging_to_zip_code(cls, zip_code, region_to_zip_ranges):
+        for region_name in region_to_zip_ranges.keys():
+            if cls.zip_belongs_to_region(
+                    zip_code, region_name, region_to_zip_ranges):
+                return region_name
+        return "None"
 
     @classmethod
     def zip_belongs_to_region(cls, zip_code, region_name, region_to_zip_ranges):
