@@ -92,7 +92,8 @@ class UserInteraction():
         print(f"Birth date: {volunteer.birth_date}")
         print("Positions:")
         for position in volunteer.positions:
-            print(f"\t{position}")
+            if position:
+                print(f"\t{position}")
 
     @staticmethod
     def post_position_details(position):
