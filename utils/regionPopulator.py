@@ -17,8 +17,8 @@ class RegionPopulator(TablePopulator):
                 id_=region[0], name=region[1], mail_name=region[2],
                 magazine_name=region[3], m_count=m_counter[region_name],
                 my_count=my_counter[region_name],
-                non_m_count=non_m_counter[region_name], looking_state=True
-                ).add_to_db()
+                non_m_count=non_m_counter.get(region_name, 0),
+                looking_state=True).add_to_db()
 
     @classmethod
     def get_data_from_file(cls):
@@ -65,12 +65,12 @@ class RegionPopulator(TablePopulator):
     def get_region_non_m_count(cls):
         region_to_zip_ranges = cls.get_region_to_zip_ranges()
         zip_to_inhabitants = cls.get_zip_to_non_m_inhabitants()
-        region_to_inhabitants = {
-            region: 0 for region in region_to_zip_ranges.keys()}
+        region_to_inhabitants = {}
         for zip_code, inhabitants in zip_to_inhabitants.items():
-            region_to_inhabitants[
-                cls.find_region_belonging_to_zip_code(
-                    zip_code, region_to_zip_ranges)] += inhabitants
+            region_name = cls.find_region_belonging_to_zip_code(
+                zip_code, region_to_zip_ranges)
+            region_to_inhabitants[region_name] = \
+                region_to_inhabitants.setdefault(region_name, 0) + inhabitants
         return region_to_inhabitants
 
     @classmethod
