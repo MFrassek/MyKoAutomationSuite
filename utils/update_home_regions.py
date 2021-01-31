@@ -3,6 +3,7 @@ import requests
 from bs4 import BeautifulSoup
 from regionFinder import RegionFinder
 from person import Volunteer
+from databaseConnection import DatabaseConnection
 
 
 def update_volunteer_home_regions():
@@ -31,7 +32,9 @@ def update_volunteer_home_regions():
             name = first_name + " " + last_name
             vol = Volunteer.create_by_name(name)
             if vol and vol.is_active() and vol.home_region != region:
-                print(name + " " + region)
+                print(f"{name} has moved from {vol.home_region} to {region}.")
+                vol.home_region = region
+                vol.update_in_db()
 
 
 def row_details_are_valid(row_details: str):
@@ -43,3 +46,4 @@ def row_details_are_valid(row_details: str):
 
 if __name__ == "__main__":
     update_volunteer_home_regions()
+    DatabaseConnection().close()

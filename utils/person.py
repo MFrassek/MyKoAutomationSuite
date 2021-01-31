@@ -46,6 +46,7 @@ class Person(DatabaseEntry):
     def home_region(self, home_region):
         assert isinstance(home_region, str), \
             "'home_region' can only be set to type string."
+        self._home_region = home_region
 
     @property
     def pronoun(self):
@@ -77,6 +78,11 @@ class Person(DatabaseEntry):
                 personName, gender, birthDate)
             VALUES (
                 '{self._name}', '{self._gender}', '{self._birth_date}');"""
+
+    def get_update_command(self):
+        return f"""UPDATE {self.__class__.table_name}
+            SET homeRegion = '{self._home_region}'
+            WHERE personName = '{self._name}';"""
 
 
 class Volunteer(Person):
