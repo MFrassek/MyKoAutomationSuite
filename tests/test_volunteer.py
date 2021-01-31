@@ -23,10 +23,11 @@ class TestVolunteer(unittest.TestCase):
     def test_volunteer_accessibility(self):
         vol = Volunteer(
             name="Test Person", gender="u",
-            birth_date="1994-07-05")
+            birth_date="1994-07-05", home_region="Münster")
         self.assertEqual(vol.name, "Test Person")
         self.assertEqual(vol.gender, "u")
         self.assertEqual(vol.birth_date, "1994-07-05")
+        self.assertEqual(vol.home_region, "Münster")
         self.assertEqual(vol.positions[0].title, "MYSec")
         self.assertEqual(vol.positions[0].held_by, "Test Person")
         self.assertEqual(vol.positions[0].region, "Münster")
@@ -36,7 +37,7 @@ class TestVolunteer(unittest.TestCase):
     def test_volunteer_mutability(self):
         vol = Volunteer(
             name="Test Person", gender="u",
-            birth_date="1994-07-05")
+            birth_date="1994-07-05", home_region="Münster")
         with self.assertRaises(AttributeError):
             vol.name = "New Name"
         with self.assertRaises(AttributeError):
@@ -45,6 +46,8 @@ class TestVolunteer(unittest.TestCase):
             vol.birth_date = "0001-01-01"
         with self.assertRaises(AttributeError):
             vol.positions = ("New Position")
+        vol.home_region = "Aachen"
+        self.assertEqual(vol.home_region, "Aachen")
 
     def test_volunteer_equal(self):
         self.assertEqual(
@@ -70,4 +73,4 @@ class TestVolunteer(unittest.TestCase):
     def test_get_details_fitting_data(self):
         self.assertEqual(
             Volunteer.get_details_fitting_data([["name", "=", "Test Person"]]),
-            [("Test Person", "u", "1994-07-05")])
+            [("Test Person", "u", "1994-07-05", None)])

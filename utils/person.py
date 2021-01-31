@@ -3,10 +3,13 @@ from position import Position
 
 
 class Person(DatabaseEntry):
-    def __init__(self, name: str, gender: str, birth_date: str):
+    def __init__(
+            self, name: str, gender: str,
+            birth_date: str, home_region: str = ""):
         self._name = name
         self._gender = gender
         self._birth_date = birth_date
+        self._home_region = home_region
 
     def __repr__(self):
         return f"{self._name}, gender: {self._gender}, " \
@@ -36,6 +39,15 @@ class Person(DatabaseEntry):
         return self._gender
 
     @property
+    def home_region(self):
+        return self._home_region
+
+    @home_region.setter
+    def home_region(self, home_region):
+        assert isinstance(home_region, str), \
+            "'home_region' can only be set to type string."
+
+    @property
     def pronoun(self):
         return get_pronoun_from_gender(self._gender)
 
@@ -53,8 +65,8 @@ class Person(DatabaseEntry):
 
     @classmethod
     def create_from_db_data_tuple(cls, data_tuple: tuple):
-        name, birth_date, gender = data_tuple
-        return cls(name, birth_date, gender)
+        name, birth_date, gender, home_region = data_tuple
+        return cls(name, birth_date, gender, home_region)
 
     @classmethod
     def create_by_name(cls, name: str):
@@ -71,9 +83,11 @@ class Volunteer(Person):
     table_name = "volunteers"
 
     def __init__(
-            self, name: str, gender: str, birth_date: str):
+            self, name: str, gender: str,
+            birth_date: str, home_region: str = ""):
         super(Volunteer, self).__init__(
-            name=name, gender=gender, birth_date=birth_date)
+            name=name, gender=gender,
+            birth_date=birth_date, home_region=home_region)
         self._positions = tuple(Position.create_all_held_positions(self._name))
 
     def __repr__(self):
@@ -92,9 +106,11 @@ class Participant(Person):
     table_name = "participants"
 
     def __init__(
-            self, name: str, gender: str, birth_date: str):
+            self, name: str, gender: str,
+            birth_date: str, home_region: str = ""):
         super(Participant, self).__init__(
-            name=name, gender=gender, birth_date=birth_date)
+            name=name, gender=gender,
+            birth_date=birth_date, home_region=home_region)
 
     def __repr__(self):
         return "Participant " + super().__repr__()
