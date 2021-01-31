@@ -42,7 +42,8 @@ def create_table_participants():
         """CREATE TABLE participants (
             personName text PRIMARY KEY NOT NULL,
             gender text NOT NULL,
-            birthDate date NOT NULL);""")
+            birthDate date NOT NULL,
+            homeRegion text);""")
 
 
 def create_table_weekend_participant():
@@ -70,7 +71,8 @@ def create_table_volunteers():
         """CREATE TABLE volunteers(
             personName text PRIMARY KEY NOT NULL,
             gender text NOT NULL,
-            birthDate date NOT NULL);""")
+            birthDate date NOT NULL,
+            homeRegion text);""")
 
 
 def create_table_mysecs():
