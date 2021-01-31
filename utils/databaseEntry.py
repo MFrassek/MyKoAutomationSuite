@@ -86,7 +86,7 @@ class DatabaseEntry(abc.ABC):
     def get_insertion_command():
         pass
 
-    def get_update_command():
+    def get_update_command(self):
         raise NotImplementedError
 
     def convert_YYYYMMDD_to_DDMMYYYY_date(self, date):
